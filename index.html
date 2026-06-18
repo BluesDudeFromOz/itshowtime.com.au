@@ -11,9 +11,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
-    <!-- Stripe -->
-    <script src="https://js.stripe.com/v3/"></script>
-    
     <style>
         :root {
             --bg-dark: #0a0a0f;
@@ -1972,35 +1969,7 @@
         </div>
     </footer>
 
-    <!-- Checkout Modal -->
-    <div class="modal-overlay" id="checkoutModal">
-        <div class="modal">
-            <button class="modal-close" onclick="closeCheckout()">×</button>
-            <h2 id="checkoutTitle">Complete Your Purchase</h2>
-            <p id="checkoutDescription">You're purchasing the Band License ($80/year)</p>
-            
-            <div class="form-group">
-                <label for="customerEmail">Email Address</label>
-                <input type="email" id="customerEmail" placeholder="your@email.com" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="customerName">Full Name</label>
-                <input type="text" id="customerName" placeholder="John Smith" required>
-            </div>
-            
-            <div id="card-element"></div>
-            <div id="card-errors" role="alert"></div>
-            
-            <button class="btn btn-primary" style="width: 100%;" onclick="processPayment()" id="payBtn">
-                Pay Now
-            </button>
-            
-            <p style="text-align: center; margin-top: 16px; font-size: 12px; color: var(--text-muted);">
-                🔒 Secured by Stripe. Your payment info never touches our servers.
-            </p>
-        </div>
-    </div>
+    <!-- (Checkout modal removed — purchases happen in the ShowTime app via Stripe Checkout) -->
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Karaoke interest registration
@@ -2041,136 +2010,17 @@
             });
         });
 
-        // Stripe Configuration
-        // IMPORTANT: Replace with your actual Stripe publishable key
-        const STRIPE_PUBLISHABLE_KEY = 'pk_test_YOUR_STRIPE_PUBLISHABLE_KEY';
-        
-        // Price IDs from your Stripe dashboard
-        const PRICE_IDS = {
-            band: 'price_BAND_PRICE_ID',  // Replace with actual price ID
-            pro: 'price_PRO_PRICE_ID'      // Replace with actual price ID
-        };
-
-        let stripe = null;
-        let cardElement = null;
-        let selectedPlan = null;
-
-        // Initialize Stripe (only when needed)
-        function initStripe() {
-            if (!stripe && STRIPE_PUBLISHABLE_KEY !== 'pk_test_YOUR_STRIPE_PUBLISHABLE_KEY') {
-                stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
-                const elements = stripe.elements();
-                cardElement = elements.create('card', {
-                    style: {
-                        base: {
-                            color: '#ffffff',
-                            fontFamily: 'Outfit, sans-serif',
-                            fontSize: '16px',
-                            '::placeholder': { color: '#8888aa' }
-                        }
-                    }
-                });
-                cardElement.mount('#card-element');
-                
-                cardElement.on('change', function(event) {
-                    const displayError = document.getElementById('card-errors');
-                    displayError.textContent = event.error ? event.error.message : '';
-                });
-            }
-        }
+        // ── Purchases are handled in the ShowTime app, not on this static site ──
+        // "Get License" sends the visitor to the app to sign up / log in, where the
+        // app's Stripe Checkout (hosted by Stripe) completes the purchase against
+        // their account. No card data ever touches this marketing site.
+        // NOTE: set APP_BASE_URL to the deployed backend before going live.
+        const APP_BASE_URL = 'https://app.itsshowtimes.com.au';
 
         function openCheckout(plan) {
-            selectedPlan = plan;
-            
-            const titles = {
-                band: 'Band License - $80/year',
-                pro: 'Pro License - $150 (one-time)'
-            };
-            
-            document.getElementById('checkoutTitle').textContent = titles[plan];
-            document.getElementById('checkoutDescription').textContent = 
-                plan === 'band' 
-                    ? 'Annual subscription. Cancel anytime.' 
-                    : 'One-time purchase. 5 years of free updates included.';
-            
-            document.getElementById('checkoutModal').classList.add('active');
-            
-            // Initialize Stripe when modal opens
-            initStripe();
+            // plan is 'band' or 'pro' — passed through to the app's upgrade/checkout flow.
+            window.location.href = APP_BASE_URL + '/upgrade?plan=' + encodeURIComponent(plan);
         }
-
-        function closeCheckout() {
-            document.getElementById('checkoutModal').classList.remove('active');
-        }
-
-        async function processPayment() {
-            const email = document.getElementById('customerEmail').value;
-            const name = document.getElementById('customerName').value;
-            
-            if (!email || !name) {
-                alert('Please fill in all fields');
-                return;
-            }
-            
-            if (!stripe) {
-                // Stripe not configured - show demo message
-                alert('🎉 Demo Mode\n\nStripe is not configured yet.\n\nTo enable payments:\n1. Create a Stripe account\n2. Add your publishable key\n3. Create products and price IDs\n\nEmail: ' + email + '\nPlan: ' + selectedPlan);
-                closeCheckout();
-                return;
-            }
-            
-            const payBtn = document.getElementById('payBtn');
-            payBtn.disabled = true;
-            payBtn.textContent = 'Processing...';
-            
-            try {
-                // Create payment intent on your server
-                const response = await fetch('/api/create-payment-intent', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        plan: selectedPlan,
-                        email: email,
-                        name: name
-                    })
-                });
-                
-                const { clientSecret, error } = await response.json();
-                
-                if (error) {
-                    throw new Error(error);
-                }
-                
-                // Confirm payment
-                const result = await stripe.confirmCardPayment(clientSecret, {
-                    payment_method: {
-                        card: cardElement,
-                        billing_details: { name, email }
-                    }
-                });
-                
-                if (result.error) {
-                    throw new Error(result.error.message);
-                }
-                
-                // Payment successful!
-                alert('🎉 Payment successful!\n\nYour license key has been sent to ' + email + '\n\nThank you for supporting ShowTime!');
-                closeCheckout();
-                
-            } catch (err) {
-                document.getElementById('card-errors').textContent = err.message;
-            } finally {
-                payBtn.disabled = false;
-                payBtn.textContent = 'Pay Now';
-            }
-        }
-
-        // Close modal on outside click
-        document.getElementById('checkoutModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeCheckout();
-            }
-        });
 
         // Smooth scroll for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
