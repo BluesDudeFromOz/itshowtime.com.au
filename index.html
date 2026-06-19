@@ -15,6 +15,22 @@
     <!-- Editable site settings (hero visuals, timing) -->
     <script src="config.js"></script>
 
+    <!-- Google Analytics (GA4) — loads only when gaMeasurementId is set in config.js -->
+    <script>
+    (function () {
+      var id = ((window.SHOWTIME_CONFIG && window.SHOWTIME_CONFIG.gaMeasurementId) || '').trim();
+      if (!/^G-[A-Z0-9]+$/i.test(id)) return;   // blank / placeholder => analytics off, no requests
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', id);
+    })();
+    </script>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

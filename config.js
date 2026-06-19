@@ -2,6 +2,10 @@
 //  ShowTime website settings — edit these values; no need to touch index.html
 // ─────────────────────────────────────────────────────────────────────────
 window.SHOWTIME_CONFIG = {
+  // Google Analytics 4 — paste your Measurement ID here to switch analytics on.
+  // Format: 'G-XXXXXXXXXX'. Leave blank ('') and nothing loads / no tracking.
+  gaMeasurementId: '',
+
   // Hero "splash" — the cycling stage visuals behind the headline panel.
   hero: {
     enabled: true,        // false = single static backdrop (no cycling)
