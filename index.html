@@ -161,22 +161,55 @@
             padding: 92px 40px 44px;
             position: relative;
             z-index: 1;
-            /* The live ShowTime startup screen — high-energy stage as the backdrop */
-            background: #0a0a0f url('static/hero_concert.png') center center / cover no-repeat;
+            overflow: hidden;
+            background: #0a0a0f;
+        }
+
+        /* Cross-fading stage visuals — the hero "plays" the app's Loop Visuals */
+        .hero-stage {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .hero-frame {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: heroCycle 21s infinite;
+            will-change: opacity;
+        }
+        .hero-frame:nth-child(1) { animation-delay: 0s; }
+        .hero-frame:nth-child(2) { animation-delay: 7s; }
+        .hero-frame:nth-child(3) { animation-delay: 14s; }
+
+        @keyframes heroCycle {
+            0%   { opacity: 0; }
+            4%   { opacity: 1; }
+            33%  { opacity: 1; }
+            38%  { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-frame { animation: none; }
+            .hero-frame:nth-child(1) { opacity: 1; }
         }
 
         .hero::before {
             content: "";
             position: absolute;
             inset: 0;
-            z-index: 0;
+            z-index: 1;
             background: radial-gradient(ellipse at center, rgba(10,10,15,0.12) 0%, rgba(10,10,15,0.55) 100%);
             pointer-events: none;
         }
 
         .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             max-width: 720px;
             text-align: center;
             background: rgba(12, 16, 26, 0.82);
@@ -1242,6 +1275,11 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-stage" aria-hidden="true">
+            <div class="hero-frame" style="background-image:url('static/hero_frame1.jpg')"></div>
+            <div class="hero-frame" style="background-image:url('static/hero_frame2.jpg')"></div>
+            <div class="hero-frame" style="background-image:url('static/hero_frame3.jpg')"></div>
+        </div>
         <div class="hero-content">
             <div class="hero-badge">🎬 Trusted by musicians across Australia</div>
             <h1>Your Stage.<br><span>Your Show.</span><br><em style="font-size:0.55em; color:var(--text-muted); font-style:normal; letter-spacing:0.02em;">Everyone on the Same Page.</em></h1>
