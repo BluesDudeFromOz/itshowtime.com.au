@@ -2118,11 +2118,14 @@
             var fadeMs = (cfg.fadeMs != null) ? cfg.fadeMs : 1200;
             var holdMs = (cfg.holdMs != null) ? cfg.holdMs : 6000;
             stage.innerHTML = '';
-            var els = frames.map(function (src) {
+            var els = frames.map(function (f) {
+                var src = (typeof f === 'string') ? f : f.src;
+                var name = (typeof f === 'string') ? '' : (f.name || '');
                 var d = document.createElement('div');
                 d.className = 'hero-frame';
                 d.style.backgroundImage = "url('" + src + "')";
                 d.style.transitionDuration = fadeMs + 'ms';
+                if (name) d.setAttribute('data-name', name);
                 stage.appendChild(d);
                 return d;
             });

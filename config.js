@@ -7,10 +7,11 @@ window.SHOWTIME_CONFIG = {
     enabled: true,        // false = single static backdrop (no cycling)
     holdMs: 6000,         // how long each stage visual stays before fading
     fadeMs: 1200,         // cross-fade duration between visuals
-    frames: [             // add / remove / reorder freely (paths from site root)
-      'static/hero_frame1.jpg',   // yellow beams + crowd
-      'static/hero_frame2.jpg',   // orange crowd, light bars
-      'static/hero_frame3.jpg'    // red light-rig
+    // add / remove / reorder freely — each visual has a name and an image path
+    frames: [
+      { name: 'Yellow beams + crowd',   src: 'static/hero_frame1.jpg' },
+      { name: 'Orange crowd, light bars', src: 'static/hero_frame2.jpg' },
+      { name: 'Red light-rig',           src: 'static/hero_frame3.jpg' }
     ]
   }
 };
