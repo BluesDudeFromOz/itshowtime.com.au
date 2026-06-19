@@ -4,7 +4,7 @@
 window.SHOWTIME_CONFIG = {
   // Google Analytics 4 — paste your Measurement ID here to switch analytics on.
   // Format: 'G-XXXXXXXXXX'. Leave blank ('') and nothing loads / no tracking.
-  gaMeasurementId: '',
+  gaMeasurementId: 'G-N9YQL53K74',
 
   // Hero "splash" — the cycling stage visuals behind the headline panel.
   hero: {
