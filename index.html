@@ -139,10 +139,27 @@
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
+            position: relative;
+            padding-bottom: 4px;
         }
 
         .nav-links a:hover {
             color: var(--cyan);
+        }
+
+        /* Active "tab" — highlights the section you're currently in (scroll-spy) */
+        .nav-links a.active {
+            color: var(--cyan);
+        }
+        .nav-links a.active::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -2px;
+            height: 2px;
+            background: var(--cyan);
+            border-radius: 2px;
         }
 
         .nav-copyright {
@@ -2228,6 +2245,60 @@
                 i = (i + 1) % els.length;
                 els[i].classList.add('is-active');
             }, holdMs + fadeMs);
+        })();
+
+        // Sticky-tab scroll-spy + GA4 virtual page-views.
+        // Highlights the current section in the nav and (only when GA is live)
+        // logs a page_view per section so GA's Pages report shows /features, /pricing, etc.
+        (function () {
+            const sections = [
+                { id: 'features',    path: '/features',     title: 'Features' },
+                { id: 'how-to-run',  path: '/how-it-works', title: 'How it works' },
+                { id: 'screenshots', path: '/screenshots',  title: 'Screenshots' },
+                { id: 'pricing',     path: '/pricing',      title: 'Pricing' },
+                { id: 'download',    path: '/download',     title: 'Download' },
+                { id: 'faq',         path: '/faq',          title: 'FAQ' },
+            ].filter(s => document.getElementById(s.id));
+            const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+            const linkFor = id => navLinks.find(a => a.getAttribute('href') === '#' + id);
+            const byId = Object.fromEntries(sections.map(s => [s.id, s]));
+
+            let lastPath = '/';   // GA's initial config() already logged Home ('/')
+            function track(path, title) {
+                if (path === lastPath) return;
+                lastPath = path;
+                if (typeof window.gtag === 'function') {
+                    window.gtag('event', 'page_view', {
+                        page_title: title,
+                        page_path: path,
+                        page_location: location.origin + location.pathname + '#' + path.slice(1)
+                    });
+                }
+            }
+            function setActive(id) {
+                navLinks.forEach(a => a.classList.remove('active'));
+                const l = id && linkFor(id);
+                if (l) l.classList.add('active');
+            }
+
+            if ('IntersectionObserver' in window && sections.length) {
+                const io = new IntersectionObserver(entries => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting) {
+                            const s = byId[e.target.id];
+                            setActive(e.target.id);
+                            track(s.path, s.title);
+                        }
+                    });
+                }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });  // trigger band near viewport centre
+                sections.forEach(s => io.observe(document.getElementById(s.id)));
+            }
+
+            // Clicking a tab logs that section immediately (smooth-scroll is the default anchor behaviour)
+            navLinks.forEach(a => a.addEventListener('click', () => {
+                const id = (a.getAttribute('href') || '').replace('#', '');
+                if (byId[id]) track(byId[id].path, byId[id].title);
+            }));
         })();
 
         // FAQ Accordion
