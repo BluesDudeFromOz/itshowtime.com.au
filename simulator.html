@@ -26,13 +26,18 @@
 <style>
   :root{--bg:#0a0a0f;--panel:#16161f;--text:#e8e8ef;--muted:#9aa4b2;--cyan:#00BFFF;--purple:#8B5CF6;--border:#23232f}
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:'Outfit','Segoe UI',system-ui,Arial,sans-serif;line-height:1.6}
+  body{margin:0;padding-top:80px;background:var(--bg);color:var(--text);font-family:'Outfit','Segoe UI',system-ui,Arial,sans-serif;line-height:1.6}
   a{color:var(--cyan);text-decoration:none}
 
-  .topbar{position:sticky;top:0;z-index:10;background:rgba(10,10,15,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:14px 22px;display:flex;justify-content:space-between;align-items:center}
-  .topbar .logo{color:var(--cyan);font-weight:800;font-size:20px}
-  .topbar .right a{color:var(--muted);margin-left:18px;font-size:14px}
-  .topbar .cta{background:var(--cyan);color:#04121b !important;padding:9px 18px;border-radius:8px;font-weight:700}
+  /* Same fixed nav as the rest of the site (consistent across Features/Pricing/Try it…) */
+  nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 30px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,.82);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+  nav .logo{display:flex;align-items:center;gap:10px}
+  nav .nav-links{display:flex;gap:34px;list-style:none;margin:0;padding:0}
+  nav .nav-links a{color:var(--muted);font-weight:500;transition:color .3s}
+  nav .nav-links a:hover,nav .nav-links a.active{color:var(--cyan)}
+  nav .nav-copyright{font-size:11px;color:#444;white-space:nowrap}
+  nav .nav-cta{background:var(--cyan);color:#04121b !important;padding:11px 24px;border-radius:8px;font-weight:700}
+  @media(max-width:880px){nav .nav-links,nav .nav-copyright{display:none}}
 
   .intro{max-width:1100px;margin:0 auto;padding:34px 22px 6px;text-align:center}
   .intro h1{font-size:clamp(26px,4.5vw,40px);margin:0 0 8px}
@@ -64,14 +69,19 @@
 </style>
 </head>
 <body>
-  <div class="topbar">
-    <a class="logo" href="/">🎬 ShowTime</a>
-    <div class="right">
-      <a href="/#features">Features</a>
-      <a href="/#pricing">Pricing</a>
-      <a class="cta" href="/#pricing">Get Started</a>
-    </div>
-  </div>
+  <nav>
+    <a href="/" class="logo"><img src="ShowDirectorLogo.png" alt="ShowTime" style="height:44px;width:auto;"></a>
+    <ul class="nav-links">
+      <li><a href="/#features">Features</a></li>
+      <li><a href="simulator.html" class="active">Try it</a></li>
+      <li><a href="/#screenshots">Screenshots</a></li>
+      <li><a href="/#pricing">Pricing</a></li>
+      <li><a href="/#download">Download</a></li>
+      <li><a href="/#faq">FAQ</a></li>
+    </ul>
+    <span class="nav-copyright">© 2026 ShowTime · Made in Adelaide 🇦🇺</span>
+    <a href="/#pricing" class="nav-cta">Get Started</a>
+  </nav>
 
   <div class="intro">
     <h1>Drive it like you're <span>on stage</span></h1>
@@ -111,11 +121,11 @@
     { x:0.63,  title:'Home / Search',     desc:'Jump to your library and find any song.' },
     { x:4.13,  title:'Previous song',     desc:'Step back a song — every device follows.', screen:'base' },
     { x:7.63,  title:'Next song',         desc:'Advance to the next song in the setlist.', screen:'song2' },
-    { x:11.13, title:'Larger font',       desc:'Bump the chart text up for the back of the stage.' },
-    { x:14.63, title:'Smaller font',      desc:'Bring the chart text size down.' },
+    { x:11.13, title:'Larger font',       desc:'Bump the chart text one size larger.', screen:'font_bigger' },
+    { x:14.63, title:'Smaller font',      desc:'Bring the chart text one size smaller.', screen:'font_smaller' },
     { x:18.13, title:'Page view',         desc:'Toggle between two-page and single-page layout.', toggle:['base','onepage'] },
     { x:21.63, title:'Fullscreen',        desc:'Go edge-to-edge for the stage.' },
-    { x:25.12, title:'Transpose',         desc:'Shift the whole chart up or down a key — press to transpose.', screen:'transpose' },
+    { x:25.12, title:'Transpose',         desc:'Press ▲ to lift the whole chart up a key, ▼ to drop it down.', upScreen:'transpose_up', downScreen:'transpose_down' },
     { x:28.63, title:'Instrument key',    desc:'One control for Eb / Bb / F / G players — each reads their own key automatically.' },
     { x:32.13, title:'Circle of Fifths',  desc:'Key relationships, 2-5-1 progressions and improv help.', screen:'cof' },
     { x:35.63, title:'Play / media',      desc:'Start the slideshow, per-song video and audio engine.', screen:'media' },
@@ -124,7 +134,9 @@
     { x:46.13, title:'Crew message',      desc:'Send a colour-coded cue to sound, lighting or stage.', screen:'crew' },
     { x:49.63, title:'Master mode',       desc:'Control every connected device from here.' },
   ];
-  const SCREENS = { base:'static/sim/base.png', onepage:'static/sim/onepage.png', transpose:'static/sim/transpose.png',
+  const SCREENS = { base:'static/sim/base.png', onepage:'static/sim/onepage.png',
+                    transpose_up:'static/sim/transpose_up.png', transpose_down:'static/sim/transpose_down.png',
+                    font_bigger:'static/sim/font_bigger.png', font_smaller:'static/sim/font_smaller.png',
                     cof:'static/sim/cof.png', media:'static/sim/media.png', crew:'static/sim/crew.png', song2:'static/sim/song2.png' };
   Object.values(SCREENS).forEach(s => { const i = new Image(); i.src = s; });   // preload
 
@@ -152,13 +164,14 @@
     focusIdx = focusIdx < 0 ? 0 : (focusIdx + d + ICONS.length) % ICONS.length;
     placeRing(focusIdx); caption(focusIdx);
   }
-  function press(i) {
+  function press(i, dir) {
     const ic = ICONS[i];
     let key = ic.screen;
     if (ic.toggle) { toggleState[i] = toggleState[i] ? 0 : 1; key = ic.toggle[toggleState[i]]; }
+    else if (ic.upScreen || ic.downScreen) { key = (dir === 'down') ? ic.downScreen : ic.upScreen; }  // ▲ up / ▼ down
     if (key && SCREENS[key]) screen.src = SCREENS[key];
     placeRing(i); caption(i);
-    if (typeof window.gtag === 'function') window.gtag('event', 'demo_press', { icon: ic.title });
+    if (typeof window.gtag === 'function') window.gtag('event', 'demo_press', { icon: ic.title, dir: dir || 'up' });
   }
 
   // build hotspots over the real icons
@@ -166,7 +179,7 @@
     const h = document.createElement('div');
     h.className = 'hotspot'; h.title = ic.title;
     h.style.left = ic.x + '%'; h.style.top = Y + '%'; h.style.width = W + '%'; h.style.height = H + '%';
-    h.addEventListener('click', () => { focusIdx = i; press(i); frame.focus(); });
+    h.addEventListener('click', () => { focusIdx = i; press(i, 'up'); frame.focus(); });
     hotspots.appendChild(h);
   });
 
@@ -174,10 +187,11 @@
     const k = e.key;
     if (k === 'ArrowLeft') { e.preventDefault(); moveFocus(-1); }
     else if (k === 'ArrowRight') { e.preventDefault(); moveFocus(1); }
-    else if (k === 'ArrowUp' || k === 'ArrowDown') { e.preventDefault(); if (focusIdx < 0) moveFocus(1); else press(focusIdx); }
+    else if (k === 'ArrowUp')   { e.preventDefault(); if (focusIdx < 0) moveFocus(1); else press(focusIdx, 'up'); }
+    else if (k === 'ArrowDown') { e.preventDefault(); if (focusIdx < 0) moveFocus(1); else press(focusIdx, 'down'); }
   }
   document.addEventListener('keydown', e => { if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) onArrow(e); });
-  frame.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (focusIdx < 0) moveFocus(1); else press(focusIdx); } });
+  frame.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (focusIdx < 0) moveFocus(1); else press(focusIdx, 'up'); } });
 
   frame.focus();
 </script>
