@@ -1790,7 +1790,7 @@
         <p style="max-width:760px;margin:36px auto 0;text-align:center;color:var(--text-muted);font-size:15px;line-height:1.6;">
             <strong style="color:var(--text);">Schools, studios &amp; large ensembles:</strong>
             running a class of 30, a choir, or any group bigger than Pro's 12?
-            <a href="mailto:support@itsshowtimes.com.au?subject=ShowTime%20education%2Flarge-group%20licence" style="color:var(--cyan);">Get in touch</a>
+            <a href="mailto:support@itsshowtime.com.au?subject=ShowTime%20education%2Flarge-group%20licence" style="color:var(--cyan);">Get in touch</a>
             for a custom education / multi-seat key — we'll set you up directly.
         </p>
 
@@ -2241,7 +2241,7 @@
         // app's Stripe Checkout (hosted by Stripe) completes the purchase against
         // their account. No card data ever touches this marketing site.
         // NOTE: set APP_BASE_URL to the deployed backend before going live.
-        const APP_BASE_URL = 'https://app.itsshowtimes.com.au';
+        const APP_BASE_URL = 'https://app.itsshowtime.com.au';
 
         function openCheckout(plan) {
             // plan is 'band' or 'pro' — passed through to the app's upgrade/checkout flow.
@@ -2552,7 +2552,7 @@
         // During local dev, the Flask app runs on port 5000.
         const CHAT_API_URL = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
             ? 'http://localhost:5000/api/support-chat'
-            : 'https://app.itsshowtimes.com.au/api/support-chat';
+            : 'https://app.itsshowtime.com.au/api/support-chat';
 
         let stHistory = [];
         let stPanelOpen = false;
@@ -2631,7 +2631,7 @@
                 stHistory.push({ role: 'assistant', content: reply });
             } catch (e) {
                 stHideTyping();
-                stAddMsg('bot', "I'm having trouble connecting right now. Please email **support@itsshowtimes.com.au** for help.");
+                stAddMsg('bot', "I'm having trouble connecting right now. Please email **support@itsshowtime.com.au** for help.");
             }
 
             document.getElementById('st-chat-send').disabled = false;
