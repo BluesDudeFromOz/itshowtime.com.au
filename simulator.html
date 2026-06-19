@@ -109,8 +109,9 @@
 
   <div class="intro">
     <h1>Drive it like you're <span>on stage</span></h1>
-    <p>This is the real ShowTime toolbar. Use your arrow keys — just like the foot-pedal or keyboard you'd
-       use at a gig — to move along the icons and press one. (You can click them too.)</p>
+    <p>This is the real ShowTime interface. Follow the <span style="color:var(--cyan)">glowing dot</span> on the
+       nav pad — press the arrow it points to. We'll find and load a song first, then you can roam the whole toolbar.
+       Use your arrow keys, the on-screen pad, or click — just like the foot-pedal or touchscreen you'd use at a gig.</p>
     <div class="keyhelp">
       <span class="grp"><span class="kc">←</span><span class="kc">→</span> move along the toolbar</span>
       <span class="grp"><span class="kc">↑</span><span class="kc">↓</span> press the selected icon</span>
@@ -176,9 +177,28 @@
                     transpose_up:'static/sim/transpose_up.png', transpose_down:'static/sim/transpose_down.png',
                     font_bigger:'static/sim/font_bigger.png', font_smaller:'static/sim/font_smaller.png',
                     cof:'static/sim/cof.png', media:'static/sim/media.png', crew:'static/sim/crew.png',
-                    song2:'static/sim/song2.png', song3:'static/sim/song3.png' };
+                    song2:'static/sim/song2.png', song3:'static/sim/song3.png',
+                    picker_setlist:'static/sim/picker_setlist.png', picker_search:'static/sim/picker_search.png',
+                    picker_amazing:'static/sim/picker_amazing.png' };
   const SONGS = ['base', 'song2', 'song3'];   // America → Amazing Grace → Advance Australia Fair
   let songIdx = 0;
+
+  // ---- Guided storyline: find & load a song, then hand over to free toolbar play ----
+  // Each step shows a real screen and points the hint dot at the ONE key to press next,
+  // so the demo stays on rails (no "infinite permutations").
+  const STORY = [
+    { screen:'base',           hint:'down',  expect:'down',
+      title:'Find any song — fast', desc:"You're on a song mid-show. Press ↓ to open your library." },
+    { screen:'picker_setlist', hint:'up',    expect:'up',
+      title:'Your setlist', desc:'There’s your set, with the song you’re on highlighted. Press ↑ to search the whole library.' },
+    { screen:'picker_search',  hint:'right', expect:'right',
+      title:'Search + on-screen keyboard', desc:'Search opens with the keyboard up. Press → and ShowTime types the song for you.' },
+    { screen:'picker_amazing', hint:'right', expect:'right',
+      title:'There it is', desc:'“amazing” finds Amazing Grace instantly. Press → to open it.' },
+    { screen:'song2',          hint:null,    expect:null, done:true,
+      title:'Loaded and ready ✓', desc:'Amazing Grace is up — the whole search took four taps. Now explore the toolbar: ← → move, ↑ ↓ press.' },
+  ];
+  let storyMode = true, storyIdx = 0;
   Object.values(SCREENS).forEach(s => { const i = new Image(); i.src = s; });   // preload
 
   const frame = document.getElementById('frame');
@@ -222,7 +242,7 @@
     const h = document.createElement('div');
     h.className = 'hotspot'; h.title = ic.title;
     h.style.left = ic.x + '%'; h.style.top = Y + '%'; h.style.width = W + '%'; h.style.height = H + '%';
-    h.addEventListener('click', () => { focusIdx = i; press(i, 'up'); frame.focus(); });
+    h.addEventListener('click', () => { if (storyMode) return; focusIdx = i; press(i, 'up'); frame.focus(); });
     hotspots.appendChild(h);
   });
 
@@ -242,9 +262,30 @@
   function clearHint() { document.querySelectorAll('.tn-hint').forEach(d => d.remove()); }
   function showHint(dir) { clearHint(); const el = tnCell[dir]; if (!el) return; const d = document.createElement('span'); d.className = 'tn-hint'; el.appendChild(d); }
 
+  // ---- Guided story renderer ----
+  function showStoryStep() {
+    const s = STORY[storyIdx];
+    screen.src = SCREENS[s.screen];
+    ring.hidden = true;                         // no toolbar ring during the story
+    capNum.textContent = (storyIdx + 1);
+    capTitle.textContent = s.title;
+    capDesc.textContent = s.desc;
+    if (s.hint) showHint(s.hint); else clearHint();
+    if (s.done) storyMode = false;              // last step → hand over to free toolbar play
+  }
+  function nudgeHint(dir) { showHint(dir); }     // wrong key: re-trigger the dot's pulse
+
   // Single entry point for every direction — keyboard, d-pad tap, or hotspot all go through here.
   function drive(dir) {
     openPad(); tnToggle.classList.remove('invite');
+    if (storyMode) {                             // on rails: only the suggested key advances
+      const s = STORY[storyIdx];
+      glowCell(dir);
+      if (dir === s.expect) { storyIdx++; showStoryStep(); }
+      else nudgeHint(s.hint);
+      return;
+    }
+    // ---- free toolbar exploration ----
     if (dir === 'left')       moveFocus(-1);
     else if (dir === 'right') moveFocus(1);
     else if (dir === 'up')    { if (focusIdx < 0) moveFocus(1); else press(focusIdx, 'up'); }
@@ -262,8 +303,10 @@
   document.addEventListener('keydown', e => { if (KEYDIR[e.key]) { e.preventDefault(); drive(KEYDIR[e.key]); } });
   frame.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); drive('enter'); } });
 
-  // On load the pad "wakes up": it grows, breathes, and a hint dot suggests the first move.
-  setTimeout(() => { openPad(); tnToggle.classList.add('invite'); showHint('right'); }, 1100);
+  // Start the guided story (sets the opening screen, caption and first hint dot).
+  showStoryStep();
+  // On load the pad "wakes up": it grows, breathes, and the hint dot suggests the first move.
+  setTimeout(() => { openPad(); tnToggle.classList.add('invite'); }, 1100);
 
   frame.focus();
 </script>
