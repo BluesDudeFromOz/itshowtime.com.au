@@ -1438,70 +1438,10 @@
             <div class="section-label">Pricing</div>
             <h2 class="section-title">Simple, Fair Pricing</h2>
             <p class="section-description">
-                Start free, upgrade when you're ready. No subscriptions on the Pro plan — pay once, get 5 years of free updates.
+                Start free, upgrade when you're ready. No subscriptions on the Pro plan — pay once, get 3 years of free updates.
             </p>
         </div>
-        <div class="pricing-grid">
-            <!-- Free Tier -->
-            <div class="pricing-card">
-                <div class="pricing-tier">Starter</div>
-                <div class="pricing-name">Free</div>
-                <div class="pricing-price">$0</div>
-                <div class="pricing-description">Try ShowTime with your own songs</div>
-                <ul class="pricing-features">
-                    <li>Up to 25 songs (includes 5 demo songs)</li>
-                    <li>3 playlists</li>
-                    <li>Chord chart display</li>
-                    <li>Page view modes (portrait, landscape, flip)</li>
-                    <li>Circle of Fifths reference</li>
-                    <li class="disabled">Transpose</li>
-                    <li class="disabled">Master/Slave sync</li>
-                    <li class="disabled">Foot pedal navigation</li>
-                    <li class="disabled">Video projection</li>
-                    <li class="disabled">ShowTime watermark shown</li>
-                </ul>
-                <a href="#" class="btn btn-secondary pricing-btn">Start Free — No Download</a>
-            </div>
-
-            <!-- Band Tier -->
-            <div class="pricing-card featured">
-                <div class="pricing-tier">Most Popular</div>
-                <div class="pricing-name">Band License</div>
-                <div class="pricing-price">$80 <span>/year</span></div>
-                <div class="pricing-description">Everything a working band needs</div>
-                <ul class="pricing-features">
-                    <li>Unlimited songs & playlists</li>
-                    <li>Instant transpose (Eb/Bb modes)</li>
-                    <li>Master/Slave wireless sync</li>
-                    <li>Foot pedal navigation</li>
-                    <li>Annotations (transpose in sync)</li>
-                    <li>Instant QR code band onboarding</li>
-                    <li>PDF fakebook page charts</li>
-                    <li>Priority support</li>
-                    <li class="disabled">Pre-show/Intermission slides</li>
-                </ul>
-                <button class="btn btn-primary pricing-btn" onclick="openCheckout('band')">Get Band License</button>
-            </div>
-
-            <!-- Pro Tier -->
-            <div class="pricing-card">
-                <div class="pricing-tier">Professional</div>
-                <div class="pricing-name">Pro License</div>
-                <div class="pricing-price">$150 <span>once</span></div>
-                <div class="pricing-description">One-time purchase, 5 years of free updates</div>
-                <ul class="pricing-features">
-                    <li>Everything in Band</li>
-                    <li>Pre-show &amp; intermission slideshows</li>
-                    <li>Video projection with transitions</li>
-                    <li>Multiple band profiles</li>
-                    <li>MusicXML sheet music display</li>
-                    <li>DMX lighting control (coming soon)</li>
-                    <li>MIDI control (coming soon)</li>
-                    <li>5 years of free updates</li>
-                </ul>
-                <button class="btn btn-primary pricing-btn" onclick="openCheckout('pro')">Get Pro License</button>
-            </div>
-        </div><!-- end pricing-grid -->
+        <!-- Pricing is shown once, in the full feature comparison below -->
 
         <!-- Feature Comparison Table -->
         <div class="compare-wrap">
@@ -1516,11 +1456,11 @@
                         </th>
                         <th class="col-band">
                             <span class="th-plan">Band</span>
-                            <span class="th-price">$80<sub>/yr</sub></span>
+                            <span class="th-price">$99<sub>/yr</sub></span>
                         </th>
                         <th class="col-pro">
                             <span class="th-plan">Pro</span>
-                            <span class="th-price">$150<sub> once</sub></span>
+                            <span class="th-price">$180<sub> once</sub></span>
                         </th>
                     </tr>
                 </thead>
@@ -1585,7 +1525,7 @@
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
                     <tr>
-                        <td class="col-feature">Eb / Bb Instrument Modes<small>Horn players see their own key automatically</small></td>
+                        <td class="col-feature">Eb / Bb / F / G Instrument Modes<small>Horn and transposing players see their own key automatically</small></td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-band"><span class="check-yes">✓</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
@@ -1597,7 +1537,7 @@
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
                     <tr>
-                        <td class="col-feature">Foot Pedal &amp; Keyboard Navigation<small>4 buttons: Prev/Next Page, Prev/Next Song — any Bluetooth pedal or keyboard</small></td>
+                        <td class="col-feature">Foot Pedal &amp; Keyboard Navigation<small>4 directional buttons — turn pages, navigate lists &amp; menus, transpose; any Bluetooth pedal or keyboard</small></td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-band"><span class="check-yes">✓</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
@@ -1612,8 +1552,14 @@
                     <!-- Band & Crew Sync -->
                     <tr class="group-header"><td colspan="4">Band &amp; Crew Sync</td></tr>
                     <tr>
-                        <td class="col-feature">Master Device Command &amp; Control<small>Song nav, page turns, audio start, slideshow/visualiser — all fire simultaneously</small></td>
-                        <td class="col-free"><span class="check-no">✗</span></td>
+                        <td class="col-feature">Connected Musicians<small>Devices that follow the master over Wi-Fi</small></td>
+                        <td class="col-free"><span class="check-part">2</span></td>
+                        <td class="col-band"><span class="check-part">4</span><br><small style="color:var(--text-muted);font-size:11px">+$20/yr each extra</small></td>
+                        <td class="col-pro"><span class="check-part">8</span></td>
+                    </tr>
+                    <tr>
+                        <td class="col-feature">Master / Slave Sync<small>Change a song or turn a page and every connected device follows instantly</small></td>
+                        <td class="col-free"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">2 devices</small></td>
                         <td class="col-band"><span class="check-yes">✓</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
@@ -1653,19 +1599,19 @@
                     <tr>
                         <td class="col-feature">Pre-Show Slideshow<small>Images and video on the projector before the show</small></td>
                         <td class="col-free"><span class="check-no">✗</span></td>
-                        <td class="col-band"><span class="check-no">✗</span></td>
+                        <td class="col-band"><span class="check-yes">✓</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
                     <tr>
                         <td class="col-feature">Intermission &amp; Post-Show Media</td>
                         <td class="col-free"><span class="check-no">✗</span></td>
-                        <td class="col-band"><span class="check-no">✗</span></td>
+                        <td class="col-band"><span class="check-yes">✓</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
                     <tr>
                         <td class="col-feature">Per-Song Video &amp; Images<small>Link videos or stills to any song — transitions, Ken Burns, fade effects</small></td>
                         <td class="col-free"><span class="check-no">✗</span></td>
-                        <td class="col-band"><span class="check-no">✗</span></td>
+                        <td class="col-band"><span class="check-yes">✓</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
                     <tr>
@@ -1714,7 +1660,7 @@
                         <td class="col-feature">Free Updates</td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-band"><span class="check-part">While subscribed</span></td>
-                        <td class="col-pro"><span class="check-part">5 years</span></td>
+                        <td class="col-pro"><span class="check-part">3 years</span></td>
                     </tr>
                     <tr>
                         <td class="col-feature">Support</td>
@@ -1971,7 +1917,7 @@
             <div class="faq-item">
                 <button class="faq-question">What's the difference between Band and Pro?</button>
                 <div class="faq-answer">
-                    <p>Band ($80/year) covers everything most gigging musicians need — unlimited songs, transpose, wireless sync, foot pedal navigation, and annotations. Pro ($150 one-time) adds the projector features: pre-show and intermission slideshows, video projection with effects, multiple band profiles, and MusicXML sheet music display. Pro is a one-time purchase with 5 years of free updates included.</p>
+                    <p>Band ($99/year, up to 4 musicians — extra members are $20/year each) covers everything a gigging band needs: unlimited songs, instant transpose, wireless master/slave sync, foot-pedal navigation, annotations, and — unlike most apps — the full projection suite: pre-show, intermission and post-show slideshows plus per-song video and images. Pro ($180 one-time, up to 8 musicians) adds multiple band profiles, MusicXML sheet music display, and DMX/MIDI control (coming soon), and is a one-time purchase with 3 years of free updates included. The free Starter plan supports 2 devices so you can try master/slave sync, with up to 25 songs.</p>
                 </div>
             </div>
             <div class="faq-item">
