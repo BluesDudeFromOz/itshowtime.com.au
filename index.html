@@ -778,7 +778,7 @@
         }
 
         .faq-item.active .faq-answer {
-            max-height: 300px;
+            max-height: 1200px; /* fallback; JS sets the exact content height */
         }
 
         .faq-answer p {
@@ -2071,13 +2071,19 @@
             button.addEventListener('click', () => {
                 const item = button.parentElement;
                 const isActive = item.classList.contains('active');
-                
-                // Close all other items
-                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-                
-                // Toggle current item
+
+                // Close all items (reset any inline height too)
+                document.querySelectorAll('.faq-item').forEach(i => {
+                    i.classList.remove('active');
+                    const a = i.querySelector('.faq-answer');
+                    if (a) a.style.maxHeight = null;
+                });
+
+                // Open the clicked item to its full content height
                 if (!isActive) {
                     item.classList.add('active');
+                    const answer = item.querySelector('.faq-answer');
+                    if (answer) answer.style.maxHeight = answer.scrollHeight + 'px';
                 }
             });
         });
