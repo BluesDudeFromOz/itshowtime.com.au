@@ -80,6 +80,28 @@
   @keyframes tn-ping{0%{box-shadow:0 0 0 0 rgba(0,191,255,.6);transform:scale(.85)}
                      70%{box-shadow:0 0 0 13px rgba(0,191,255,0);transform:scale(1.15)}
                      100%{box-shadow:0 0 0 0 rgba(0,191,255,0);transform:scale(.85)}}
+  /* A direction that does nothing on the current screen is dimmed (the screen's "tag" = which keys are live). */
+  .tn-cell.off{opacity:.22;filter:grayscale(.7);cursor:default}
+  .tn-cell.off.glow{background:rgba(0,0,0,.72);box-shadow:none;transform:none}
+
+  /* Anthem cue: flash the Play icon + a quick once-through projection preview, top-right. */
+  /* Both cues fade via a short .show/.fade transition rather than a held @keyframes animation —
+     a continuously-running animation promotes the element to a compositor layer that some
+     renderers (and headless screenshots) fail to repaint. */
+  .play-flash{position:absolute;border:2px solid #ffd23f;border-radius:9px;pointer-events:none;opacity:1;transition:opacity .5s ease;
+    box-shadow:0 0 0 3px rgba(255,210,63,.4),0 0 18px rgba(255,210,63,.85)}
+  .play-flash.fade{opacity:0}
+  .proj-preview{position:absolute;top:8%;right:2%;width:24%;height:24%;z-index:28;border-radius:9px;overflow:hidden;
+    border:1.5px solid rgba(0,191,255,.85);background:#0c1024;opacity:0;transform:translateY(-6px) scale(.97);transition:opacity .4s ease,transform .4s ease;
+    box-shadow:0 12px 34px rgba(0,0,0,.7),0 0 0 4px rgba(0,191,255,.18),0 0 26px rgba(0,191,255,.45)}
+  .proj-preview.show{opacity:1;transform:none}
+  .proj-preview .pp-label{position:absolute;top:5px;left:8px;z-index:3;font-size:11px;font-weight:600;color:#dff3ff;letter-spacing:.5px;text-shadow:0 1px 3px #000}
+  .proj-preview .pp-sweep{position:absolute;inset:0;background:
+    radial-gradient(130% 90% at 30% 125%, rgba(255,150,70,.85), rgba(255,90,40,.1) 55%, rgba(255,90,40,0) 72%),
+    linear-gradient(120deg, rgba(0,191,255,.35), rgba(139,92,246,.45))}
+  .proj-preview .pp-beam{position:absolute;top:-10%;left:-30%;width:34%;height:140%;transform:skewX(-18deg);
+    background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.6), rgba(255,255,255,0));animation:proj-beam 2.2s ease-in-out .4s 1}
+  @keyframes proj-beam{0%{left:-30%}100%{left:120%}}
 
   .sim-caption{background:var(--panel);padding:15px 22px;border-top:1px solid var(--border);min-height:64px;display:flex;align-items:center;gap:13px}
   .sim-caption .num{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:rgba(0,191,255,.15);color:var(--cyan);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
@@ -186,19 +208,26 @@
   // ---- Guided storyline: find & load a song, then hand over to free toolbar play ----
   // Each step shows a real screen and points the hint dot at the ONE key to press next,
   // so the demo stays on rails (no "infinite permutations").
+  // Each step carries a `tag` bitmask of the directions that are LIVE on that screen
+  // (↑=1 ↓=2 ←=4 →=8). The d-pad dims the dead ones, so the demo teaches exactly which
+  // keys do something where. `auto` = ms to advance on its own (the app "typing" for you).
+  const DIRBIT = { up:1, down:2, left:4, right:8 };
   const STORY = [
-    { screen:'base',           hint:'down',  expect:'down',
-      title:'Find any song — fast', desc:"You're on a song mid-show. Press ↓ to open your library." },
-    { screen:'picker_setlist', hint:'up',    expect:'up',
-      title:'Your setlist', desc:'There’s your set, with the song you’re on highlighted. Press ↑ to search the whole library.' },
-    { screen:'picker_search',  hint:'right', expect:'right',
-      title:'Search + on-screen keyboard', desc:'Search opens with the keyboard up. Press → and ShowTime types the song for you.' },
-    { screen:'picker_amazing', hint:'right', expect:'right',
-      title:'There it is', desc:'“amazing” finds Amazing Grace instantly. Press → to open it.' },
-    { screen:'song2',          hint:null,    expect:null, done:true,
-      title:'Loaded and ready ✓', desc:'Amazing Grace is up — the whole search took four taps. Now explore the toolbar: ← → move, ↑ ↓ press.' },
+    { screen:'base',            tag:15, expect:'down',  hint:'down',
+      title:'Find any song — fast', desc:"You're on a song — every direction is live here (↑↓←→). Press ↓ to open your library.", anthem:true },
+    { screen:'picker_setlist',  tag:3,  expect:'up',    hint:'up',
+      title:'Your setlist', desc:'There’s your set, the song you’re on highlighted. ↑/↓ move through it — press ↑ to jump to search.' },
+    { screen:'picker_search',   tag:1,  expect:'up',    hint:'up', auto:1500,
+      title:'Search just opened', desc:'Nothing typed yet — with no results, only ↑ is live. Watch ShowTime fill in the song…' },
+    { screen:'picker_amazing',  tag:2,  expect:'down',  hint:'down',
+      title:'Match found', desc:'“amazing” finds Amazing Grace — results are populated, so ↓ lights up. Press ↓ to step into them.' },
+    { screen:'picker_amazing_sel', tag:8, expect:'right', hint:'right',
+      title:'Amazing Grace selected', desc:'The record’s highlighted — press → to open it.' },
+    { screen:'song2',           tag:15, expect:null,    hint:null, done:true,
+      title:'Loaded and ready ✓', desc:'Amazing Grace is up — found and loaded in a few taps. Now explore the toolbar: ← → move, ↑ ↓ press.' },
   ];
-  let storyMode = true, storyIdx = 0;
+  let storyMode = true, storyIdx = 0, autoTimer = null, booted = false;
+  const ANTHEM_SCREENS = new Set(['base', 'song3']);   // America the Beautiful, Advance Australia Fair
   Object.values(SCREENS).forEach(s => { const i = new Image(); i.src = s; });   // preload
 
   const frame = document.getElementById('frame');
@@ -233,6 +262,7 @@
     else if (ic.action === 'nextSong') { songIdx = (songIdx + 1) % SONGS.length; key = SONGS[songIdx]; }
     else if (ic.action === 'prevSong') { songIdx = (songIdx - 1 + SONGS.length) % SONGS.length; key = SONGS[songIdx]; }
     if (key && SCREENS[key]) screen.src = SCREENS[key];
+    if (ic.action === 'nextSong' || ic.action === 'prevSong') maybeAnthem(key);   // landed on a song
     placeRing(i); caption(i);
     if (typeof window.gtag === 'function') window.gtag('event', 'demo_press', { icon: ic.title, dir: dir || 'up' });
   }
@@ -262,6 +292,37 @@
   function clearHint() { document.querySelectorAll('.tn-hint').forEach(d => d.remove()); }
   function showHint(dir) { clearHint(); const el = tnCell[dir]; if (!el) return; const d = document.createElement('span'); d.className = 'tn-hint'; el.appendChild(d); }
 
+  function nudgeHint(dir) { showHint(dir); }     // wrong key: re-trigger the dot's pulse
+
+  // Dim every d-pad direction that isn't live on the current screen (per its tag bitmask).
+  function applyTag(tag) {
+    Object.entries(DIRBIT).forEach(([dir, bit]) => tnCell[dir].classList.toggle('off', !(tag & bit)));
+  }
+
+  // ---- Anthem cue: flash the Play icon and run a one-off projection preview, top-right ----
+  const wrap = screen.parentElement;
+  const PLAY = ICONS.find(i => i.title === 'Play / media');
+  function flashPlayIcon() {
+    const f = document.createElement('div'); f.className = 'play-flash';
+    f.style.left = PLAY.x + '%'; f.style.top = Y + '%'; f.style.width = W + '%'; f.style.height = H + '%';
+    wrap.appendChild(f);
+    setTimeout(() => f.classList.add('fade'), 1800);
+    setTimeout(() => f.remove(), 2400);
+  }
+  function showProjectionPreview() {
+    if (wrap.querySelector('.proj-preview')) return;
+    const p = document.createElement('div'); p.className = 'proj-preview';
+    p.innerHTML = '<div class="pp-sweep"></div><div class="pp-beam"></div><div class="pp-label">📽 Projection</div>';
+    wrap.appendChild(p);
+    requestAnimationFrame(() => p.classList.add('show'));   // fade in
+    setTimeout(() => p.classList.remove('show'), 2800);     // fade out
+    setTimeout(() => p.remove(), 3300);
+  }
+  function maybeAnthem(screenKey) {
+    if (!ANTHEM_SCREENS.has(screenKey)) return;   // only the anthems carry projected visuals
+    flashPlayIcon(); showProjectionPreview();
+  }
+
   // ---- Guided story renderer ----
   function showStoryStep() {
     const s = STORY[storyIdx];
@@ -270,19 +331,22 @@
     capNum.textContent = (storyIdx + 1);
     capTitle.textContent = s.title;
     capDesc.textContent = s.desc;
+    applyTag(s.tag);                            // dim the dead directions
     if (s.hint) showHint(s.hint); else clearHint();
+    if (s.anthem && booted) maybeAnthem(s.screen);   // (initial load fires it at wake-up instead)
     if (s.done) storyMode = false;              // last step → hand over to free toolbar play
+    clearTimeout(autoTimer);
+    if (s.auto) autoTimer = setTimeout(() => { storyIdx++; showStoryStep(); }, s.auto);
   }
-  function nudgeHint(dir) { showHint(dir); }     // wrong key: re-trigger the dot's pulse
 
   // Single entry point for every direction — keyboard, d-pad tap, or hotspot all go through here.
   function drive(dir) {
     openPad(); tnToggle.classList.remove('invite');
     if (storyMode) {                             // on rails: only the suggested key advances
       const s = STORY[storyIdx];
-      glowCell(dir);
-      if (dir === s.expect) { storyIdx++; showStoryStep(); }
-      else nudgeHint(s.hint);
+      if (s.auto) return;                        // the app is "typing" — ignore input briefly
+      if (dir === s.expect) { glowCell(dir); storyIdx++; showStoryStep(); }
+      else { if (DIRBIT[dir] & s.tag) glowCell(dir); nudgeHint(s.hint); }   // dead key → no glow, just re-hint
       return;
     }
     // ---- free toolbar exploration ----
@@ -305,8 +369,12 @@
 
   // Start the guided story (sets the opening screen, caption and first hint dot).
   showStoryStep();
-  // On load the pad "wakes up": it grows, breathes, and the hint dot suggests the first move.
-  setTimeout(() => { openPad(); tnToggle.classList.add('invite'); }, 1100);
+  // On load the interface "wakes up": the pad grows & breathes, and — since we open on an
+  // anthem — the Play icon flashes and a one-off projection preview sweeps the top-right corner.
+  setTimeout(() => {
+    openPad(); tnToggle.classList.add('invite'); booted = true;
+    const s = STORY[storyIdx]; if (s.anthem) maybeAnthem(s.screen);
+  }, 1100);
 
   frame.focus();
 </script>
