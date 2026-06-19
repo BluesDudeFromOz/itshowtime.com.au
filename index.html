@@ -161,11 +161,31 @@
             padding: 120px 40px 80px;
             position: relative;
             z-index: 1;
+            /* The live ShowTime startup screen — high-energy stage as the backdrop */
+            background: #0a0a0f url('static/hero_concert.png') center center / cover no-repeat;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background: radial-gradient(ellipse at center, rgba(10,10,15,0.12) 0%, rgba(10,10,15,0.55) 100%);
+            pointer-events: none;
         }
 
         .hero-content {
-            max-width: 1200px;
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
             text-align: center;
+            background: rgba(12, 16, 26, 0.82);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 48px 44px;
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
         }
 
         .hero-badge {
@@ -1233,11 +1253,6 @@
             <div class="hero-buttons">
                 <a href="#pricing" class="btn btn-primary">Get Started</a>
                 <a href="#features" class="btn btn-secondary">See Features</a>
-            </div>
-            <div class="hero-image">
-                <img src="screenshot.png" alt="The ShowTime performance interface — your live control screen, ready for the setlist"
-                     style="width: 100%; border-radius: 12px; border: 1px solid var(--border);
-                            box-shadow: 0 0 60px rgba(0, 191, 255, 0.15);">
             </div>
         </div>
     </section>
