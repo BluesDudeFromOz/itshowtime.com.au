@@ -12,6 +12,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16.png">
     <link rel="apple-touch-icon" href="static/apple-touch-icon.png">
 
+    <!-- Editable site settings (hero visuals, timing) -->
+    <script src="config.js"></script>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -162,7 +165,8 @@
             position: relative;
             z-index: 1;
             overflow: hidden;
-            background: #0a0a0f;
+            /* first frame doubles as the no-JS / pre-load fallback backdrop */
+            background: #0a0a0f url('static/hero_frame1.jpg') center center / cover no-repeat;
         }
 
         /* Cross-fading stage visuals — the hero "plays" the app's Loop Visuals */
@@ -178,25 +182,10 @@
             background-size: cover;
             background-position: center;
             opacity: 0;
-            animation: heroCycle 21s infinite;
+            transition: opacity 1.2s ease-in-out;
             will-change: opacity;
         }
-        .hero-frame:nth-child(1) { animation-delay: 0s; }
-        .hero-frame:nth-child(2) { animation-delay: 7s; }
-        .hero-frame:nth-child(3) { animation-delay: 14s; }
-
-        @keyframes heroCycle {
-            0%   { opacity: 0; }
-            4%   { opacity: 1; }
-            33%  { opacity: 1; }
-            38%  { opacity: 0; }
-            100% { opacity: 0; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .hero-frame { animation: none; }
-            .hero-frame:nth-child(1) { opacity: 1; }
-        }
+        .hero-frame.is-active { opacity: 1; }
 
         .hero::before {
             content: "";
@@ -1275,11 +1264,7 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-stage" aria-hidden="true">
-            <div class="hero-frame" style="background-image:url('static/hero_frame1.jpg')"></div>
-            <div class="hero-frame" style="background-image:url('static/hero_frame2.jpg')"></div>
-            <div class="hero-frame" style="background-image:url('static/hero_frame3.jpg')"></div>
-        </div>
+        <div class="hero-stage" aria-hidden="true"><!-- stage visuals injected from config.js --></div>
         <div class="hero-content">
             <div class="hero-badge">🎬 Trusted by musicians across Australia</div>
             <h1>Your Stage.<br><span>Your Show.</span><br><em style="font-size:0.55em; color:var(--text-muted); font-style:normal; letter-spacing:0.02em;">Everyone on the Same Page.</em></h1>
@@ -2123,6 +2108,34 @@
             document.getElementById('ss-' + id).classList.add('active');
             event.target.closest('.screenshot-tab').classList.add('active');
         }
+
+        // Hero stage visuals — built and cross-faded from window.SHOWTIME_CONFIG.hero (config.js)
+        (function () {
+            var cfg = (window.SHOWTIME_CONFIG && window.SHOWTIME_CONFIG.hero) || {};
+            var frames = cfg.frames || [];
+            var stage = document.querySelector('.hero-stage');
+            if (!stage || !frames.length) return;
+            var fadeMs = (cfg.fadeMs != null) ? cfg.fadeMs : 1200;
+            var holdMs = (cfg.holdMs != null) ? cfg.holdMs : 6000;
+            stage.innerHTML = '';
+            var els = frames.map(function (src) {
+                var d = document.createElement('div');
+                d.className = 'hero-frame';
+                d.style.backgroundImage = "url('" + src + "')";
+                d.style.transitionDuration = fadeMs + 'ms';
+                stage.appendChild(d);
+                return d;
+            });
+            els[0].classList.add('is-active');
+            var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (cfg.enabled === false || reduce || els.length < 2) return;
+            var i = 0;
+            setInterval(function () {
+                els[i].classList.remove('is-active');
+                i = (i + 1) % els.length;
+                els[i].classList.add('is-active');
+            }, holdMs + fadeMs);
+        })();
 
         // FAQ Accordion
         document.querySelectorAll('.faq-question').forEach(button => {
