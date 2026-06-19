@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Try ShowTime — Interactive Demo</title>
-<meta name="description" content="Take the ShowTime interface for a spin — tap the toolbar to explore charts, transpose, notation, the Circle of Fifths, projection media, crew messaging and more.">
+<meta name="description" content="Drive the ShowTime interface with your arrow keys, just like the live app on stage — move along the toolbar and open each feature: charts, transpose, notation, Circle of Fifths, projection, crew messaging.">
 <link rel="icon" href="favicon.ico?v=3" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32.png?v=3">
 
@@ -35,37 +35,45 @@
   .topbar .right a{color:var(--muted);margin-left:18px;font-size:14px}
   .topbar .cta{background:var(--cyan);color:#04121b !important;padding:9px 18px;border-radius:8px;font-weight:700}
 
-  .intro{max-width:900px;margin:0 auto;padding:40px 22px 10px;text-align:center}
-  .intro h1{font-size:clamp(28px,5vw,44px);margin:0 0 10px}
+  .intro{max-width:1000px;margin:0 auto;padding:36px 22px 8px;text-align:center}
+  .intro h1{font-size:clamp(26px,4.5vw,40px);margin:0 0 8px}
   .intro h1 span{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .intro p{color:var(--muted);font-size:17px;max-width:620px;margin:0 auto}
-  .hint{display:inline-block;margin-top:14px;font-size:13px;color:var(--cyan);background:rgba(0,191,255,.08);border:1px solid rgba(0,191,255,.25);border-radius:50px;padding:6px 16px}
+  .intro p{color:var(--muted);font-size:16px;max-width:680px;margin:0 auto}
 
-  .device{max-width:960px;margin:26px auto 0;padding:0 22px}
-  .frame{background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  /* Arrow-key legend */
+  .keyhelp{display:flex;gap:24px;justify-content:center;align-items:center;flex-wrap:wrap;margin:16px auto 0}
+  .keyhelp .grp{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13.5px}
+  .kc{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;padding:0 5px;border:1px solid #3a3a48;border-bottom-width:2px;border-radius:6px;background:#22222c;color:#cfd6e0;font-size:14px}
 
-  .sim-toolbar{display:flex;gap:6px;align-items:center;background:var(--toolbar);padding:8px 10px;border-bottom:2px solid #3a3a46;overflow-x:auto}
-  .sim-toolbar button{flex:0 0 auto;width:52px;height:52px;border-radius:10px;border:2px solid transparent;background:transparent;cursor:pointer;padding:6px;transition:all .15s;display:flex;align-items:center;justify-content:center}
-  .sim-toolbar button:hover{background:rgba(255,255,255,.06)}
-  .sim-toolbar button.active{border-color:var(--cyan);background:rgba(0,191,255,.12)}
-  .sim-toolbar button img{width:100%;height:100%;object-fit:contain}
+  .device{max-width:1180px;margin:22px auto 0;padding:0 22px}
+  .frame{background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55);outline:none}
+  .frame:focus-visible{box-shadow:0 0 0 3px rgba(0,191,255,.45),0 30px 80px rgba(0,0,0,.55)}
+
+  .sim-toolbar{display:flex;gap:6px;align-items:center;background:var(--toolbar);padding:9px 12px;border-bottom:2px solid #3a3a46;overflow-x:auto}
+  .sim-toolbar button{flex:0 0 auto;width:56px;height:56px;border-radius:11px;border:2px solid transparent;background:transparent;cursor:pointer;padding:7px;transition:transform .12s,background .12s,border-color .12s;display:flex;align-items:center;justify-content:center}
+  .sim-toolbar button img{width:100%;height:100%;object-fit:contain;pointer-events:none}
+  .sim-toolbar button.opened{background:rgba(0,191,255,.14)}
+  .sim-toolbar button.focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,191,255,.25);transform:translateY(-2px) scale(1.06)}
+  .sim-toolbar button.pressed{transform:scale(.92)}
 
   .sim-screen{position:relative;aspect-ratio:16/9;background:#0c0c12;display:flex;align-items:center;justify-content:center}
   .sim-screen img{max-width:100%;max-height:100%;object-fit:contain;display:block}
 
-  .sim-caption{background:var(--panel);padding:18px 22px;border-top:1px solid var(--border)}
-  .sim-caption h3{margin:0 0 4px;font-size:19px;color:#fff}
+  .sim-caption{background:var(--panel);padding:18px 22px;border-top:1px solid var(--border);display:flex;align-items:center;gap:14px}
+  .sim-caption .ic{width:34px;height:34px;flex:0 0 auto}
+  .sim-caption h3{margin:0 0 3px;font-size:19px;color:#fff}
   .sim-caption p{margin:0;color:var(--muted);font-size:15px}
 
-  .legend{max-width:960px;margin:14px auto 0;padding:0 22px;text-align:center;color:var(--muted);font-size:13px}
+  .legend{max-width:1180px;margin:14px auto 0;padding:0 22px;text-align:center;color:var(--muted);font-size:13px}
 
-  .footcta{text-align:center;padding:48px 22px 70px}
+  .footcta{text-align:center;padding:46px 22px 70px}
   .footcta a{display:inline-block;background:var(--cyan);color:#04121b;font-weight:700;padding:14px 32px;border-radius:10px;font-size:16px}
   .footcta .sub{display:block;color:var(--muted);font-size:14px;margin-top:12px}
 
   @media(max-width:560px){
-    .sim-toolbar button{width:46px;height:46px}
+    .sim-toolbar button{width:48px;height:48px}
     .sim-screen{aspect-ratio:4/3}
+    .keyhelp{gap:14px}
   }
 </style>
 </head>
@@ -80,21 +88,25 @@
   </div>
 
   <div class="intro">
-    <h1>Take ShowTime for a <span>spin</span></h1>
-    <p>This is the real interface, screen by screen. Tap an icon in the toolbar to explore what each part does — no sign-up needed.</p>
-    <div class="hint">👆 Tap the toolbar icons</div>
+    <h1>Drive it like you're <span>on stage</span></h1>
+    <p>This is the real ShowTime interface. Use your arrow keys — exactly like the foot-pedal or keyboard
+       you'd use at a gig — to move along the toolbar and open each tool. (You can click/tap too.)</p>
+    <div class="keyhelp">
+      <span class="grp"><span class="kc">←</span><span class="kc">→</span> move along the toolbar</span>
+      <span class="grp"><span class="kc">↑</span><span class="kc">↓</span> open the selected tool</span>
+    </div>
   </div>
 
   <div class="device">
-    <div class="frame">
-      <div class="sim-toolbar" id="toolbar" role="tablist" aria-label="ShowTime features"></div>
+    <div class="frame" id="frame" tabindex="0" role="application" aria-label="ShowTime interface demo — use arrow keys">
+      <div class="sim-toolbar" id="toolbar"></div>
       <div class="sim-screen"><img id="screen" alt=""></div>
       <div class="sim-caption">
-        <h3 id="capTitle"></h3>
-        <p id="capDesc"></p>
+        <img class="ic" id="capIcon" src="" alt="">
+        <div><h3 id="capTitle"></h3><p id="capDesc"></p></div>
       </div>
     </div>
-    <div class="legend">A guided walk-through using real ShowTime screens. The live app runs in your browser on stage.</div>
+    <div class="legend">A guided walk-through using real ShowTime screens. The live app runs in your browser on stage — same navigation, no app to install.</div>
   </div>
 
   <div class="footcta">
@@ -114,40 +126,60 @@
   ];
 
   const toolbar = document.getElementById('toolbar');
+  const frame = document.getElementById('frame');
   const screen = document.getElementById('screen');
+  const capIcon = document.getElementById('capIcon');
   const capTitle = document.getElementById('capTitle');
   const capDesc = document.getElementById('capDesc');
-  let current = -1;
 
-  function show(i) {
-    if (i === current) return;
-    current = i;
-    const f = FEATURES[i];
-    screen.src = f.screen;
-    screen.alt = f.title + ' — ShowTime';
-    capTitle.textContent = f.title;
-    capDesc.textContent = f.desc;
+  let focusIdx = 0;     // where the "cursor" is on the toolbar
+  let openedIdx = -1;   // which feature screen is currently shown
+
+  function paint() {
     [...toolbar.children].forEach((b, n) => {
-      b.classList.toggle('active', n === i);
-      b.setAttribute('aria-selected', n === i ? 'true' : 'false');
+      b.classList.toggle('focus', n === focusIdx);
+      b.classList.toggle('opened', n === openedIdx);
     });
-    if (typeof window.gtag === 'function') {
-      window.gtag('event', 'demo_feature', { feature: f.title });
-    }
+    const fb = toolbar.children[focusIdx];
+    if (fb && fb.scrollIntoView) fb.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }
+  function moveFocus(d) { focusIdx = (focusIdx + d + FEATURES.length) % FEATURES.length; paint(); }
+  function open(i) {
+    openedIdx = i; focusIdx = i;
+    const f = FEATURES[i];
+    screen.src = f.screen; screen.alt = f.title + ' — ShowTime';
+    capIcon.src = f.icon; capTitle.textContent = f.title; capDesc.textContent = f.desc;
+    paint();
+    const b = toolbar.children[i];
+    if (b) { b.classList.add('pressed'); setTimeout(() => b.classList.remove('pressed'), 130); }
+    if (typeof window.gtag === 'function') window.gtag('event', 'demo_feature', { feature: f.title });
   }
 
   FEATURES.forEach((f, i) => {
     const b = document.createElement('button');
-    b.type = 'button';
-    b.title = f.title;
-    b.setAttribute('role', 'tab');
-    b.setAttribute('aria-label', f.title);
+    b.type = 'button'; b.title = f.title; b.setAttribute('aria-label', f.title);
     b.innerHTML = '<img src="' + f.icon + '" alt="">';
-    b.addEventListener('click', () => show(i));
+    b.addEventListener('click', () => { open(i); frame.focus(); });
     toolbar.appendChild(b);
   });
 
-  show(0);  // start on the chord chart
+  function onKey(e) {
+    const k = e.key;
+    if (k === 'ArrowLeft')  { e.preventDefault(); moveFocus(-1); }
+    else if (k === 'ArrowRight') { e.preventDefault(); moveFocus(1); }
+    else if (k === 'ArrowUp' || k === 'ArrowDown') { e.preventDefault(); open(focusIdx); }
+  }
+  // Arrow keys drive the toolbar from anywhere on the page (so it just works on arrival).
+  document.addEventListener('keydown', e => {
+    if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) onKey(e);
+  });
+  // Enter/Space open the focused tool only when the interface itself is focused (won't hijack links).
+  frame.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(focusIdx); }
+  });
+
+  open(0);          // start on the chord chart
+  frame.focus();    // ready for arrow keys immediately
 </script>
 </body>
 </html>
