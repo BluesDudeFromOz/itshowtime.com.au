@@ -58,6 +58,29 @@
   .hotspot:hover{background:rgba(0,191,255,.14)}
   .ring{position:absolute;border:2px solid var(--cyan);border-radius:9px;box-shadow:0 0 0 3px rgba(0,191,255,.30),0 0 14px rgba(0,191,255,.55);pointer-events:none;transition:left .12s,top .12s,width .12s,height .12s}
 
+  /* Touch-nav d-pad — a faithful replica of the real app's bottom-right control
+     (40px round ✥ toggle that expands into a 3×3 ▲◀OK▶▼ pad). Same keys, same look. */
+  .tn-toggle{position:absolute;bottom:2.6%;right:2.0%;z-index:30;width:40px;height:40px;border-radius:50%;
+    border:1px solid rgba(0,191,255,.55);background:rgba(0,0,0,.82);color:var(--cyan);font-size:20px;line-height:1;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:.6;transition:opacity .2s,transform .25s,box-shadow .25s}
+  .tn-toggle:hover{opacity:.95}
+  .tn-toggle.active{background:rgba(0,191,255,.38);border-color:var(--cyan);opacity:1}
+  .tn-toggle.invite{opacity:1;transform:scale(1.22);animation:tn-breathe 1.7s ease-in-out infinite}
+  @keyframes tn-breathe{0%,100%{box-shadow:0 0 0 4px rgba(0,191,255,.16),0 0 18px rgba(0,191,255,.45)}
+                        50%{box-shadow:0 0 0 8px rgba(0,191,255,.26),0 0 32px rgba(0,191,255,.78)}}
+  .tn-pad{position:absolute;bottom:11%;right:2.0%;z-index:30;display:none;grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px);gap:3px;opacity:.85}
+  .tn-pad.active{display:grid}
+  .tn-cell{border:1px solid rgba(0,191,255,.5);background:rgba(0,0,0,.72);color:var(--cyan);font-size:21px;border-radius:8px;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;user-select:none;transition:background .12s,box-shadow .12s,transform .08s}
+  .tn-cell.center{background:rgba(0,191,255,.2);font-size:12px;font-weight:700}
+  .tn-cell.empty{visibility:hidden;cursor:default}
+  .tn-cell:active,.tn-cell.glow{background:rgba(0,191,255,.45);box-shadow:0 0 0 2px rgba(0,191,255,.55),0 0 18px rgba(0,191,255,.75);transform:scale(.95)}
+  .tn-hint{position:absolute;top:-7px;right:-7px;width:15px;height:15px;border-radius:50%;background:var(--cyan);pointer-events:none;
+    animation:tn-ping 1.4s ease-out infinite}
+  @keyframes tn-ping{0%{box-shadow:0 0 0 0 rgba(0,191,255,.6);transform:scale(.85)}
+                     70%{box-shadow:0 0 0 13px rgba(0,191,255,0);transform:scale(1.15)}
+                     100%{box-shadow:0 0 0 0 rgba(0,191,255,0);transform:scale(.85)}}
+
   .sim-caption{background:var(--panel);padding:15px 22px;border-top:1px solid var(--border);min-height:64px;display:flex;align-items:center;gap:13px}
   .sim-caption .num{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:rgba(0,191,255,.15);color:var(--cyan);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
   .sim-caption h3{margin:0 0 2px;font-size:18px;color:#fff}
@@ -100,6 +123,20 @@
         <img class="screen" id="screen" src="static/sim/base.png" alt="ShowTime performance interface">
         <div id="hotspots"></div>
         <div class="ring" id="ring" hidden></div>
+
+        <!-- The real app's bottom-right touch-nav control, replicated -->
+        <button class="tn-toggle" id="tnToggle" title="Touch navigation" aria-label="Touch navigation">✥</button>
+        <div class="tn-pad" id="tnPad" aria-label="Direction pad">
+          <div class="tn-cell empty"></div>
+          <div class="tn-cell" id="tnUp"    data-dir="up"    title="Up (↑)">▲</div>
+          <div class="tn-cell empty"></div>
+          <div class="tn-cell" id="tnLeft"  data-dir="left"  title="Left (←)">◀</div>
+          <div class="tn-cell center" id="tnOk" data-dir="enter" title="Select (Enter)">OK</div>
+          <div class="tn-cell" id="tnRight" data-dir="right" title="Right (→)">▶</div>
+          <div class="tn-cell empty"></div>
+          <div class="tn-cell" id="tnDown"  data-dir="down"  title="Down (↓)">▼</div>
+          <div class="tn-cell empty"></div>
+        </div>
       </div>
       <div class="sim-caption">
         <span class="num" id="capNum">→</span>
@@ -189,15 +226,44 @@
     hotspots.appendChild(h);
   });
 
-  function onArrow(e) {
-    const k = e.key;
-    if (k === 'ArrowLeft') { e.preventDefault(); moveFocus(-1); }
-    else if (k === 'ArrowRight') { e.preventDefault(); moveFocus(1); }
-    else if (k === 'ArrowUp')   { e.preventDefault(); if (focusIdx < 0) moveFocus(1); else press(focusIdx, 'up'); }
-    else if (k === 'ArrowDown') { e.preventDefault(); if (focusIdx < 0) moveFocus(1); else press(focusIdx, 'down'); }
+  // ---- Touch-nav d-pad (mirrors the real app's bottom-right control) ----
+  const tnToggle = document.getElementById('tnToggle');
+  const tnPad = document.getElementById('tnPad');
+  const tnCell = { up:document.getElementById('tnUp'), down:document.getElementById('tnDown'),
+                   left:document.getElementById('tnLeft'), right:document.getElementById('tnRight'),
+                   enter:document.getElementById('tnOk') };
+  let padOpen = false, moved = false;
+
+  function openPad() { if (padOpen) return; padOpen = true; tnPad.classList.add('active'); tnToggle.classList.add('active'); }
+  function glowCell(dir) {
+    const el = tnCell[dir]; if (!el) return;
+    el.classList.add('glow'); clearTimeout(el._g); el._g = setTimeout(() => el.classList.remove('glow'), 240);
   }
-  document.addEventListener('keydown', e => { if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) onArrow(e); });
-  frame.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (focusIdx < 0) moveFocus(1); else press(focusIdx, 'up'); } });
+  function clearHint() { document.querySelectorAll('.tn-hint').forEach(d => d.remove()); }
+  function showHint(dir) { clearHint(); const el = tnCell[dir]; if (!el) return; const d = document.createElement('span'); d.className = 'tn-hint'; el.appendChild(d); }
+
+  // Single entry point for every direction — keyboard, d-pad tap, or hotspot all go through here.
+  function drive(dir) {
+    openPad(); tnToggle.classList.remove('invite');
+    if (dir === 'left')       moveFocus(-1);
+    else if (dir === 'right') moveFocus(1);
+    else if (dir === 'up')    { if (focusIdx < 0) moveFocus(1); else press(focusIdx, 'up'); }
+    else if (dir === 'down')  { if (focusIdx < 0) moveFocus(1); else press(focusIdx, 'down'); }
+    else if (dir === 'enter') { if (focusIdx < 0) moveFocus(1); else press(focusIdx, 'up'); }
+    glowCell(dir);
+    if (!moved && (dir === 'left' || dir === 'right')) { moved = true; clearHint(); }   // user found the toolbar
+  }
+
+  // tap the toggle to reveal the pad (just like the app)
+  tnToggle.addEventListener('click', () => { tnToggle.classList.remove('invite'); padOpen ? null : openPad(); });
+  Object.entries(tnCell).forEach(([dir, el]) => el.addEventListener('click', () => { drive(dir); frame.focus(); }));
+
+  const KEYDIR = { ArrowLeft:'left', ArrowRight:'right', ArrowUp:'up', ArrowDown:'down' };
+  document.addEventListener('keydown', e => { if (KEYDIR[e.key]) { e.preventDefault(); drive(KEYDIR[e.key]); } });
+  frame.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); drive('enter'); } });
+
+  // On load the pad "wakes up": it grows, breathes, and a hint dot suggests the first move.
+  setTimeout(() => { openPad(); tnToggle.classList.add('invite'); showHint('right'); }, 1100);
 
   frame.focus();
 </script>
