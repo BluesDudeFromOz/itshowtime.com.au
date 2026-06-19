@@ -119,8 +119,8 @@
   // x positions (%) match the real on-screen icons in static/sim/base.png, left→right.
   const ICONS = [
     { x:0.63,  title:'Home / Search',     desc:'Jump to your library and find any song.' },
-    { x:4.13,  title:'Previous song',     desc:'Step back a song — every device follows.', screen:'base' },
-    { x:7.63,  title:'Next song',         desc:'Advance to the next song in the setlist.', screen:'song2' },
+    { x:4.13,  title:'Previous song',     desc:'Step back through the setlist — every device follows.', action:'prevSong' },
+    { x:7.63,  title:'Next song',         desc:'Advance through the setlist — every device follows.', action:'nextSong' },
     { x:11.13, title:'Larger font',       desc:'Bump the chart text one size larger.', screen:'font_bigger' },
     { x:14.63, title:'Smaller font',      desc:'Bring the chart text one size smaller.', screen:'font_smaller' },
     { x:18.13, title:'Page view',         desc:'Toggle between two-page and single-page layout.', toggle:['base','onepage'] },
@@ -137,7 +137,10 @@
   const SCREENS = { base:'static/sim/base.png', onepage:'static/sim/onepage.png',
                     transpose_up:'static/sim/transpose_up.png', transpose_down:'static/sim/transpose_down.png',
                     font_bigger:'static/sim/font_bigger.png', font_smaller:'static/sim/font_smaller.png',
-                    cof:'static/sim/cof.png', media:'static/sim/media.png', crew:'static/sim/crew.png', song2:'static/sim/song2.png' };
+                    cof:'static/sim/cof.png', media:'static/sim/media.png', crew:'static/sim/crew.png',
+                    song2:'static/sim/song2.png', song3:'static/sim/song3.png' };
+  const SONGS = ['base', 'song2', 'song3'];   // America → Amazing Grace → Advance Australia Fair
+  let songIdx = 0;
   Object.values(SCREENS).forEach(s => { const i = new Image(); i.src = s; });   // preload
 
   const frame = document.getElementById('frame');
@@ -169,6 +172,8 @@
     let key = ic.screen;
     if (ic.toggle) { toggleState[i] = toggleState[i] ? 0 : 1; key = ic.toggle[toggleState[i]]; }
     else if (ic.upScreen || ic.downScreen) { key = (dir === 'down') ? ic.downScreen : ic.upScreen; }  // ▲ up / ▼ down
+    else if (ic.action === 'nextSong') { songIdx = (songIdx + 1) % SONGS.length; key = SONGS[songIdx]; }
+    else if (ic.action === 'prevSong') { songIdx = (songIdx - 1 + SONGS.length) % SONGS.length; key = SONGS[songIdx]; }
     if (key && SCREENS[key]) screen.src = SCREENS[key];
     placeRing(i); caption(i);
     if (typeof window.gtag === 'function') window.gtag('event', 'demo_press', { icon: ic.title, dir: dir || 'up' });

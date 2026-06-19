@@ -1,0 +1,61 @@
+<svg viewBox="0 0 680 383" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Concert crowd from the stage">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#070912"/>
+<stop offset="42%" stop-color="#15102f"/>
+<stop offset="74%" stop-color="#2a1330"/>
+<stop offset="100%" stop-color="#451d33"/>
+</linearGradient>
+<radialGradient id="glow" cx="50%" cy="62%" r="55%">
+<stop offset="0%" stop-color="#ff8a3d" stop-opacity="0.55"/>
+<stop offset="55%" stop-color="#ff5a28" stop-opacity="0.14"/>
+<stop offset="100%" stop-color="#ff5a28" stop-opacity="0"/>
+</radialGradient>
+</defs>
+<rect x="0" y="0" width="680" height="383" fill="url(#sky)"/>
+<rect x="0" y="0" width="680" height="383" fill="url(#glow)"/>
+<g>
+<polygon points="252,8 40,383 130,383 282,8" fill="#d24b8f" opacity="0.22"/>
+<polygon points="300,8 120,383 215,383 330,8" fill="#ffb24d" opacity="0.26"/>
+<polygon points="342,5 300,383 392,383 362,5" fill="#fff1d6" opacity="0.30"/>
+<polygon points="384,8 452,383 565,383 414,8" fill="#33c6ff" opacity="0.22"/>
+<polygon points="420,8 560,383 648,383 452,8" fill="#ffb24d" opacity="0.20"/>
+<polygon points="332,7 470,383 545,383 360,7" fill="#33c6ff" opacity="0.18"/>
+<polygon points="362,7 222,383 292,383 382,7" fill="#d24b8f" opacity="0.18"/>
+</g>
+<g fill="#fff6df">
+<circle cx="150" cy="12" r="3"/><circle cx="205" cy="9" r="2.4"/><circle cx="262" cy="11" r="3"/>
+<circle cx="318" cy="8" r="2.6"/><circle cx="362" cy="8" r="3"/><circle cx="410" cy="9" r="2.6"/>
+<circle cx="462" cy="11" r="3"/><circle cx="520" cy="9" r="2.4"/><circle cx="455" cy="10" r="2"/>
+</g>
+<g fill="#ffce7a" opacity="0.85">
+<circle cx="150" cy="12" r="6" opacity="0.3"/><circle cx="262" cy="11" r="6" opacity="0.3"/>
+<circle cx="362" cy="8" r="7" opacity="0.3"/><circle cx="462" cy="11" r="6" opacity="0.3"/>
+</g>
+<path d="M0,383 L0,300 Q60,282 120,294 Q180,278 250,290 Q330,272 400,288 Q470,274 545,290 Q610,280 680,296 L680,383 Z" fill="#05050c"/>
+<g fill="#07070f">
+<ellipse cx="40" cy="300" rx="13" ry="15"/><ellipse cx="95" cy="306" rx="12" ry="14"/>
+<ellipse cx="150" cy="298" rx="14" ry="16"/><ellipse cx="210" cy="305" rx="12" ry="14"/>
+<ellipse cx="268" cy="296" rx="14" ry="16"/><ellipse cx="325" cy="304" rx="12" ry="14"/>
+<ellipse cx="382" cy="297" rx="14" ry="16"/><ellipse cx="440" cy="305" rx="12" ry="14"/>
+<ellipse cx="498" cy="297" rx="14" ry="16"/><ellipse cx="556" cy="305" rx="12" ry="14"/>
+<ellipse cx="612" cy="298" rx="13" ry="15"/><ellipse cx="660" cy="306" rx="12" ry="14"/>
+</g>
+<g stroke="#06060d" stroke-width="6" stroke-linecap="round" opacity="0.95">
+<line x1="70" y1="298" x2="62" y2="262"/><line x1="76" y1="298" x2="88" y2="266"/>
+<line x1="185" y1="300" x2="178" y2="266"/><line x1="300" y1="300" x2="308" y2="264"/>
+<line x1="358" y1="296" x2="350" y2="260"/><line x1="470" y1="300" x2="478" y2="266"/>
+<line x1="585" y1="300" x2="578" y2="266"/><line x1="630" y1="300" x2="640" y2="268"/>
+<line x1="248" y1="300" x2="242" y2="270"/><line x1="418" y1="300" x2="426" y2="270"/>
+</g>
+<g fill="#ffe7a8">
+<circle cx="58" cy="284" r="1.6"/><circle cx="128" cy="290" r="1.4"/><circle cx="172" cy="282" r="1.7"/>
+<circle cx="232" cy="288" r="1.4"/><circle cx="296" cy="280" r="1.6"/><circle cx="344" cy="286" r="1.5"/>
+<circle cx="404" cy="282" r="1.7"/><circle cx="452" cy="290" r="1.4"/><circle cx="512" cy="282" r="1.6"/>
+<circle cx="566" cy="288" r="1.4"/><circle cx="624" cy="284" r="1.6"/><circle cx="92" cy="296" r="1.3"/>
+<circle cx="266" cy="296" r="1.3"/><circle cx="388" cy="296" r="1.3"/><circle cx="500" cy="296" r="1.3"/>
+</g>
+<g fill="#bfe9ff" opacity="0.9">
+<circle cx="110" cy="276" r="1.3"/><circle cx="318" cy="274" r="1.4"/><circle cx="486" cy="276" r="1.3"/><circle cx="218" cy="272" r="1.2"/>
+</g>
+</svg>
