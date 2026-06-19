@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Try ShowTime — Interactive Demo</title>
+<meta name="description" content="Take the ShowTime interface for a spin — tap the toolbar to explore charts, transpose, notation, the Circle of Fifths, projection media, crew messaging and more.">
+<link rel="icon" href="favicon.ico?v=3" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32.png?v=3">
+
+<!-- Editable settings + GA (shared with the main site) -->
+<script src="config.js"></script>
+<script>
+(function () {
+  var id = ((window.SHOWTIME_CONFIG && window.SHOWTIME_CONFIG.gaMeasurementId) || '').trim();
+  if (!/^G-[A-Z0-9]+$/i.test(id)) return;
+  var s = document.createElement('script'); s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
+  document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', id, { page_title: 'Interactive Demo', page_path: '/simulator' });
+})();
+</script>
+
+<style>
+  :root{--bg:#0a0a0f;--panel:#16161f;--text:#e8e8ef;--muted:#9aa4b2;--cyan:#00BFFF;--purple:#8B5CF6;--border:#23232f;--toolbar:#2b2b34}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Outfit','Segoe UI',system-ui,Arial,sans-serif;line-height:1.6}
+  a{color:var(--cyan);text-decoration:none}
+
+  .topbar{position:sticky;top:0;z-index:10;background:rgba(10,10,15,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:14px 22px;display:flex;justify-content:space-between;align-items:center}
+  .topbar .logo{color:var(--cyan);font-weight:800;font-size:20px}
+  .topbar .right a{color:var(--muted);margin-left:18px;font-size:14px}
+  .topbar .cta{background:var(--cyan);color:#04121b !important;padding:9px 18px;border-radius:8px;font-weight:700}
+
+  .intro{max-width:900px;margin:0 auto;padding:40px 22px 10px;text-align:center}
+  .intro h1{font-size:clamp(28px,5vw,44px);margin:0 0 10px}
+  .intro h1 span{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .intro p{color:var(--muted);font-size:17px;max-width:620px;margin:0 auto}
+  .hint{display:inline-block;margin-top:14px;font-size:13px;color:var(--cyan);background:rgba(0,191,255,.08);border:1px solid rgba(0,191,255,.25);border-radius:50px;padding:6px 16px}
+
+  .device{max-width:960px;margin:26px auto 0;padding:0 22px}
+  .frame{background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+
+  .sim-toolbar{display:flex;gap:6px;align-items:center;background:var(--toolbar);padding:8px 10px;border-bottom:2px solid #3a3a46;overflow-x:auto}
+  .sim-toolbar button{flex:0 0 auto;width:52px;height:52px;border-radius:10px;border:2px solid transparent;background:transparent;cursor:pointer;padding:6px;transition:all .15s;display:flex;align-items:center;justify-content:center}
+  .sim-toolbar button:hover{background:rgba(255,255,255,.06)}
+  .sim-toolbar button.active{border-color:var(--cyan);background:rgba(0,191,255,.12)}
+  .sim-toolbar button img{width:100%;height:100%;object-fit:contain}
+
+  .sim-screen{position:relative;aspect-ratio:16/9;background:#0c0c12;display:flex;align-items:center;justify-content:center}
+  .sim-screen img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+
+  .sim-caption{background:var(--panel);padding:18px 22px;border-top:1px solid var(--border)}
+  .sim-caption h3{margin:0 0 4px;font-size:19px;color:#fff}
+  .sim-caption p{margin:0;color:var(--muted);font-size:15px}
+
+  .legend{max-width:960px;margin:14px auto 0;padding:0 22px;text-align:center;color:var(--muted);font-size:13px}
+
+  .footcta{text-align:center;padding:48px 22px 70px}
+  .footcta a{display:inline-block;background:var(--cyan);color:#04121b;font-weight:700;padding:14px 32px;border-radius:10px;font-size:16px}
+  .footcta .sub{display:block;color:var(--muted);font-size:14px;margin-top:12px}
+
+  @media(max-width:560px){
+    .sim-toolbar button{width:46px;height:46px}
+    .sim-screen{aspect-ratio:4/3}
+  }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="logo" href="/">🎬 ShowTime</a>
+    <div class="right">
+      <a href="/#features">Features</a>
+      <a href="/#pricing">Pricing</a>
+      <a class="cta" href="/#pricing">Get Started</a>
+    </div>
+  </div>
+
+  <div class="intro">
+    <h1>Take ShowTime for a <span>spin</span></h1>
+    <p>This is the real interface, screen by screen. Tap an icon in the toolbar to explore what each part does — no sign-up needed.</p>
+    <div class="hint">👆 Tap the toolbar icons</div>
+  </div>
+
+  <div class="device">
+    <div class="frame">
+      <div class="sim-toolbar" id="toolbar" role="tablist" aria-label="ShowTime features"></div>
+      <div class="sim-screen"><img id="screen" alt=""></div>
+      <div class="sim-caption">
+        <h3 id="capTitle"></h3>
+        <p id="capDesc"></p>
+      </div>
+    </div>
+    <div class="legend">A guided walk-through using real ShowTime screens. The live app runs in your browser on stage.</div>
+  </div>
+
+  <div class="footcta">
+    <a href="/#pricing">Get ShowTime — from free</a>
+    <span class="sub">Starter is free · Band $99/yr · no app to install</span>
+  </div>
+
+<script>
+  const FEATURES = [
+    { icon:'static/transpose.png',      screen:'static/2_page_chart_view.png',                title:'Chord charts & instant transpose', desc:'Yellow chords on black, two-page or portrait. Transpose to any key — or any instrument — in one tap.' },
+    { icon:'static/edit_notation.png',  screen:'static/hybrid_notation_chord_chart_view.png', title:'Music notation',                    desc:'Full sheet music alongside your charts, from a riff to a full page — and it transposes too.' },
+    { icon:'static/circle_of_5ths.png', screen:'static/cicrcleofkeys.png',                    title:'Circle of Fifths',                  desc:'Key relationships, 2-5-1 progressions and improv help, right there on the performance screen.' },
+    { icon:'static/annotations.png',    screen:'static/annotation_view.png',                  title:'Annotations',                       desc:'Pin notes and cues to any part of a song — colour-coded per player, and they transpose in sync.' },
+    { icon:'static/play.png',           screen:'static/multimedia_slideshow.png',             title:'Video & projection',                desc:'Per-song video, pre-show/intermission slideshows and a beat-sync visualiser on the projector.' },
+    { icon:'static/message_crew.png',   screen:'static/message_support.png',                  title:'Crew messaging',                    desc:'Send colour-coded cues to sound, lighting and stage crew mid-show — they tap once to confirm.' },
+    { icon:'static/master.png',         screen:'static/search_screen.png',                    title:'Library & master control',          desc:'Find any song instantly and launch it — every connected device follows the master in real time.' },
+  ];
+
+  const toolbar = document.getElementById('toolbar');
+  const screen = document.getElementById('screen');
+  const capTitle = document.getElementById('capTitle');
+  const capDesc = document.getElementById('capDesc');
+  let current = -1;
+
+  function show(i) {
+    if (i === current) return;
+    current = i;
+    const f = FEATURES[i];
+    screen.src = f.screen;
+    screen.alt = f.title + ' — ShowTime';
+    capTitle.textContent = f.title;
+    capDesc.textContent = f.desc;
+    [...toolbar.children].forEach((b, n) => {
+      b.classList.toggle('active', n === i);
+      b.setAttribute('aria-selected', n === i ? 'true' : 'false');
+    });
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'demo_feature', { feature: f.title });
+    }
+  }
+
+  FEATURES.forEach((f, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.title = f.title;
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-label', f.title);
+    b.innerHTML = '<img src="' + f.icon + '" alt="">';
+    b.addEventListener('click', () => show(i));
+    toolbar.appendChild(b);
+  });
+
+  show(0);  // start on the chord chart
+</script>
+</body>
+</html>
