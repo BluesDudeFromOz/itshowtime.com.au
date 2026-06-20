@@ -195,7 +195,7 @@
     { x:25.12, title:'Transpose',         desc:'Press ▲ to lift the whole chart up a key, ▼ to drop it down.', upScreen:'transpose_up', downScreen:'transpose_down' },
     { x:28.63, title:'Instrument key',    desc:'One control for Eb / Bb / F / G players — each reads their own key automatically.' },
     { x:32.13, title:'Circle of Fifths',  desc:'Key relationships, 2-5-1 progressions and improv help.', screen:'cof' },
-    { x:35.63, title:'Play / media',      desc:'Start the slideshow, per-song video and audio engine.', screen:'media' },
+    { x:35.63, title:'Play / media',      desc:'Project the song’s slideshow / video to your screens.', action:'project' },
     { x:39.13, title:'Rotate screen',     desc:'Flip orientation for any device.' },
     { x:42.63, title:'Blank screen',      desc:'Black the screen out between songs.' },
     { x:46.13, title:'Crew message',      desc:'Send a colour-coded cue to sound, lighting or stage.', screen:'crew' },
@@ -269,6 +269,7 @@
     else if (ic.action === 'prevSong') { songIdx = (songIdx - 1 + SONGS.length) % SONGS.length; key = SONGS[songIdx]; }
     if (key && SCREENS[key]) screen.src = SCREENS[key];
     if (ic.action === 'nextSong' || ic.action === 'prevSong') maybeAnthem(key);   // landed on a song
+    if (ic.action === 'project') showProjectionPreview();   // Play → visuals project to the top-right screen
     placeRing(i); caption(i);
     if (typeof window.gtag === 'function') window.gtag('event', 'demo_press', { icon: ic.title, dir: dir || 'up' });
   }
