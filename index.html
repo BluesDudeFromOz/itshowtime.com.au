@@ -1307,26 +1307,33 @@
         .ticker {
             position: relative;
             overflow: hidden;
-            white-space: nowrap;
+            height: 52px;
             background: linear-gradient(90deg, rgba(0,191,255,.10), rgba(139,92,246,.10));
             border-top: 1px solid var(--border, #23232f);
             border-bottom: 1px solid var(--border, #23232f);
         }
         .ticker::before, .ticker::after {
-            content: ""; position: absolute; top: 0; bottom: 0; width: 90px; z-index: 2; pointer-events: none;
+            content: ""; position: absolute; top: 0; bottom: 0; width: 70px; z-index: 2; pointer-events: none;
         }
         .ticker::before { left: 0;  background: linear-gradient(90deg,  #0a0a0f, rgba(10,10,15,0)); }
         .ticker::after  { right: 0; background: linear-gradient(270deg, #0a0a0f, rgba(10,10,15,0)); }
-        .ticker-track { display: inline-flex; align-items: center; animation: ticker-scroll 40s linear infinite; will-change: transform; }
-        .ticker:hover .ticker-track { animation-play-state: paused; }
-        .ticker-set { display: inline-flex; align-items: center; padding: 14px 0; }
-        .ticker-item { display: inline-flex; align-items: center; gap: 11px; padding: 0 30px; font-size: 15px; font-weight: 600; color: var(--text, #e8e8ef); letter-spacing: .2px; }
-        .ticker-item::before { content: "●"; color: var(--cyan, #00BFFF); font-size: 8px; }
-        @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        @media (prefers-reduced-motion: reduce) {
-            .ticker-track { animation: none; flex-wrap: wrap; justify-content: center; white-space: normal; }
-            .ticker-set:last-child { display: none; }
+        /* one message crosses at a time, right -> left (animation duration set per-message in JS) */
+        .ticker-line {
+            position: absolute; top: 50%; left: 0;
+            display: inline-flex; align-items: center; gap: 11px;
+            white-space: nowrap;
+            font-size: 15px; font-weight: 600; color: var(--text, #e8e8ef); letter-spacing: .2px;
+            transform: translate(100vw, -50%);
+            will-change: transform;
         }
+        .ticker-line::before { content: "●"; color: var(--cyan, #00BFFF); font-size: 8px; }
+        .ticker:hover .ticker-line { animation-play-state: paused; }
+        @keyframes ticker-cross {
+            from { transform: translate(100vw, -50%); }
+            to   { transform: translate(-100%, -50%); }
+        }
+        /* reduced motion: no scroll — JS swaps a centred message on an interval */
+        .ticker-line.static { left: 0; right: 0; transform: translateY(-50%); justify-content: center; text-align: center; }
     </style>
 </head>
 <body>
@@ -1367,45 +1374,51 @@
         </div>
     </section>
 
-    <!-- Scrolling feature ticker -->
+    <!-- Single-line feature ticker — one message crosses at a time (JS-driven) -->
     <div class="ticker" aria-label="ShowTime at a glance">
-        <div class="ticker-track">
-            <div class="ticker-set">
-                <span class="ticker-item">Professional chord-chart &amp; setlist manager for live performers</span>
-                <span class="ticker-item">Sync your whole band wirelessly</span>
-                <span class="ticker-item">Master/slave setlist navigation</span>
-                <span class="ticker-item">Transpose chord charts &amp; notation instantly</span>
-                <span class="ticker-item">Transpose for Eb, Bb, F &amp; G instruments across the setlist</span>
-                <span class="ticker-item">Circle of Fifths lookup for songwriting &amp; improvisation</span>
-                <span class="ticker-item">Bluetooth pedal navigation</span>
-                <span class="ticker-item">QR codes for instant onboarding</span>
-                <span class="ticker-item">Crew messaging — lighting, sound &amp; stage management</span>
-                <span class="ticker-item">Rehearsal links</span>
-                <span class="ticker-item">Backing-track support</span>
-                <span class="ticker-item">Projector slideshows — video, JPG &amp; PNG</span>
-                <span class="ticker-item">Intermission video display</span>
-                <span class="ticker-item">Cloud and/or standalone</span>
-                <span class="ticker-item">ShowTime server for Mac, PC &amp; Linux</span>
-            </div>
-            <div class="ticker-set" aria-hidden="true">
-                <span class="ticker-item">Professional chord-chart &amp; setlist manager for live performers</span>
-                <span class="ticker-item">Sync your whole band wirelessly</span>
-                <span class="ticker-item">Master/slave setlist navigation</span>
-                <span class="ticker-item">Transpose chord charts &amp; notation instantly</span>
-                <span class="ticker-item">Transpose for Eb, Bb, F &amp; G instruments across the setlist</span>
-                <span class="ticker-item">Circle of Fifths lookup for songwriting &amp; improvisation</span>
-                <span class="ticker-item">Bluetooth pedal navigation</span>
-                <span class="ticker-item">QR codes for instant onboarding</span>
-                <span class="ticker-item">Crew messaging — lighting, sound &amp; stage management</span>
-                <span class="ticker-item">Rehearsal links</span>
-                <span class="ticker-item">Backing-track support</span>
-                <span class="ticker-item">Projector slideshows — video, JPG &amp; PNG</span>
-                <span class="ticker-item">Intermission video display</span>
-                <span class="ticker-item">Cloud and/or standalone</span>
-                <span class="ticker-item">ShowTime server for Mac, PC &amp; Linux</span>
-            </div>
-        </div>
+        <div class="ticker-line" id="tickerLine"></div>
     </div>
+    <script>
+    (function () {
+        var MSGS = [
+            'Professional chord-chart & setlist manager for live performers',
+            'Sync your whole band wirelessly',
+            'Master/slave setlist navigation',
+            'Transpose chord charts & notation instantly',
+            'Transpose for Eb, Bb, F & G instruments across the setlist',
+            'Circle of Fifths lookup for songwriting & improvisation',
+            'Bluetooth pedal navigation',
+            'QR codes for instant onboarding',
+            'Crew messaging — lighting, sound & stage management',
+            'Rehearsal links',
+            'Backing-track support',
+            'Projector slideshows — video, JPG & PNG',
+            'Intermission video display',
+            'Cloud and/or standalone',
+            'ShowTime server for Mac, PC & Linux'
+        ];
+        var line = document.getElementById('tickerLine');
+        if (!line) return;
+        var i = 0, SPEED = 230;   // px per second — readable but lively
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            // reduced motion: no scroll, just swap a centred message every 2.5s
+            line.classList.add('static');
+            var swap = function () { line.textContent = MSGS[i]; i = (i + 1) % MSGS.length; };
+            swap(); setInterval(swap, 2500);
+        } else {
+            var next = function () {
+                line.textContent = MSGS[i];
+                i = (i + 1) % MSGS.length;
+                line.style.animation = 'none';
+                void line.offsetWidth;                                   // reflow → restart cleanly
+                var dur = Math.max(5, (window.innerWidth + line.offsetWidth) / SPEED);
+                line.style.animation = 'ticker-cross ' + dur.toFixed(1) + 's linear';
+            };
+            line.addEventListener('animationend', next);
+            next();
+        }
+    })();
+    </script>
 
     <!-- Features Section -->
     <section class="features" id="features">
