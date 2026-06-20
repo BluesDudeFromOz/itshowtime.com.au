@@ -1,0 +1,22 @@
+# ShowTime hero feature ticker — the rotating dot-points under "Everyone on the Same Page".
+# Edit any time: ONE feature per line. Blank lines and lines starting with # are ignored.
+# The order here is the order they appear. No quotes or commas needed — just plain text.
+
+Professional chord-chart & setlist manager for live performers
+Sync your whole band wirelessly
+Master/slave setlist navigation
+Transpose chord charts & notation instantly
+Transpose for Eb, Bb, F & G instruments across the setlist
+Circle of Fifths lookup for songwriting & improvisation
+Bluetooth pedal navigation
+QR codes for instant onboarding
+Crew messaging — lighting, sound & stage management
+Rehearsal links
+Backing-track support
+Projector slideshows — video, JPG & PNG
+Intermission video display
+Many visualisation designs with a beat detector
+Automatic MIDI instrument setup for each song
+DMX lighting support — coming soon
+Cloud and/or standalone
+ShowTime server for Mac, PC & Linux

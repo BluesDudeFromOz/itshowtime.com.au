@@ -1386,38 +1386,36 @@
 
     <script>
     (function () {
-        var MSGS = [
-            'Professional chord-chart & setlist manager for live performers',
-            'Sync your whole band wirelessly',
-            'Master/slave setlist navigation',
-            'Transpose chord charts & notation instantly',
-            'Transpose for Eb, Bb, F & G instruments across the setlist',
-            'Circle of Fifths lookup for songwriting & improvisation',
-            'Bluetooth pedal navigation',
-            'QR codes for instant onboarding',
-            'Crew messaging — lighting, sound & stage management',
-            'Rehearsal links',
-            'Backing-track support',
-            'Projector slideshows — video, JPG & PNG',
-            'Intermission video display',
-            'Many visualisation designs with a beat detector',
-            'Automatic MIDI instrument setup for each song',
-            'DMX lighting support — coming soon',
-            'Cloud and/or standalone',
-            'ShowTime server for Mac, PC & Linux'
-        ];
         var line = document.getElementById('tickerLine');
         if (!line) return;
-        var i = 0, HOLD = 3000;   // each dot-point held for 3 seconds
-        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        var show = function () {
-            if (!reduce) line.classList.remove('show');           // reset so the new one fades in
-            line.textContent = MSGS[i]; i = (i + 1) % MSGS.length;
-            if (!reduce) { void line.offsetWidth; line.classList.add('show'); }
-        };
-        if (reduce) line.classList.add('show');
-        show();
-        setInterval(show, HOLD);
+        // Fallback only used if features.txt can't be loaded (e.g. opened as a file:// page).
+        var FALLBACK = [
+            'Professional chord-chart & setlist manager for live performers',
+            'Sync your whole band wirelessly',
+            'Transpose chord charts & notation instantly'
+        ];
+        function start(MSGS) {
+            if (!MSGS || !MSGS.length) MSGS = FALLBACK;
+            var i = 0, HOLD = 3000;   // each dot-point held for 3 seconds
+            var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var show = function () {
+                if (!reduce) line.classList.remove('show');       // reset so the new one fades in
+                line.textContent = MSGS[i]; i = (i + 1) % MSGS.length;
+                if (!reduce) { void line.offsetWidth; line.classList.add('show'); }
+            };
+            if (reduce) line.classList.add('show');
+            show();
+            setInterval(show, HOLD);
+        }
+        // Feature list lives in features.txt (one per line) so it's easy to edit. Edits show on reload.
+        fetch('features.txt', { cache: 'no-cache' })
+            .then(function (r) { return r.ok ? r.text() : ''; })
+            .then(function (txt) {
+                var list = txt.split('\n').map(function (s) { return s.trim(); })
+                              .filter(function (s) { return s && s.charAt(0) !== '#'; });
+                start(list);
+            })
+            .catch(function () { start(FALLBACK); });
     })();
     </script>
 
