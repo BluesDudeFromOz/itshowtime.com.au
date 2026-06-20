@@ -1334,6 +1334,11 @@
         }
         /* reduced motion: no scroll — JS swaps a centred message on an interval */
         .ticker-line.static { left: 0; right: 0; transform: translateY(-50%); justify-content: center; text-align: center; }
+        /* in-hero variant: sits inside the hero panel, no full-width strip styling */
+        .ticker.in-hero { height: 36px; margin: 14px 0 2px; background: transparent; border: none; }
+        .ticker.in-hero::before { width: 44px; background: linear-gradient(90deg, rgba(12,16,26,.95), rgba(12,16,26,0)); }
+        .ticker.in-hero::after  { width: 44px; background: linear-gradient(270deg, rgba(12,16,26,.95), rgba(12,16,26,0)); }
+        .ticker.in-hero .ticker-line { font-size: 14px; }
     </style>
 </head>
 <body>
@@ -1366,6 +1371,10 @@
                 Lead from one screen and the whole band follows — same song, same key, same page.
                 On stage, online or off.
             </p>
+            <!-- Single-line feature ticker, inside the hero -->
+            <div class="ticker in-hero" aria-label="ShowTime at a glance">
+                <div class="ticker-line" id="tickerLine"></div>
+            </div>
             <div class="hero-buttons">
                 <a href="#pricing" class="btn btn-primary">Get Started</a>
                 <a href="#features" class="btn btn-secondary">See Features</a>
@@ -1373,10 +1382,6 @@
         </div>
     </section>
 
-    <!-- Single-line feature ticker — one message crosses at a time (JS-driven) -->
-    <div class="ticker" aria-label="ShowTime at a glance">
-        <div class="ticker-line" id="tickerLine"></div>
-    </div>
     <script>
     (function () {
         var MSGS = [
@@ -1393,28 +1398,37 @@
             'Backing-track support',
             'Projector slideshows — video, JPG & PNG',
             'Intermission video display',
+            'Many visualisation designs with a beat detector',
+            'Automatic MIDI instrument setup for each song',
+            'DMX lighting support — coming soon',
             'Cloud and/or standalone',
             'ShowTime server for Mac, PC & Linux'
         ];
         var line = document.getElementById('tickerLine');
         if (!line) return;
-        var i = 0, SPEED = 230;   // px per second — readable but lively
+        var box = line.parentElement, i = 0, SPEED = 230;   // px/sec — readable but lively
         if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             // reduced motion: no scroll, just swap a centred message every 2.5s
             line.classList.add('static');
             var swap = function () { line.textContent = MSGS[i]; i = (i + 1) % MSGS.length; };
             swap(); setInterval(swap, 2500);
-        } else {
-            var next = function () {
-                line.textContent = MSGS[i];
-                i = (i + 1) % MSGS.length;
-                line.style.animation = 'none';
-                void line.offsetWidth;                                   // reflow → restart cleanly
-                var dur = Math.max(5, (window.innerWidth + line.offsetWidth) / SPEED);
-                line.style.animation = 'ticker-cross ' + dur.toFixed(1) + 's linear';
+        } else if (line.animate) {
+            // one message crosses its container (works full-width OR inside the hero panel)
+            var current = null;
+            var run = function () {
+                line.textContent = MSGS[i]; i = (i + 1) % MSGS.length;
+                var cw = box.clientWidth, mw = line.offsetWidth;
+                current = line.animate(
+                    [ { transform: 'translate(' + cw + 'px, -50%)' }, { transform: 'translate(' + (-mw) + 'px, -50%)' } ],
+                    { duration: Math.max(5000, (cw + mw) / SPEED * 1000), easing: 'linear' }
+                );
+                current.onfinish = run;
             };
-            line.addEventListener('animationend', next);
-            next();
+            box.addEventListener('mouseenter', function () { if (current) current.pause(); });
+            box.addEventListener('mouseleave', function () { if (current) current.play(); });
+            run();
+        } else {
+            line.classList.add('static'); line.textContent = MSGS[0];
         }
     })();
     </script>
