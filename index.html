@@ -1299,6 +1299,31 @@
             outline: none;
             border-color: var(--cyan);
         }
+
+        /* Scrolling feature ticker, just under the hero */
+        .ticker {
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            background: linear-gradient(90deg, rgba(0,191,255,.10), rgba(139,92,246,.10));
+            border-top: 1px solid var(--border, #23232f);
+            border-bottom: 1px solid var(--border, #23232f);
+        }
+        .ticker::before, .ticker::after {
+            content: ""; position: absolute; top: 0; bottom: 0; width: 90px; z-index: 2; pointer-events: none;
+        }
+        .ticker::before { left: 0;  background: linear-gradient(90deg,  #0a0a0f, rgba(10,10,15,0)); }
+        .ticker::after  { right: 0; background: linear-gradient(270deg, #0a0a0f, rgba(10,10,15,0)); }
+        .ticker-track { display: inline-flex; align-items: center; animation: ticker-scroll 40s linear infinite; will-change: transform; }
+        .ticker:hover .ticker-track { animation-play-state: paused; }
+        .ticker-set { display: inline-flex; align-items: center; padding: 14px 0; }
+        .ticker-item { display: inline-flex; align-items: center; gap: 11px; padding: 0 30px; font-size: 15px; font-weight: 600; color: var(--text, #e8e8ef); letter-spacing: .2px; }
+        .ticker-item::before { content: "●"; color: var(--cyan, #00BFFF); font-size: 8px; }
+        @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @media (prefers-reduced-motion: reduce) {
+            .ticker-track { animation: none; flex-wrap: wrap; justify-content: center; white-space: normal; }
+            .ticker-set:last-child { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -1338,6 +1363,32 @@
             </div>
         </div>
     </section>
+
+    <!-- Scrolling feature ticker -->
+    <div class="ticker" aria-label="ShowTime at a glance">
+        <div class="ticker-track">
+            <div class="ticker-set">
+                <span class="ticker-item">Professional chord-chart &amp; setlist manager for live performers</span>
+                <span class="ticker-item">Sync your whole band wirelessly</span>
+                <span class="ticker-item">Transpose chord charts &amp; notation instantly</span>
+                <span class="ticker-item">Transpose for Eb, Bb, F &amp; G instruments across the setlist</span>
+                <span class="ticker-item">Cloud and/or standalone</span>
+                <span class="ticker-item">ShowTime server for Mac, PC &amp; Linux</span>
+                <span class="ticker-item">Projector slideshows — video, JPG &amp; PNG</span>
+                <span class="ticker-item">Intermission video display</span>
+            </div>
+            <div class="ticker-set" aria-hidden="true">
+                <span class="ticker-item">Professional chord-chart &amp; setlist manager for live performers</span>
+                <span class="ticker-item">Sync your whole band wirelessly</span>
+                <span class="ticker-item">Transpose chord charts &amp; notation instantly</span>
+                <span class="ticker-item">Transpose for Eb, Bb, F &amp; G instruments across the setlist</span>
+                <span class="ticker-item">Cloud and/or standalone</span>
+                <span class="ticker-item">ShowTime server for Mac, PC &amp; Linux</span>
+                <span class="ticker-item">Projector slideshows — video, JPG &amp; PNG</span>
+                <span class="ticker-item">Intermission video display</span>
+            </div>
+        </div>
+    </div>
 
     <!-- Features Section -->
     <section class="features" id="features">
