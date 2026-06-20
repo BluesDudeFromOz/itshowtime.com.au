@@ -1138,7 +1138,16 @@
         table.compare thead .th-plan {
             font-size: 18px;
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
+        }
+
+        table.compare thead .th-sub {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .3px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
         }
 
         table.compare thead .th-price {
@@ -1548,20 +1557,24 @@
                     <tr>
                         <th class="col-feature"></th>
                         <th class="col-free">
-                            <span class="th-plan">Starter</span>
-                            <span class="th-price">$0</span>
+                            <span class="th-plan">Band 2</span>
+                            <span class="th-sub">up to 2 players</span>
+                            <span class="th-price">Free</span>
                         </th>
                         <th class="col-band">
-                            <span class="th-plan">Band</span>
+                            <span class="th-plan">Band 4</span>
+                            <span class="th-sub">up to 4 players</span>
                             <span class="th-price">$99<sub>/yr</sub></span>
                         </th>
                         <th class="col-bandplus">
-                            <span class="th-plan">Band+</span>
+                            <span class="th-plan">Band 8</span>
+                            <span class="th-sub">up to 8 players</span>
                             <span class="th-price">$149<sub>/yr</sub></span>
                         </th>
                         <th class="col-pro">
-                            <span class="th-plan">Pro</span>
-                            <span class="th-price">$249<sub> once · 3-yr updates</sub></span>
+                            <span class="th-plan">Band 12 · Pro</span>
+                            <span class="th-sub">up to 12 players</span>
+                            <span class="th-price">$249<sub> once</sub></span>
                         </th>
                     </tr>
                 </thead>
@@ -1808,13 +1821,13 @@
                             <a href="#download" class="btn btn-secondary" style="font-size:14px;padding:12px 20px;">Download Free</a>
                         </td>
                         <td class="col-band">
-                            <button class="btn btn-primary" style="font-size:14px;padding:12px 20px;" onclick="openCheckout('band')">Get Band License</button>
+                            <button class="btn btn-primary" style="font-size:14px;padding:12px 20px;" onclick="openCheckout('band')">Get Band 4</button>
                         </td>
                         <td class="col-bandplus">
-                            <button class="btn btn-primary" style="font-size:14px;padding:12px 20px;" onclick="openCheckout('bandplus')">Get Band+ License</button>
+                            <button class="btn btn-primary" style="font-size:14px;padding:12px 20px;" onclick="openCheckout('bandplus')">Get Band 8</button>
                         </td>
                         <td class="col-pro">
-                            <button class="btn btn-primary" style="font-size:14px;padding:12px 20px;background:var(--yellow);color:#000;" onclick="openCheckout('pro')">Get Pro License</button>
+                            <button class="btn btn-primary" style="font-size:14px;padding:12px 20px;background:var(--yellow);color:#000;" onclick="openCheckout('pro')">Get Band 12 · Pro</button>
                         </td>
                     </tr>
                 </tfoot>
