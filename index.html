@@ -190,7 +190,7 @@
 
         /* Hero Section */
         .hero {
-            min-height: calc(100vh - 64px);   /* leave the moving banner peeking into the first screen */
+            min-height: 100vh;   /* full splash — the rotating dot-points now live inside the hero */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1335,10 +1335,16 @@
         /* reduced motion: no scroll — JS swaps a centred message on an interval */
         .ticker-line.static { left: 0; right: 0; transform: translateY(-50%); justify-content: center; text-align: center; }
         /* in-hero variant: sits inside the hero panel, no full-width strip styling */
-        .ticker.in-hero { height: 36px; margin: 14px 0 2px; background: transparent; border: none; }
-        .ticker.in-hero::before { width: 44px; background: linear-gradient(90deg, rgba(12,16,26,.95), rgba(12,16,26,0)); }
-        .ticker.in-hero::after  { width: 44px; background: linear-gradient(270deg, rgba(12,16,26,.95), rgba(12,16,26,0)); }
-        .ticker.in-hero .ticker-line { font-size: 14px; }
+        .ticker.in-hero { height: 40px; margin: 14px 0 4px; background: transparent; border: none; }
+        .ticker.in-hero::before, .ticker.in-hero::after { display: none; }
+        .ticker.in-hero .ticker-line {
+            position: absolute; inset: 0;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            white-space: nowrap; text-align: center; font-size: 15px;
+            opacity: 0; transform: translateY(7px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        .ticker.in-hero .ticker-line.show { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
@@ -1367,11 +1373,7 @@
         <div class="hero-content">
             <div class="hero-badge"><img src="static/redfavicon-32.png" alt="ShowTime"> Trusted by musicians across Australia</div>
             <h1>Your Stage.<br><span>Your Show.</span><br><em style="font-size:0.55em; color:var(--text-muted); font-style:normal; letter-spacing:0.02em;">Everyone on the Same Page.</em></h1>
-            <p class="hero-description">
-                Lead from one screen and the whole band follows — same song, same key, same page.
-                On stage, online or off.
-            </p>
-            <!-- Single-line feature ticker, inside the hero -->
+            <!-- Feature dot-points rotate here as the sub-headline (one every 3s) -->
             <div class="ticker in-hero" aria-label="ShowTime at a glance">
                 <div class="ticker-line" id="tickerLine"></div>
             </div>
@@ -1406,30 +1408,16 @@
         ];
         var line = document.getElementById('tickerLine');
         if (!line) return;
-        var box = line.parentElement, i = 0, SPEED = 230;   // px/sec — readable but lively
-        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            // reduced motion: no scroll, just swap a centred message every 2.5s
-            line.classList.add('static');
-            var swap = function () { line.textContent = MSGS[i]; i = (i + 1) % MSGS.length; };
-            swap(); setInterval(swap, 2500);
-        } else if (line.animate) {
-            // one message crosses its container (works full-width OR inside the hero panel)
-            var current = null;
-            var run = function () {
-                line.textContent = MSGS[i]; i = (i + 1) % MSGS.length;
-                var cw = box.clientWidth, mw = line.offsetWidth;
-                current = line.animate(
-                    [ { transform: 'translate(' + cw + 'px, -50%)' }, { transform: 'translate(' + (-mw) + 'px, -50%)' } ],
-                    { duration: Math.max(5000, (cw + mw) / SPEED * 1000), easing: 'linear' }
-                );
-                current.onfinish = run;
-            };
-            box.addEventListener('mouseenter', function () { if (current) current.pause(); });
-            box.addEventListener('mouseleave', function () { if (current) current.play(); });
-            run();
-        } else {
-            line.classList.add('static'); line.textContent = MSGS[0];
-        }
+        var i = 0, HOLD = 3000;   // each dot-point held for 3 seconds
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var show = function () {
+            if (!reduce) line.classList.remove('show');           // reset so the new one fades in
+            line.textContent = MSGS[i]; i = (i + 1) % MSGS.length;
+            if (!reduce) { void line.offsetWidth; line.classList.add('show'); }
+        };
+        if (reduce) line.classList.add('show');
+        show();
+        setInterval(show, HOLD);
     })();
     </script>
 
