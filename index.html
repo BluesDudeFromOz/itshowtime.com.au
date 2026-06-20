@@ -244,7 +244,9 @@
         }
 
         .hero-badge {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             background: var(--bg-elevated);
             border: 1px solid var(--border);
             padding: 8px 20px;
@@ -254,6 +256,7 @@
             margin-bottom: 16px;
             animation: fadeInUp 0.8s ease;
         }
+        .hero-badge img { width: 18px; height: 18px; display: block; }
 
         .hero h1 {
             font-size: clamp(40px, 6vw, 68px);
@@ -1350,7 +1353,7 @@
     <section class="hero">
         <div class="hero-stage" aria-hidden="true"><!-- stage visuals injected from config.js --></div>
         <div class="hero-content">
-            <div class="hero-badge">🎬 Trusted by musicians across Australia</div>
+            <div class="hero-badge"><img src="static/redfavicon-32.png" alt="ShowTime"> Trusted by musicians across Australia</div>
             <h1>Your Stage.<br><span>Your Show.</span><br><em style="font-size:0.55em; color:var(--text-muted); font-style:normal; letter-spacing:0.02em;">Everyone on the Same Page.</em></h1>
             <p class="hero-description">
                 Professional chord chart and setlist manager for live performers.
@@ -1370,22 +1373,36 @@
             <div class="ticker-set">
                 <span class="ticker-item">Professional chord-chart &amp; setlist manager for live performers</span>
                 <span class="ticker-item">Sync your whole band wirelessly</span>
+                <span class="ticker-item">Master/slave setlist navigation</span>
                 <span class="ticker-item">Transpose chord charts &amp; notation instantly</span>
                 <span class="ticker-item">Transpose for Eb, Bb, F &amp; G instruments across the setlist</span>
-                <span class="ticker-item">Cloud and/or standalone</span>
-                <span class="ticker-item">ShowTime server for Mac, PC &amp; Linux</span>
+                <span class="ticker-item">Circle of Fifths lookup for songwriting &amp; improvisation</span>
+                <span class="ticker-item">Bluetooth pedal navigation</span>
+                <span class="ticker-item">QR codes for instant onboarding</span>
+                <span class="ticker-item">Crew messaging — lighting, sound &amp; stage management</span>
+                <span class="ticker-item">Rehearsal links</span>
+                <span class="ticker-item">Backing-track support</span>
                 <span class="ticker-item">Projector slideshows — video, JPG &amp; PNG</span>
                 <span class="ticker-item">Intermission video display</span>
+                <span class="ticker-item">Cloud and/or standalone</span>
+                <span class="ticker-item">ShowTime server for Mac, PC &amp; Linux</span>
             </div>
             <div class="ticker-set" aria-hidden="true">
                 <span class="ticker-item">Professional chord-chart &amp; setlist manager for live performers</span>
                 <span class="ticker-item">Sync your whole band wirelessly</span>
+                <span class="ticker-item">Master/slave setlist navigation</span>
                 <span class="ticker-item">Transpose chord charts &amp; notation instantly</span>
                 <span class="ticker-item">Transpose for Eb, Bb, F &amp; G instruments across the setlist</span>
-                <span class="ticker-item">Cloud and/or standalone</span>
-                <span class="ticker-item">ShowTime server for Mac, PC &amp; Linux</span>
+                <span class="ticker-item">Circle of Fifths lookup for songwriting &amp; improvisation</span>
+                <span class="ticker-item">Bluetooth pedal navigation</span>
+                <span class="ticker-item">QR codes for instant onboarding</span>
+                <span class="ticker-item">Crew messaging — lighting, sound &amp; stage management</span>
+                <span class="ticker-item">Rehearsal links</span>
+                <span class="ticker-item">Backing-track support</span>
                 <span class="ticker-item">Projector slideshows — video, JPG &amp; PNG</span>
                 <span class="ticker-item">Intermission video display</span>
+                <span class="ticker-item">Cloud and/or standalone</span>
+                <span class="ticker-item">ShowTime server for Mac, PC &amp; Linux</span>
             </div>
         </div>
     </div>
