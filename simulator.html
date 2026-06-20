@@ -98,10 +98,9 @@
     box-shadow:0 12px 34px rgba(0,0,0,.7),0 0 0 4px rgba(0,191,255,.18),0 0 26px rgba(0,191,255,.45)}
   .proj-preview.show{opacity:1;transform:none}
   .proj-preview .pp-label{position:absolute;top:5px;left:8px;z-index:3;font-size:11px;font-weight:600;color:#dff3ff;letter-spacing:.5px;text-shadow:0 1px 3px #000}
-  .proj-preview .pp-sweep{position:absolute;inset:0;background:
-    radial-gradient(130% 90% at 30% 125%, rgba(255,150,70,.85), rgba(255,90,40,.1) 55%, rgba(255,90,40,0) 72%),
-    linear-gradient(120deg, rgba(0,191,255,.35), rgba(139,92,246,.45))}
-  .proj-preview .pp-beam{position:absolute;top:-10%;left:-30%;width:34%;height:140%;transform:skewX(-18deg);
+  .proj-preview .pp-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .proj-preview .pp-grad{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,0) 50%)}
+  .proj-preview .pp-beam{position:absolute;top:-10%;left:-30%;width:34%;height:140%;z-index:2;transform:skewX(-18deg);
     background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.6), rgba(255,255,255,0));animation:proj-beam 2.2s ease-in-out .4s 1}
   @keyframes proj-beam{0%{left:-30%}100%{left:120%}}
 
@@ -319,7 +318,7 @@
   function showProjectionPreview() {
     if (wrap.querySelector('.proj-preview')) return;
     const p = document.createElement('div'); p.className = 'proj-preview';
-    p.innerHTML = '<div class="pp-sweep"></div><div class="pp-beam"></div><div class="pp-label">📽 Projection</div>';
+    p.innerHTML = '<img class="pp-img" src="static/hero_frame1.jpg" alt=""><div class="pp-grad"></div><div class="pp-beam"></div><div class="pp-label">📽 Projection</div>';
     wrap.appendChild(p);
     requestAnimationFrame(() => p.classList.add('show'));   // fade in
     setTimeout(() => p.classList.remove('show'), 2800);     // fade out
