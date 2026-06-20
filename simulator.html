@@ -40,15 +40,17 @@
   nav .nav-cta{background:var(--cyan);color:#04121b !important;padding:11px 24px;border-radius:8px;font-weight:700}
   @media(max-width:880px){nav .nav-links,nav .nav-copyright{display:none}}
 
-  .intro{max-width:1100px;margin:0 auto;padding:34px 22px 6px;text-align:center}
-  .intro h1{font-size:clamp(26px,4.5vw,40px);margin:0 0 8px}
+  .intro{max-width:1100px;margin:0 auto;padding:16px 22px 0;text-align:center}
+  .intro h1{font-size:clamp(24px,4vw,36px);margin:0 0 6px}
   .intro h1 span{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .intro p{color:var(--muted);font-size:16px;max-width:700px;margin:0 auto}
-  .keyhelp{display:flex;gap:24px;justify-content:center;align-items:center;flex-wrap:wrap;margin:15px auto 0}
+  .keyhelp{display:flex;gap:24px;justify-content:center;align-items:center;flex-wrap:wrap;margin:10px auto 0}
+  /* Descriptive copy moved below the simulator so the interface itself is what you see first. */
+  .intro-below{max-width:1000px;margin:20px auto 0;padding:0 22px;text-align:center}
+  .intro-below p{color:var(--muted);font-size:16px;line-height:1.65;margin:0 auto}
   .keyhelp .grp{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13.5px}
   .kc{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;padding:0 5px;border:1px solid #3a3a48;border-bottom-width:2px;border-radius:6px;background:#22222c;color:#cfd6e0;font-size:14px}
 
-  .device{max-width:1200px;margin:20px auto 0;padding:0 22px}
+  .device{max-width:1200px;margin:14px auto 0;padding:0 22px}
   .frame{border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55);outline:none}
   .frame:focus-visible{box-shadow:0 0 0 3px rgba(0,191,255,.45),0 30px 80px rgba(0,0,0,.55)}
 
@@ -131,12 +133,10 @@
 
   <div class="intro">
     <h1>Drive it like you're <span>on stage</span></h1>
-    <p>This is the real ShowTime interface. Follow the <span style="color:var(--cyan)">glowing dot</span> on the
-       nav pad — press the arrow it points to. We'll find and load a song first, then you can roam the whole toolbar.
-       Use your arrow keys, the on-screen pad, or click — just like the foot-pedal or touchscreen you'd use at a gig.</p>
     <div class="keyhelp">
-      <span class="grp"><span class="kc">←</span><span class="kc">→</span> move along the toolbar</span>
+      <span class="grp"><span class="kc">←</span><span class="kc">→</span> move the highlight</span>
       <span class="grp"><span class="kc">↑</span><span class="kc">↓</span> press the selected icon</span>
+      <span class="grp"><span class="kc">✥</span> or tap the on-screen pad</span>
     </div>
   </div>
 
@@ -166,7 +166,13 @@
         <div><h3 id="capTitle">Use the arrow keys</h3><p id="capDesc">← → to move along the toolbar, ↑ ↓ to press the highlighted icon.</p></div>
       </div>
     </div>
-    <div class="legend">A guided walk-through using real ShowTime screens — same toolbar, same navigation as on stage. No app to install.</div>
+  </div>
+
+  <div class="intro-below">
+    <p>This is the <strong>real ShowTime interface</strong> — same toolbar, same navigation you'd use on stage.
+       Follow the <span style="color:var(--cyan)">glowing dot</span> on the nav pad: it finds and loads a song,
+       then you can roam the whole toolbar. Arrow keys, the on-screen pad, or click — just like the foot-pedal
+       or touchscreen at a gig. No app to install.</p>
   </div>
 
   <div class="footcta">
@@ -213,8 +219,8 @@
   // keys do something where. `auto` = ms to advance on its own (the app "typing" for you).
   const DIRBIT = { up:1, down:2, left:4, right:8 };
   const STORY = [
-    { screen:'base',            tag:15, expect:'down',  hint:'down',
-      title:'Find any song — fast', desc:"You're on a song — every direction is live here (↑↓←→). Press ↓ to open your library.", anthem:true },
+    { screen:'base',            tag:15, expect:'down',  hint:'down', toolbar:true,
+      title:'Find any song — fast', desc:"You're on a song. ← → move the highlight along the toolbar (the pad mirrors you). Press ↓ to open your library.", anthem:true },
     { screen:'picker_setlist',  tag:3,  expect:'up',    hint:'up',
       title:'Your setlist', desc:'There’s your set, the song you’re on highlighted. ↑/↓ move through it — press ↑ to jump to search.' },
     { screen:'picker_search',   tag:1,  expect:'up',    hint:'up', auto:1500,
@@ -223,8 +229,8 @@
       title:'Match found', desc:'“amazing” finds Amazing Grace — results are populated, so ↓ lights up. Press ↓ to step into them.' },
     { screen:'picker_amazing_sel', tag:8, expect:'right', hint:'right',
       title:'Amazing Grace selected', desc:'The record’s highlighted — press → to open it.' },
-    { screen:'song2',           tag:15, expect:null,    hint:null, done:true,
-      title:'Loaded and ready ✓', desc:'Amazing Grace is up — found and loaded in a few taps. Now explore the toolbar: ← → move, ↑ ↓ press.' },
+    { screen:'song2',           tag:15, expect:null,    hint:null, done:true, toolbar:true,
+      title:'Loaded and ready ✓', desc:'Amazing Grace is up — found and loaded in a few taps. Now explore the toolbar: ← → move the highlight, ↑ ↓ press it.' },
   ];
   let storyMode = true, storyIdx = 0, autoTimer = null, booted = false;
   const ANTHEM_SCREENS = new Set(['base', 'song3']);   // America the Beautiful, Advance Australia Fair
@@ -327,7 +333,9 @@
   function showStoryStep() {
     const s = STORY[storyIdx];
     screen.src = SCREENS[s.screen];
-    ring.hidden = true;                         // no toolbar ring during the story
+    // On toolbar (song) screens the menu-bar highlight is the focus — show it on Home and let
+    // ← → move it. On picker screens there's no toolbar, so hide the ring (the pad drives).
+    if (s.toolbar) { focusIdx = 0; placeRing(0); } else { ring.hidden = true; focusIdx = -1; }
     capNum.textContent = (storyIdx + 1);
     capTitle.textContent = s.title;
     capDesc.textContent = s.desc;
@@ -345,6 +353,9 @@
     if (storyMode) {                             // on rails: only the suggested key advances
       const s = STORY[storyIdx];
       if (s.auto) return;                        // the app is "typing" — ignore input briefly
+      if (s.toolbar && (dir === 'left' || dir === 'right')) {   // menu-bar is the focus; the pad just follows
+        moveFocus(dir === 'left' ? -1 : 1); glowCell(dir); return;
+      }
       if (dir === s.expect) { glowCell(dir); storyIdx++; showStoryStep(); }
       else { if (DIRBIT[dir] & s.tag) glowCell(dir); nudgeHint(s.hint); }   // dead key → no glow, just re-hint
       return;
@@ -376,7 +387,7 @@
     const s = STORY[storyIdx]; if (s.anthem) maybeAnthem(s.screen);
   }, 1100);
 
-  frame.focus();
+  frame.focus({ preventScroll: true });   // keep the page at the top (headline + device in view) on load
 </script>
 </body>
 </html>
