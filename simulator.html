@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Try ShowTime — Interactive Demo</title>
-<meta name="description" content="Drive the real ShowTime interface with your arrow keys, just like the live app on stage — move along the toolbar and press an icon to see it work.">
+<title>Try ShowTime — Live Demo</title>
+<meta name="description" content="Try the real ShowTime live in your browser — browse demo songs and charts, flip pages and transpose, in a read-only demo right on the page.">
 <link rel="icon" href="favicon.ico?v=3" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32.png?v=3">
 
@@ -19,7 +19,7 @@
   window.dataLayer = window.dataLayer || [];
   window.gtag = function () { window.dataLayer.push(arguments); };
   window.gtag('js', new Date());
-  window.gtag('config', id, { page_title: 'Interactive Demo', page_path: '/simulator' });
+  window.gtag('config', id, { page_title: 'Live Demo', page_path: '/simulator' });
 })();
 </script>
 
@@ -30,7 +30,7 @@
        background:linear-gradient(rgba(8,8,14,.84),rgba(8,8,14,.90)),#0a0a0f url('static/concert_art.svg') center top/cover no-repeat fixed}
   a{color:var(--cyan);text-decoration:none}
 
-  /* Same fixed nav as the rest of the site (consistent across Features/Pricing/Try it…) */
+  /* Same fixed nav as the rest of the site */
   nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 30px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,.82);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
   nav .logo{display:flex;align-items:center;gap:10px}
   nav .nav-links{display:flex;gap:34px;list-style:none;margin:0;padding:0}
@@ -40,78 +40,22 @@
   nav .nav-cta{background:var(--cyan);color:#04121b !important;padding:11px 24px;border-radius:8px;font-weight:700}
   @media(max-width:880px){nav .nav-links,nav .nav-copyright{display:none}}
 
-  .intro{max-width:1100px;margin:0 auto;padding:16px 22px 0;text-align:center}
-  .intro h1{font-size:clamp(24px,4vw,36px);margin:0 0 6px}
+  .intro{max-width:900px;margin:0 auto;padding:16px 22px 0;text-align:center}
+  .intro h1{font-size:clamp(24px,4vw,34px);margin:0 0 8px}
   .intro h1 span{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .keyhelp{display:flex;gap:24px;justify-content:center;align-items:center;flex-wrap:wrap;margin:10px auto 0}
-  /* Descriptive copy moved below the simulator so the interface itself is what you see first. */
-  .intro-below{max-width:1000px;margin:20px auto 0;padding:0 22px;text-align:center}
-  .intro-below p{color:var(--muted);font-size:16px;line-height:1.65;margin:0 auto}
-  .keyhelp .grp{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13.5px}
-  .kc{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;padding:0 5px;border:1px solid #3a3a48;border-bottom-width:2px;border-radius:6px;background:#22222c;color:#cfd6e0;font-size:14px}
+  .intro p{color:var(--muted);font-size:15px;margin:0 auto;max-width:660px}
+  .pill{display:inline-block;margin-top:10px;font-size:12.5px;color:var(--cyan);border:1px solid rgba(0,191,255,.4);border-radius:20px;padding:4px 12px;background:rgba(0,191,255,.08)}
 
-  .device{max-width:1200px;margin:14px auto 0;padding:0 22px}
-  .frame{border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55);outline:none}
-  .frame:focus-visible{box-shadow:0 0 0 3px rgba(0,191,255,.45),0 30px 80px rgba(0,0,0,.55)}
+  /* Contained device frame holding the live app (kept modest so it sits inside the page) */
+  .device{max-width:960px;margin:18px auto 0;padding:0 22px}
+  .frame{position:relative;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#000;
+         box-shadow:0 30px 80px rgba(0,0,0,.55)}
+  .frame iframe{display:block;width:100%;height:620px;border:0}
+  .openfull{text-align:center;margin:13px auto 0}
+  .openfull a{color:var(--muted);font-size:14px}
 
-  .screen-wrap{position:relative;aspect-ratio:1600/900;background:#000}
-  .screen-wrap img.screen{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block}
-  .hotspot{position:absolute;border-radius:9px;cursor:pointer;background:transparent}
-  .hotspot:hover{background:rgba(0,191,255,.14)}
-  .ring{position:absolute;border:2px solid var(--cyan);border-radius:9px;box-shadow:0 0 0 3px rgba(0,191,255,.30),0 0 14px rgba(0,191,255,.55);pointer-events:none;transition:left .12s,top .12s,width .12s,height .12s}
-
-  /* Touch-nav d-pad — a faithful replica of the real app's bottom-right control
-     (40px round ✥ toggle that expands into a 3×3 ▲◀OK▶▼ pad). Same keys, same look. */
-  .tn-toggle{position:absolute;bottom:2.6%;right:2.0%;z-index:30;width:40px;height:40px;border-radius:50%;
-    border:1px solid rgba(0,191,255,.55);background:rgba(0,0,0,.82);color:var(--cyan);font-size:20px;line-height:1;
-    display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:.6;transition:opacity .2s,transform .25s,box-shadow .25s}
-  .tn-toggle:hover{opacity:.95}
-  .tn-toggle.active{background:rgba(0,191,255,.38);border-color:var(--cyan);opacity:1}
-  .tn-toggle.invite{opacity:1;transform:scale(1.22);animation:tn-breathe 1.7s ease-in-out infinite}
-  @keyframes tn-breathe{0%,100%{box-shadow:0 0 0 4px rgba(0,191,255,.16),0 0 18px rgba(0,191,255,.45)}
-                        50%{box-shadow:0 0 0 8px rgba(0,191,255,.26),0 0 32px rgba(0,191,255,.78)}}
-  .tn-pad{position:absolute;bottom:11%;right:2.0%;z-index:30;display:none;grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px);gap:3px;opacity:.85}
-  .tn-pad.active{display:grid}
-  .tn-cell{border:1px solid rgba(0,191,255,.5);background:rgba(0,0,0,.72);color:var(--cyan);font-size:21px;border-radius:8px;
-    display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;user-select:none;transition:background .12s,box-shadow .12s,transform .08s}
-  .tn-cell.center{background:rgba(0,191,255,.2);font-size:12px;font-weight:700}
-  .tn-cell.empty{visibility:hidden;cursor:default}
-  .tn-cell:active,.tn-cell.glow{background:rgba(0,191,255,.45);box-shadow:0 0 0 2px rgba(0,191,255,.55),0 0 18px rgba(0,191,255,.75);transform:scale(.95)}
-  .tn-hint{position:absolute;top:-7px;right:-7px;width:15px;height:15px;border-radius:50%;background:var(--cyan);pointer-events:none;
-    animation:tn-ping 1.4s ease-out infinite}
-  @keyframes tn-ping{0%{box-shadow:0 0 0 0 rgba(0,191,255,.6);transform:scale(.85)}
-                     70%{box-shadow:0 0 0 13px rgba(0,191,255,0);transform:scale(1.15)}
-                     100%{box-shadow:0 0 0 0 rgba(0,191,255,0);transform:scale(.85)}}
-  /* A direction that does nothing on the current screen is dimmed (the screen's "tag" = which keys are live). */
-  .tn-cell.off{opacity:.22;filter:grayscale(.7);cursor:default}
-  .tn-cell.off.glow{background:rgba(0,0,0,.72);box-shadow:none;transform:none}
-
-  /* Anthem cue: flash the Play icon + a quick once-through projection preview, top-right. */
-  /* Both cues fade via a short .show/.fade transition rather than a held @keyframes animation —
-     a continuously-running animation promotes the element to a compositor layer that some
-     renderers (and headless screenshots) fail to repaint. */
-  .play-flash{position:absolute;border:2px solid #ffd23f;border-radius:9px;pointer-events:none;opacity:1;transition:opacity .5s ease;
-    box-shadow:0 0 0 3px rgba(255,210,63,.4),0 0 18px rgba(255,210,63,.85)}
-  .play-flash.fade{opacity:0}
-  .proj-preview{position:absolute;top:8%;right:2%;width:24%;height:24%;z-index:28;border-radius:9px;overflow:hidden;
-    border:1.5px solid rgba(0,191,255,.85);background:#0c1024;opacity:0;transform:translateY(-6px) scale(.97);transition:opacity .4s ease,transform .4s ease;
-    box-shadow:0 12px 34px rgba(0,0,0,.7),0 0 0 4px rgba(0,191,255,.18),0 0 26px rgba(0,191,255,.45)}
-  .proj-preview.show{opacity:1;transform:none}
-  .proj-preview .pp-label{position:absolute;top:5px;left:8px;z-index:3;font-size:11px;font-weight:600;color:#dff3ff;letter-spacing:.5px;text-shadow:0 1px 3px #000}
-  .proj-preview .pp-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-  .proj-preview .pp-grad{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,0) 50%)}
-  .proj-preview .pp-beam{position:absolute;top:-10%;left:-30%;width:34%;height:140%;z-index:2;transform:skewX(-18deg);
-    background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.6), rgba(255,255,255,0));animation:proj-beam 2.2s ease-in-out .4s 1}
-  @keyframes proj-beam{0%{left:-30%}100%{left:120%}}
-
-  .sim-caption{background:var(--panel);padding:15px 22px;border-top:1px solid var(--border);min-height:64px;display:flex;align-items:center;gap:13px}
-  .sim-caption .num{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:rgba(0,191,255,.15);color:var(--cyan);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
-  .sim-caption h3{margin:0 0 2px;font-size:18px;color:#fff}
-  .sim-caption p{margin:0;color:var(--muted);font-size:14.5px}
-
-  .legend{max-width:1200px;margin:13px auto 0;padding:0 22px;text-align:center;color:var(--muted);font-size:13px}
-  .footcta{text-align:center;padding:44px 22px 70px}
-  .footcta a{display:inline-block;background:var(--cyan);color:#04121b;font-weight:700;padding:14px 32px;border-radius:10px;font-size:16px}
+  .footcta{text-align:center;padding:40px 22px 72px}
+  .footcta a.cta{display:inline-block;background:var(--cyan);color:#04121b;font-weight:700;padding:14px 32px;border-radius:10px;font-size:16px}
   .footcta .sub{display:block;color:var(--muted);font-size:14px;margin-top:12px}
 </style>
 </head>
@@ -131,263 +75,24 @@
   </nav>
 
   <div class="intro">
-    <h1>Drive it like you're <span>on stage</span></h1>
-    <div class="keyhelp">
-      <span class="grp"><span class="kc">←</span><span class="kc">→</span> move the highlight</span>
-      <span class="grp"><span class="kc">↑</span><span class="kc">↓</span> press the selected icon</span>
-      <span class="grp"><span class="kc">✥</span> or tap the on-screen pad</span>
-    </div>
+    <h1>Try the <span>real ShowTime</span>, live</h1>
+    <p>This is the actual app running in your browser — open the demo songs, flip charts and transpose. It's a read-only demo, so nothing you do changes anything. When you're ready, pricing and sign-up are one click away above.</p>
+    <span class="pill">🔒 Read-only live demo</span>
   </div>
 
   <div class="device">
-    <div class="frame" id="frame" tabindex="0" role="application" aria-label="ShowTime interface demo — use arrow keys">
-      <div class="screen-wrap">
-        <img class="screen" id="screen" src="static/sim/base.png" alt="ShowTime performance interface">
-        <div id="hotspots"></div>
-        <div class="ring" id="ring" hidden></div>
-
-        <!-- The real app's bottom-right touch-nav control, replicated -->
-        <button class="tn-toggle" id="tnToggle" title="Touch navigation" aria-label="Touch navigation">✥</button>
-        <div class="tn-pad" id="tnPad" aria-label="Direction pad">
-          <div class="tn-cell empty"></div>
-          <div class="tn-cell" id="tnUp"    data-dir="up"    title="Up (↑)">▲</div>
-          <div class="tn-cell empty"></div>
-          <div class="tn-cell" id="tnLeft"  data-dir="left"  title="Left (←)">◀</div>
-          <div class="tn-cell center" id="tnOk" data-dir="enter" title="Select (Enter)">OK</div>
-          <div class="tn-cell" id="tnRight" data-dir="right" title="Right (→)">▶</div>
-          <div class="tn-cell empty"></div>
-          <div class="tn-cell" id="tnDown"  data-dir="down"  title="Down (↓)">▼</div>
-          <div class="tn-cell empty"></div>
-        </div>
-      </div>
-      <div class="sim-caption">
-        <span class="num" id="capNum">→</span>
-        <div><h3 id="capTitle">Use the arrow keys</h3><p id="capDesc">← → to move along the toolbar, ↑ ↓ to press the highlighted icon.</p></div>
-      </div>
+    <div class="frame">
+      <iframe src="https://showtime-saas.fly.dev/demo" title="ShowTime live demo"
+              loading="lazy" allow="fullscreen; microphone"></iframe>
+    </div>
+    <div class="openfull">
+      <a href="https://showtime-saas.fly.dev/demo" target="_blank" rel="noopener">Open the demo full-screen ↗</a>
     </div>
   </div>
 
-  <div class="intro-below">
-    <p>This is the <strong>real ShowTime interface</strong> — same toolbar, same navigation you'd use on stage.
-       Follow the <span style="color:var(--cyan)">glowing dot</span> on the nav pad: it finds and loads a song,
-       then you can roam the whole toolbar. Arrow keys, the on-screen pad, or click — just like the foot-pedal
-       or touchscreen at a gig. No app to install.</p>
-  </div>
-
   <div class="footcta">
-    <a href="index.html#pricing">Get ShowTime — from free</a>
-    <span class="sub">Starter is free · Band $99/yr · no app to install</span>
+    <a class="cta" href="index.html#pricing">See pricing &amp; get started</a>
+    <span class="sub">Free to start — your own private cloud library in under a minute.</span>
   </div>
-
-<script>
-  // All toolbar buttons sit on one row: y 0.33%, w 3.44%, h 6.11% (captured at 1600x900).
-  const Y = 0.33, W = 3.44, H = 6.11;
-  // x positions (%) match the real on-screen icons in static/sim/base.png, left→right.
-  const ICONS = [
-    { x:0.63,  title:'Home / Search',     desc:'Jump to your library and find any song.' },
-    { x:4.13,  title:'Previous song',     desc:'Step back through the setlist — every device follows.', action:'prevSong' },
-    { x:7.63,  title:'Next song',         desc:'Advance through the setlist — every device follows.', action:'nextSong' },
-    { x:11.13, title:'Larger font',       desc:'Bump the chart text one size larger.', screen:'font_bigger' },
-    { x:14.63, title:'Smaller font',      desc:'Bring the chart text one size smaller.', screen:'font_smaller' },
-    { x:18.13, title:'Page view',         desc:'Toggle between two-page and single-page layout.', toggle:['base','onepage'] },
-    { x:21.63, title:'Fullscreen',        desc:'Go edge-to-edge for the stage.' },
-    { x:25.12, title:'Transpose',         desc:'Press ▲ to lift the whole chart up a key, ▼ to drop it down.', upScreen:'transpose_up', downScreen:'transpose_down' },
-    { x:28.63, title:'Instrument key',    desc:'One control for Eb / Bb / F / G players — each reads their own key automatically.' },
-    { x:32.13, title:'Circle of Fifths',  desc:'Key relationships, 2-5-1 progressions and improv help.', screen:'cof' },
-    { x:35.63, title:'Play / media',      desc:'Project the song’s slideshow / video to your screens.', action:'project' },
-    { x:39.13, title:'Rotate screen',     desc:'Flip orientation for any device.' },
-    { x:42.63, title:'Blank screen',      desc:'Black the screen out between songs.' },
-    { x:46.13, title:'Crew message',      desc:'Send a colour-coded cue to sound, lighting or stage.', screen:'crew' },
-    { x:49.63, title:'Master mode',       desc:'Control every connected device from here.' },
-  ];
-  const SCREENS = { base:'static/sim/base.png', onepage:'static/sim/onepage.png',
-                    transpose_up:'static/sim/transpose_up.png', transpose_down:'static/sim/transpose_down.png',
-                    font_bigger:'static/sim/font_bigger.png', font_smaller:'static/sim/font_smaller.png',
-                    cof:'static/sim/cof.png', media:'static/sim/media.png', crew:'static/sim/crew.png',
-                    song2:'static/sim/song2.png', song3:'static/sim/song3.png',
-                    picker_setlist:'static/sim/picker_setlist.png', picker_search:'static/sim/picker_search.png',
-                    picker_amazing:'static/sim/picker_amazing.png', picker_amazing_sel:'static/sim/picker_amazing_sel.png' };
-  const SONGS = ['base', 'song2', 'song3'];   // America → Amazing Grace → Advance Australia Fair
-  let songIdx = 0;
-
-  // ---- Guided storyline: find & load a song, then hand over to free toolbar play ----
-  // Each step shows a real screen and points the hint dot at the ONE key to press next,
-  // so the demo stays on rails (no "infinite permutations").
-  // Each step carries a `tag` bitmask of the directions that are LIVE on that screen
-  // (↑=1 ↓=2 ←=4 →=8). The d-pad dims the dead ones, so the demo teaches exactly which
-  // keys do something where. `auto` = ms to advance on its own (the app "typing" for you).
-  const DIRBIT = { up:1, down:2, left:4, right:8 };
-  const STORY = [
-    { screen:'base',            tag:15, expect:'down',  hint:'down', toolbar:true,
-      title:'Find any song — fast', desc:"You're on a song. ← → move the highlight along the toolbar (the pad mirrors you). Press ↓ to open your library.", anthem:true },
-    { screen:'picker_setlist',  tag:3,  expect:'up',    hint:'up',
-      title:'Your setlist', desc:'There’s your set, the song you’re on highlighted. ↑/↓ move through it — press ↑ to jump to search.' },
-    { screen:'picker_search',   tag:1,  expect:'up',    hint:'up', auto:1500,
-      title:'Search just opened', desc:'Nothing typed yet — with no results, only ↑ is live. Watch ShowTime fill in the song…' },
-    { screen:'picker_amazing',  tag:2,  expect:'down',  hint:'down',
-      title:'Match found', desc:'“amazing” finds Amazing Grace — results are populated, so ↓ lights up. Press ↓ to step into them.' },
-    { screen:'picker_amazing_sel', tag:8, expect:'right', hint:'right',
-      title:'Amazing Grace selected', desc:'The record’s highlighted — press → to open it.' },
-    { screen:'song2',           tag:15, expect:null,    hint:null, done:true, toolbar:true,
-      title:'Loaded and ready ✓', desc:'Amazing Grace is up — found and loaded in a few taps. Now explore the toolbar: ← → move the highlight, ↑ ↓ press it.' },
-  ];
-  let storyMode = true, storyIdx = 0, autoTimer = null, booted = false;
-  const ANTHEM_SCREENS = new Set(['base', 'song3']);   // America the Beautiful, Advance Australia Fair
-  Object.values(SCREENS).forEach(s => { const i = new Image(); i.src = s; });   // preload
-
-  const frame = document.getElementById('frame');
-  const screen = document.getElementById('screen');
-  const ring = document.getElementById('ring');
-  const hotspots = document.getElementById('hotspots');
-  const capNum = document.getElementById('capNum'), capTitle = document.getElementById('capTitle'), capDesc = document.getElementById('capDesc');
-  let focusIdx = -1;
-  let toggleState = {};
-
-  function placeRing(i) {
-    const ic = ICONS[i];
-    ring.style.left = ic.x + '%'; ring.style.top = Y + '%';
-    ring.style.width = W + '%'; ring.style.height = H + '%';
-    ring.hidden = false;
-  }
-  function caption(i) {
-    const ic = ICONS[i];
-    capNum.textContent = (i + 1);
-    capTitle.textContent = ic.title;
-    capDesc.textContent = ic.desc;
-  }
-  function moveFocus(d) {
-    focusIdx = focusIdx < 0 ? 0 : (focusIdx + d + ICONS.length) % ICONS.length;
-    placeRing(focusIdx); caption(focusIdx);
-  }
-  function press(i, dir) {
-    const ic = ICONS[i];
-    let key = ic.screen;
-    if (ic.toggle) { toggleState[i] = toggleState[i] ? 0 : 1; key = ic.toggle[toggleState[i]]; }
-    else if (ic.upScreen || ic.downScreen) { key = (dir === 'down') ? ic.downScreen : ic.upScreen; }  // ▲ up / ▼ down
-    else if (ic.action === 'nextSong') { songIdx = (songIdx + 1) % SONGS.length; key = SONGS[songIdx]; }
-    else if (ic.action === 'prevSong') { songIdx = (songIdx - 1 + SONGS.length) % SONGS.length; key = SONGS[songIdx]; }
-    if (key && SCREENS[key]) screen.src = SCREENS[key];
-    if (ic.action === 'nextSong' || ic.action === 'prevSong') maybeAnthem(key);   // landed on a song
-    if (ic.action === 'project') showProjectionPreview();   // Play → visuals project to the top-right screen
-    placeRing(i); caption(i);
-    if (typeof window.gtag === 'function') window.gtag('event', 'demo_press', { icon: ic.title, dir: dir || 'up' });
-  }
-
-  // build hotspots over the real icons
-  ICONS.forEach((ic, i) => {
-    const h = document.createElement('div');
-    h.className = 'hotspot'; h.title = ic.title;
-    h.style.left = ic.x + '%'; h.style.top = Y + '%'; h.style.width = W + '%'; h.style.height = H + '%';
-    h.addEventListener('click', () => { if (storyMode) return; focusIdx = i; press(i, 'up'); frame.focus(); });
-    hotspots.appendChild(h);
-  });
-
-  // ---- Touch-nav d-pad (mirrors the real app's bottom-right control) ----
-  const tnToggle = document.getElementById('tnToggle');
-  const tnPad = document.getElementById('tnPad');
-  const tnCell = { up:document.getElementById('tnUp'), down:document.getElementById('tnDown'),
-                   left:document.getElementById('tnLeft'), right:document.getElementById('tnRight'),
-                   enter:document.getElementById('tnOk') };
-  let padOpen = false, moved = false;
-
-  function openPad() { if (padOpen) return; padOpen = true; tnPad.classList.add('active'); tnToggle.classList.add('active'); }
-  function glowCell(dir) {
-    const el = tnCell[dir]; if (!el) return;
-    el.classList.add('glow'); clearTimeout(el._g); el._g = setTimeout(() => el.classList.remove('glow'), 240);
-  }
-  function clearHint() { document.querySelectorAll('.tn-hint').forEach(d => d.remove()); }
-  function showHint(dir) { clearHint(); const el = tnCell[dir]; if (!el) return; const d = document.createElement('span'); d.className = 'tn-hint'; el.appendChild(d); }
-
-  function nudgeHint(dir) { showHint(dir); }     // wrong key: re-trigger the dot's pulse
-
-  // Dim every d-pad direction that isn't live on the current screen (per its tag bitmask).
-  function applyTag(tag) {
-    Object.entries(DIRBIT).forEach(([dir, bit]) => tnCell[dir].classList.toggle('off', !(tag & bit)));
-  }
-
-  // ---- Anthem cue: flash the Play icon and run a one-off projection preview, top-right ----
-  const wrap = screen.parentElement;
-  const PLAY = ICONS.find(i => i.title === 'Play / media');
-  function flashPlayIcon() {
-    const f = document.createElement('div'); f.className = 'play-flash';
-    f.style.left = PLAY.x + '%'; f.style.top = Y + '%'; f.style.width = W + '%'; f.style.height = H + '%';
-    wrap.appendChild(f);
-    setTimeout(() => f.classList.add('fade'), 1800);
-    setTimeout(() => f.remove(), 2400);
-  }
-  function showProjectionPreview() {
-    if (wrap.querySelector('.proj-preview')) return;
-    const p = document.createElement('div'); p.className = 'proj-preview';
-    p.innerHTML = '<img class="pp-img" src="static/hero_frame1.jpg" alt=""><div class="pp-grad"></div><div class="pp-beam"></div><div class="pp-label">📽 Projection</div>';
-    wrap.appendChild(p);
-    requestAnimationFrame(() => p.classList.add('show'));   // fade in
-    setTimeout(() => p.classList.remove('show'), 2800);     // fade out
-    setTimeout(() => p.remove(), 3300);
-  }
-  function maybeAnthem(screenKey) {
-    if (!ANTHEM_SCREENS.has(screenKey)) return;   // only the anthems carry projected visuals
-    flashPlayIcon(); showProjectionPreview();
-  }
-
-  // ---- Guided story renderer ----
-  function showStoryStep() {
-    const s = STORY[storyIdx];
-    screen.src = SCREENS[s.screen];
-    // On toolbar (song) screens the menu-bar highlight is the focus — show it on Home and let
-    // ← → move it. On picker screens there's no toolbar, so hide the ring (the pad drives).
-    if (s.toolbar) { focusIdx = 0; placeRing(0); } else { ring.hidden = true; focusIdx = -1; }
-    capNum.textContent = (storyIdx + 1);
-    capTitle.textContent = s.title;
-    capDesc.textContent = s.desc;
-    applyTag(s.tag);                            // dim the dead directions
-    if (s.hint) showHint(s.hint); else clearHint();
-    if (s.anthem && booted) maybeAnthem(s.screen);   // (initial load fires it at wake-up instead)
-    if (s.done) storyMode = false;              // last step → hand over to free toolbar play
-    clearTimeout(autoTimer);
-    if (s.auto) autoTimer = setTimeout(() => { storyIdx++; showStoryStep(); }, s.auto);
-  }
-
-  // Single entry point for every direction — keyboard, d-pad tap, or hotspot all go through here.
-  function drive(dir) {
-    openPad(); tnToggle.classList.remove('invite');
-    if (storyMode) {                             // on rails: only the suggested key advances
-      const s = STORY[storyIdx];
-      if (s.auto) return;                        // the app is "typing" — ignore input briefly
-      if (s.toolbar && (dir === 'left' || dir === 'right')) {   // menu-bar is the focus; the pad just follows
-        moveFocus(dir === 'left' ? -1 : 1); glowCell(dir); return;
-      }
-      if (dir === s.expect) { glowCell(dir); storyIdx++; showStoryStep(); }
-      else { if (DIRBIT[dir] & s.tag) glowCell(dir); nudgeHint(s.hint); }   // dead key → no glow, just re-hint
-      return;
-    }
-    // ---- free toolbar exploration ----
-    if (dir === 'left')       moveFocus(-1);
-    else if (dir === 'right') moveFocus(1);
-    else if (dir === 'up')    { if (focusIdx < 0) moveFocus(1); else press(focusIdx, 'up'); }
-    else if (dir === 'down')  { if (focusIdx < 0) moveFocus(1); else press(focusIdx, 'down'); }
-    else if (dir === 'enter') { if (focusIdx < 0) moveFocus(1); else press(focusIdx, 'up'); }
-    glowCell(dir);
-    if (!moved && (dir === 'left' || dir === 'right')) { moved = true; clearHint(); }   // user found the toolbar
-  }
-
-  // tap the toggle to reveal the pad (just like the app)
-  tnToggle.addEventListener('click', () => { tnToggle.classList.remove('invite'); padOpen ? null : openPad(); });
-  Object.entries(tnCell).forEach(([dir, el]) => el.addEventListener('click', () => { drive(dir); frame.focus(); }));
-
-  const KEYDIR = { ArrowLeft:'left', ArrowRight:'right', ArrowUp:'up', ArrowDown:'down' };
-  document.addEventListener('keydown', e => { if (KEYDIR[e.key]) { e.preventDefault(); drive(KEYDIR[e.key]); } });
-  frame.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); drive('enter'); } });
-
-  // Start the guided story (sets the opening screen, caption and first hint dot).
-  showStoryStep();
-  // On load the interface "wakes up": the pad grows & breathes, and — since we open on an
-  // anthem — the Play icon flashes and a one-off projection preview sweeps the top-right corner.
-  setTimeout(() => {
-    openPad(); tnToggle.classList.add('invite'); booted = true;
-    const s = STORY[storyIdx]; if (s.anthem) maybeAnthem(s.screen);
-  }, 1100);
-
-  frame.focus({ preventScroll: true });   // keep the page at the top (headline + device in view) on load
-</script>
 </body>
 </html>
