@@ -2347,7 +2347,11 @@
         (function () {
             var phrases = document.querySelectorAll('.hero-cycle .hc-phrase');
             if (phrases.length < 2) return;
-            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            // Respect reduced-motion by snapping (no fade) rather than disabling — the phrases
+            // are content, not decoration, so they must still cycle through.
+            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                phrases.forEach(function (p) { p.style.transition = 'none'; });
+            }
             var i = 0;
             setInterval(function () {
                 phrases[i].classList.remove('active');
