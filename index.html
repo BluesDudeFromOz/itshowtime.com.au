@@ -315,7 +315,7 @@
         @keyframes clClap { 0%{transform:rotate(7deg)} 26%{transform:rotate(-6deg)} 44%{transform:rotate(-6deg)} 54%{transform:rotate(15deg)} 58%{transform:rotate(13deg)} 80%{transform:rotate(13deg)} 100%{transform:rotate(0deg)} }
         @keyframes clBulb { 0%,52%{fill:#FFFFFF} 58%{fill:#FFD24D} 80%{fill:#FFCF45} 100%{fill:#FFFFFF} }
         @keyframes clGlow { 0%,52%{filter:none} 58%{filter:drop-shadow(0 0 18px rgba(255,205,70,.95)) drop-shadow(0 0 6px rgba(255,150,30,.9))} 80%{filter:drop-shadow(0 0 13px rgba(255,200,60,.85))} 100%{filter:drop-shadow(0 0 7px rgba(255,200,90,.5))} }
-        @media (prefers-reduced-motion: reduce){ .hc-clap.active .cl-arm{animation:none;transform:rotate(0deg)} .hc-clap.active .cl-show{animation:none;filter:drop-shadow(0 0 8px rgba(255,200,90,.5))} .hc-clap.active .cl-blb circle{animation:none} }
+        /* Clapper plays regardless of reduce-motion: it is content (the finale of the message cycle), like the moving text above. */
 
         .hero-description {
             font-size: 18px;
@@ -2379,7 +2379,13 @@
             setInterval(function () {
                 phrases[i].classList.remove('active');
                 i = (i + 1) % phrases.length;
-                phrases[i].classList.add('active');
+                var cur = phrases[i];
+                cur.classList.add('active');
+                if (cur.classList.contains('hc-clap')) {
+                    cur.querySelectorAll('.cl-arm, .cl-show, .cl-blb circle').forEach(function (el) {
+                        el.style.animation = 'none'; void el.offsetWidth; el.style.animation = '';
+                    });
+                }
             }, 2600);
         })();
 
