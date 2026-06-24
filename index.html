@@ -288,7 +288,9 @@
             font-size: clamp(36px, 6vw, 64px); font-weight: 800; line-height: 1.1;
         }
         .hc-phrase.active { opacity: 1; transform: none; }
-        .hc-phrase span {
+        .hc-line { display: inline-block; max-width: 100%; text-align: center; }
+        .hc-phrase.hc-long { font-size: clamp(28px, 4.4vw, 48px); }
+        .hc-grad {
             background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 100%);
             -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
         }
@@ -1407,10 +1409,10 @@
             <div class="hero-badge"><img src="static/redfavicon-32.png" alt="ShowTime"> Trusted by musicians across Australia</div>
             <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;">Your Stage. Your Show. Everyone on the same page.</h1>
             <div class="hero-cycle" aria-hidden="true">
-              <div class="hc-phrase active">Your <span>Stage.</span></div>
-              <div class="hc-phrase">Your <span>Show.</span></div>
-              <div class="hc-phrase">Everyone on the <span>Same Page.</span></div>
-              <div class="hc-phrase hc-showtime">It's Showtime!</div>
+              <div class="hc-phrase active"><span class="hc-line">Your <span class="hc-grad">Stage.</span></span></div>
+              <div class="hc-phrase"><span class="hc-line">Your <span class="hc-grad">Show.</span></span></div>
+              <div class="hc-phrase hc-long"><span class="hc-line">Everyone on the <span class="hc-grad">Same Page.</span></span></div>
+              <div class="hc-phrase hc-showtime"><span class="hc-line">It's Showtime!</span></div>
             </div>
             <!-- Feature dot-points rotate here as the sub-headline (one every 3s) -->
             <div class="ticker in-hero" aria-label="ShowTime at a glance">
