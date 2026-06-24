@@ -237,7 +237,7 @@
             position: relative;
             z-index: 2;
             width: 100%;        /* fill up to the cap (without this, the box shrinks to its content) */
-            max-width: 1009px;  /* golden ratio: 624px height × 1.618 ≈ 1009px wide */
+            max-width: 853px;   /* golden ratio ~853 × 527; switch to 1265 for the larger 1265 × 781 */
             text-align: center;
             background: rgba(12, 16, 26, 0.82);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -276,6 +276,31 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+
+        /* Cycling hero headline: Your Stage -> Your Show -> Everyone... -> IT'S SHOWTIME! */
+        .hero-cycle { position: relative; min-height: 156px; margin-bottom: 14px; }
+        .hc-phrase {
+            position: absolute; inset: 0; margin: 0; animation: none;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            opacity: 0; transform: translateY(10px);
+            transition: opacity .55s ease, transform .55s ease;
+            font-size: clamp(36px, 6vw, 64px); font-weight: 800; line-height: 1.1;
+        }
+        .hc-phrase.active { opacity: 1; transform: none; }
+        .hc-phrase span {
+            background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 100%);
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hc-showtime {
+            font-weight: 800; letter-spacing: 3px; text-transform: uppercase;
+            font-size: clamp(40px, 6.5vw, 72px); color: #FFC524;
+            text-shadow: 0 0 6px #FFE07A, 0 0 16px #FFB400, 0 0 34px #FF8A00, 0 2px 2px rgba(0,0,0,.6);
+            animation: stPulse 1.1s ease-in-out infinite;
+        }
+        @keyframes stPulse {
+            0%,100% { text-shadow: 0 0 6px #FFE07A, 0 0 16px #FFB400, 0 0 30px #FF8A00, 0 2px 2px rgba(0,0,0,.6); }
+            50%     { text-shadow: 0 0 11px #FFF0B0, 0 0 28px #FFC400, 0 0 56px #FF9E00, 0 2px 2px rgba(0,0,0,.6); }
         }
 
         .hero-description {
@@ -1380,7 +1405,12 @@
         <div class="hero-stage" aria-hidden="true"><!-- stage visuals injected from config.js --></div>
         <div class="hero-content">
             <div class="hero-badge"><img src="static/redfavicon-32.png" alt="ShowTime"> Trusted by musicians across Australia</div>
-            <h1>Your Stage. <span>Your Show.</span><br><em style="font-size:0.55em; color:var(--text-muted); font-style:normal; letter-spacing:0.02em;">Everyone on the Same Page.</em></h1>
+            <div class="hero-cycle" aria-label="Your Stage. Your Show. Everyone on the Same Page. It's Showtime.">
+              <h1 class="hc-phrase active">Your <span>Stage.</span></h1>
+              <h1 class="hc-phrase">Your <span>Show.</span></h1>
+              <h1 class="hc-phrase">Everyone on the <span>Same Page.</span></h1>
+              <div class="hc-phrase hc-showtime">It's Showtime!</div>
+            </div>
             <!-- Feature dot-points rotate here as the sub-headline (one every 3s) -->
             <div class="ticker in-hero" aria-label="ShowTime at a glance">
                 <div class="ticker-line" id="tickerLine"></div>
@@ -2310,6 +2340,19 @@
                 i = (i + 1) % els.length;
                 els[i].classList.add('is-active');
             }, holdMs + fadeMs);
+        })();
+
+        // Cycling hero headline — Your Stage -> Your Show -> Everyone... -> It's Showtime! -> loop
+        (function () {
+            var phrases = document.querySelectorAll('.hero-cycle .hc-phrase');
+            if (phrases.length < 2) return;
+            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            var i = 0;
+            setInterval(function () {
+                phrases[i].classList.remove('active');
+                i = (i + 1) % phrases.length;
+                phrases[i].classList.add('active');
+            }, 2600);
         })();
 
         // Sticky-tab scroll-spy + GA4 virtual page-views.
