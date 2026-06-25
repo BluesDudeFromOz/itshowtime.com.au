@@ -1302,6 +1302,22 @@
             text-align: center;
         }
 
+        /* Band 6 column (same family as Band 4, lighter tint so Band 4 stays the highlight) */
+        table.compare thead th.col-band6 {
+            color: var(--text);
+            background: rgba(0,191,255,0.05);
+            border-radius: 12px 12px 0 0;
+        }
+        table.compare tbody td.col-band6 {
+            text-align: center;
+            background: rgba(0,191,255,0.035);
+        }
+        table.compare tfoot td.col-band6 {
+            background: rgba(0,191,255,0.035);
+            border-radius: 0 0 12px 12px;
+            text-align: center;
+        }
+
         .check-yes  { color: #00FF88; font-size: 20px; }
         .check-no   { color: #444460; font-size: 18px; }
         .check-part { color: var(--yellow); font-size: 13px; font-weight: 600; }
@@ -1708,6 +1724,11 @@
                             <span class="th-sub">up to 4 players</span>
                             <span class="th-price">$99<sub>/yr</sub></span>
                         </th>
+                        <th class="col-band6">
+                            <span class="th-plan">Band 6</span>
+                            <span class="th-sub">up to 6 players</span>
+                            <span class="th-price">$124<sub>/yr</sub></span>
+                        </th>
                         <th class="col-bandplus">
                             <span class="th-plan">Band 8</span>
                             <span class="th-sub">up to 8 players</span>
@@ -1722,11 +1743,12 @@
                 </thead>
                 <tbody>
                     <!-- Song Library -->
-                    <tr class="group-header"><td colspan="5">Song Library</td></tr>
+                    <tr class="group-header"><td colspan="6">Song Library</td></tr>
                     <tr>
                         <td class="col-feature">Songs<small>Maximum number of songs in your library</small></td>
                         <td class="col-free"><span class="check-part">25</span></td>
                         <td class="col-band"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Unlimited</small></td>
+                        <td class="col-band6"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Unlimited</small></td>
                         <td class="col-bandplus"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Unlimited</small></td>
                         <td class="col-pro"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Unlimited</small></td>
                     </tr>
@@ -1734,6 +1756,7 @@
                         <td class="col-feature">Playlists / Setlists</td>
                         <td class="col-free"><span class="check-part">3</span></td>
                         <td class="col-band"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Unlimited</small></td>
+                        <td class="col-band6"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Unlimited</small></td>
                         <td class="col-bandplus"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Unlimited</small></td>
                         <td class="col-pro"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Unlimited</small></td>
                     </tr>
@@ -1741,6 +1764,7 @@
                         <td class="col-feature">PDF Fakebook Pages<small>Attach PDF chart images to any song</small></td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-band"><span class="check-yes">✓</span></td>
+                        <td class="col-band6"><span class="check-yes">✓</span></td>
                         <td class="col-bandplus"><span class="check-yes">✓</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
@@ -1748,16 +1772,18 @@
                         <td class="col-feature">MusicXML Sheet Music<small>Full notation via OpenSheetMusicDisplay</small></td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-band"><span class="check-no">✗</span></td>
+                        <td class="col-band6"><span class="check-no">✗</span></td>
                         <td class="col-bandplus"><span class="check-no">✗</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
 
                     <!-- Performance -->
-                    <tr class="group-header"><td colspan="5">Performance</td></tr>
+                    <tr class="group-header"><td colspan="6">Performance</td></tr>
                     <tr>
                         <td class="col-feature">Instant Transpose<small>Any key, one tap — persists per song</small></td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-band"><span class="check-yes">✓</span></td>
+                        <td class="col-band6"><span class="check-yes">✓</span></td>
                         <td class="col-bandplus"><span class="check-yes">✓</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
@@ -1765,6 +1791,7 @@
                         <td class="col-feature">Eb / Bb / F / G Instrument Modes<small>Horn and transposing players see their own key automatically</small></td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-band"><span class="check-yes">✓</span></td>
+                        <td class="col-band6"><span class="check-yes">✓</span></td>
                         <td class="col-bandplus"><span class="check-yes">✓</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
@@ -1772,16 +1799,18 @@
                         <td class="col-feature">Annotations<small>Draggable notes — transpose automatically in sync with chords</small></td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-band"><span class="check-yes">✓</span></td>
+                        <td class="col-band6"><span class="check-yes">✓</span></td>
                         <td class="col-bandplus"><span class="check-yes">✓</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
 
                     <!-- Band & Crew Sync -->
-                    <tr class="group-header"><td colspan="5">Band &amp; Crew Sync</td></tr>
+                    <tr class="group-header"><td colspan="6">Band &amp; Crew Sync</td></tr>
                     <tr>
                         <td class="col-feature">Connected Musicians<small>Musicians viewing charts over Wi-Fi. Crew &amp; roadies connect free and don't count toward this.</small></td>
                         <td class="col-free"><span class="check-part">2</span></td>
                         <td class="col-band"><span class="check-part">4</span></td>
+                        <td class="col-band6"><span class="check-part">6</span></td>
                         <td class="col-bandplus"><span class="check-part">8</span></td>
                         <td class="col-pro"><span class="check-part">12</span></td>
                     </tr>
@@ -1789,6 +1818,7 @@
                         <td class="col-feature">Crew App<small>Sound, lighting, stage manager, roadie on phones — free on every plan, never uses a musician slot</small></td>
                         <td class="col-free"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Free</small></td>
                         <td class="col-band"><span class="check-yes">✓</span></td>
+                        <td class="col-band6"><span class="check-yes">✓</span></td>
                         <td class="col-bandplus"><span class="check-yes">✓</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
@@ -1796,6 +1826,7 @@
                         <td class="col-feature">Crew Messaging with Acknowledgement<small>Send alerts mid-show — crew taps to confirm, you see it instantly</small></td>
                         <td class="col-free"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Free</small></td>
                         <td class="col-band"><span class="check-yes">✓</span></td>
+                        <td class="col-band6"><span class="check-yes">✓</span></td>
                         <td class="col-bandplus"><span class="check-yes">✓</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
@@ -1803,6 +1834,7 @@
                         <td class="col-feature">Multiple Band Profiles<small>Separate setlists and settings per band</small></td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-band"><span class="check-no">✗</span></td>
+                        <td class="col-band6"><span class="check-no">✗</span></td>
                         <td class="col-bandplus"><span class="check-no">✗</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
@@ -1810,16 +1842,18 @@
                         <td class="col-feature">Open Mic / Backing Band Mode<small>Manage guest performers and running order</small></td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-band"><span class="check-yes">✓</span></td>
+                        <td class="col-band6"><span class="check-yes">✓</span></td>
                         <td class="col-bandplus"><span class="check-yes">✓</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
 
                     <!-- Projection -->
-                    <tr class="group-header"><td colspan="5">Projection &amp; Media</td></tr>
+                    <tr class="group-header"><td colspan="6">Projection &amp; Media</td></tr>
                     <tr>
                         <td class="col-feature">Pre-Show Slideshow<small>Images and video on the projector before the show</small></td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-band"><span class="check-yes">✓</span></td>
+                        <td class="col-band6"><span class="check-yes">✓</span></td>
                         <td class="col-bandplus"><span class="check-yes">✓</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
@@ -1827,6 +1861,7 @@
                         <td class="col-feature">Intermission &amp; Post-Show Media</td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-band"><span class="check-yes">✓</span></td>
+                        <td class="col-band6"><span class="check-yes">✓</span></td>
                         <td class="col-bandplus"><span class="check-yes">✓</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
@@ -1834,6 +1869,7 @@
                         <td class="col-feature">Per-Song Video &amp; Images<small>Link videos or stills to any song — transitions, Ken Burns, fade effects</small></td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-band"><span class="check-yes">✓</span></td>
+                        <td class="col-band6"><span class="check-yes">✓</span></td>
                         <td class="col-bandplus"><span class="check-yes">✓</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
@@ -1841,6 +1877,7 @@
                         <td class="col-feature">Backing Track to PA<small>Audio routed to the device nearest the mixing desk — one tap to claim</small></td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-band"><span class="check-yes">✓</span></td>
+                        <td class="col-band6"><span class="check-yes">✓</span></td>
                         <td class="col-bandplus"><span class="check-yes">✓</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
@@ -1848,16 +1885,18 @@
                         <td class="col-feature">Beat-Sync Visualiser<small>Real-time visuals that pulse to the music — kaleidoscope, fire, particles &amp; more</small></td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-band"><span class="check-yes">✓</span></td>
+                        <td class="col-band6"><span class="check-yes">✓</span></td>
                         <td class="col-bandplus"><span class="check-yes">✓</span></td>
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
 
                     <!-- Advanced / Coming Soon -->
-                    <tr class="group-header"><td colspan="5">Advanced &amp; Coming Soon</td></tr>
+                    <tr class="group-header"><td colspan="6">Advanced &amp; Coming Soon</td></tr>
                     <tr>
                         <td class="col-feature">DMX Lighting Control</td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-band"><span class="check-no">✗</span></td>
+                        <td class="col-band6"><span class="check-no">✗</span></td>
                         <td class="col-bandplus"><span class="check-no">✗</span></td>
                         <td class="col-pro"><span class="check-soon">Coming soon</span></td>
                     </tr>
@@ -1865,16 +1904,18 @@
                         <td class="col-feature">MIDI Control</td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-band"><span class="check-no">✗</span></td>
+                        <td class="col-band6"><span class="check-no">✗</span></td>
                         <td class="col-bandplus"><span class="check-no">✗</span></td>
                         <td class="col-pro"><span class="check-soon">Coming soon</span></td>
                     </tr>
 
                     <!-- Support -->
-                    <tr class="group-header"><td colspan="5">Support &amp; Updates</td></tr>
+                    <tr class="group-header"><td colspan="6">Support &amp; Updates</td></tr>
                     <tr>
                         <td class="col-feature">ShowTime Watermark<small>Removed when you upgrade to a paid plan</small></td>
                         <td class="col-free"><span class="check-part">Shown</span></td>
                         <td class="col-band"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Removed</small></td>
+                        <td class="col-band6"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Removed</small></td>
                         <td class="col-bandplus"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Removed</small></td>
                         <td class="col-pro"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Removed</small></td>
                     </tr>
@@ -1882,6 +1923,7 @@
                         <td class="col-feature">Free Updates<small>Licence is perpetual — this is how long free updates run; the app keeps working after</small></td>
                         <td class="col-free"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Always (Cloud)</small></td>
                         <td class="col-band"><span class="check-part">1 year</span></td>
+                        <td class="col-band6"><span class="check-part">1 year</span></td>
                         <td class="col-bandplus"><span class="check-part">1 year</span></td>
                         <td class="col-pro"><span class="check-part">3 years</span></td>
                     </tr>
@@ -1889,6 +1931,7 @@
                         <td class="col-feature">Support</td>
                         <td class="col-free"><span class="check-part">Community</span></td>
                         <td class="col-band"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Priority</small></td>
+                        <td class="col-band6"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Priority</small></td>
                         <td class="col-bandplus"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Priority</small></td>
                         <td class="col-pro"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Priority</small></td>
                     </tr>
@@ -1902,6 +1945,9 @@
                         <td class="col-band">
                             <button class="btn btn-primary" style="font-size:14px;padding:12px 20px;" onclick="openCheckout('band')">Get Band 4</button>
                         </td>
+                        <td class="col-band6">
+                            <a href="mailto:robb@itsshowtime.com.au?subject=Band%206%20licence" class="btn btn-secondary" style="font-size:14px;padding:12px 20px;">Get Band 6</a>
+                        </td>
                         <td class="col-bandplus">
                             <button class="btn btn-primary" style="font-size:14px;padding:12px 20px;" onclick="openCheckout('bandplus')">Get Band 8</button>
                         </td>
@@ -1911,6 +1957,13 @@
                     </tr>
                 </tfoot>
             </table>
+        </div>
+
+        <div style="max-width:840px;margin:28px auto 0;padding:18px 24px;border:1px solid var(--border);border-radius:12px;background:var(--bg-elevated);">
+            <p style="margin:0;color:var(--text);font-size:15px;line-height:1.7;">
+                <strong style="color:var(--cyan);">AI Assistant &mdash; optional, and <em>not</em> a subscription.</strong><br>
+                ShowTime's AI helper runs on <strong>your own Anthropic (Claude) account</strong> &mdash; you pay Anthropic directly, <strong>pay&#8209;as&#8209;you&#8209;use</strong> at their standard rates, only for the questions you actually ask. No monthly fee, no lock&#8209;in. It helps you learn the app, build setlists, and tidy up charts.
+            </p>
         </div>
 
         <p style="max-width:840px;margin:28px auto 0;text-align:center;color:var(--text-muted);font-size:14.5px;line-height:1.7;">
@@ -2173,7 +2226,7 @@
             <div class="faq-item">
                 <button class="faq-question">Which plan is right for me?</button>
                 <div class="faq-answer">
-                    <p><strong>Band 4</strong> ($99/yr, up to 4 players) and <strong>Band 8</strong> ($149/yr, up to 8) are the same plan — pick the one that fits your line-up. Both cover everything a gigging band needs: unlimited songs, instant transpose, wireless master/slave sync, foot-pedal navigation, annotations, and — unlike most apps — the full projection suite: pre-show, intermission and post-show slideshows plus per-song video and images.</p>
+                    <p><strong>Band 4</strong> ($99/yr, up to 4 players), <strong>Band 6</strong> ($124/yr, up to 6 players) and <strong>Band 8</strong> ($149/yr, up to 8) are the same plan — pick the one that fits your line-up. All cover everything a gigging band needs: unlimited songs, instant transpose, wireless master/slave sync, foot-pedal navigation, annotations, and — unlike most apps — the full projection suite: pre-show, intermission and post-show slideshows plus per-song video and images.</p>
                     <p><strong>Band 12 · Pro</strong> ($249, up to 12 players) adds multiple band profiles, MusicXML sheet music, and DMX/MIDI control (coming soon), and includes 3 years of updates.</p>
                     <p>The free <strong>Band 2</strong> tier runs in the cloud — nothing to install — and supports 2 devices so you can try master/slave sync, with up to 25 songs.</p>
                     <p>Every licence is <strong>perpetual</strong>: you're paying for a window of updates and priority support, not renting the software. No per-musician fees on any plan.</p>
