@@ -2435,8 +2435,7 @@
                 return d;
             });
             els[0].classList.add('is-active');
-            var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (cfg.enabled === false || reduce || els.length < 2) return;
+            if (cfg.enabled === false || els.length < 2) return;   // rotate regardless of reduce-motion (matches the clapper)
             var i = 0;
             setInterval(function () {
                 els[i].classList.remove('is-active');
@@ -2466,8 +2465,7 @@
                 return d;
             });
             els[0].classList.add('is-active');
-            var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (reduce || els.length < 2) return;   // reduced-motion / single image => static backdrop
+            if (els.length < 2) return;   // single image => static backdrop (rotate regardless of reduce-motion)
             var i = 0;
             setInterval(function () {
                 els[i].classList.remove('is-active');
