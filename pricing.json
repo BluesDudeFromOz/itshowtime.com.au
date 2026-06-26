@@ -1,0 +1,85 @@
+{
+  "_comment": "SINGLE SOURCE OF TRUTH for ShowTime pricing. Edit prices/tiers HERE only. The app reads this (GET /api/pricing, _tier_seats, the license-modal table); the website reads a synced copy. Run scripts/sync_pricing to copy this into the website before publishing.",
+  "currency": "AUD",
+  "updated": "2026-06-27",
+  "tiers": [
+    {
+      "id": "band2",
+      "name": "Band 2",
+      "musicians": 2,
+      "songs": 25,
+      "unlimited_songs": false,
+      "price": 0,
+      "period": "free",
+      "price_label": "Free",
+      "stripe_price_id": "",
+      "highlight": false,
+      "pro": false
+    },
+    {
+      "id": "duo",
+      "name": "Duo",
+      "musicians": 2,
+      "songs": 0,
+      "unlimited_songs": true,
+      "price": 59,
+      "period": "perpetual",
+      "price_label": "$59 once",
+      "stripe_price_id": "",
+      "highlight": false,
+      "pro": false
+    },
+    {
+      "id": "band4",
+      "name": "Band 4",
+      "musicians": 4,
+      "songs": 0,
+      "unlimited_songs": true,
+      "price": 99,
+      "period": "yr",
+      "price_label": "$99/yr",
+      "stripe_price_id": "",
+      "highlight": true,
+      "pro": false
+    },
+    {
+      "id": "band6",
+      "name": "Band 6",
+      "musicians": 6,
+      "songs": 0,
+      "unlimited_songs": true,
+      "price": 124,
+      "period": "yr",
+      "price_label": "$124/yr",
+      "stripe_price_id": "",
+      "highlight": false,
+      "pro": false
+    },
+    {
+      "id": "band8",
+      "name": "Band 8",
+      "musicians": 8,
+      "songs": 0,
+      "unlimited_songs": true,
+      "price": 149,
+      "period": "yr",
+      "price_label": "$149/yr",
+      "stripe_price_id": "",
+      "highlight": false,
+      "pro": false
+    },
+    {
+      "id": "band12",
+      "name": "Band 12 · Pro",
+      "musicians": 12,
+      "songs": 0,
+      "unlimited_songs": true,
+      "price": 499,
+      "period": "3yr",
+      "price_label": "$499 / 3yr",
+      "stripe_price_id": "",
+      "highlight": false,
+      "pro": true
+    }
+  ]
+}

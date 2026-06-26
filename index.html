@@ -1743,27 +1743,27 @@
                         <th class="col-free">
                             <span class="th-plan">Band 2</span>
                             <span class="th-sub">up to 2 players</span>
-                            <span class="th-price">Free</span>
+                            <span class="th-price" data-price="band2">Free</span>
                         </th>
                         <th class="col-band">
                             <span class="th-plan">Band 4</span>
                             <span class="th-sub">up to 4 players</span>
-                            <span class="th-price">$99<sub>/yr</sub></span>
+                            <span class="th-price" data-price="band4">$99<sub>/yr</sub></span>
                         </th>
                         <th class="col-band6">
                             <span class="th-plan">Band 6</span>
                             <span class="th-sub">up to 6 players</span>
-                            <span class="th-price">$124<sub>/yr</sub></span>
+                            <span class="th-price" data-price="band6">$124<sub>/yr</sub></span>
                         </th>
                         <th class="col-bandplus">
                             <span class="th-plan">Band 8</span>
                             <span class="th-sub">up to 8 players</span>
-                            <span class="th-price">$149<sub>/yr</sub></span>
+                            <span class="th-price" data-price="band8">$149<sub>/yr</sub></span>
                         </th>
                         <th class="col-pro">
                             <span class="th-plan">Band 12 · Pro</span>
                             <span class="th-sub">up to 12 players</span>
-                            <span class="th-price">$249<sub> / 3 yrs</sub></span>
+                            <span class="th-price" data-price="band12">$499<sub> / 3 yrs</sub></span>
                         </th>
                     </tr>
                 </thead>
@@ -1983,6 +1983,14 @@
                     </tr>
                 </tfoot>
             </table>
+        </div>
+
+        <div style="max-width:840px;margin:28px auto 0;padding:18px 24px;border:1px solid var(--border);border-radius:12px;background:var(--bg-elevated);display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+            <p style="margin:0;flex:1;min-width:240px;color:var(--text);font-size:15px;line-height:1.7;">
+                <strong style="color:var(--cyan);">Just a duo?</strong><br>
+                Two players, <strong>unlimited songs</strong> and the full paid feature set &mdash; <strong data-price="duo">$59 once</strong>, perpetual. Perfect for acoustic duos and solo-plus-one acts.
+            </p>
+            <a href="mailto:robb@itsshowtime.com.au?subject=Duo%20licence" class="btn btn-primary" style="font-size:14px;padding:12px 20px;white-space:nowrap;">Get Duo</a>
         </div>
 
         <div style="max-width:840px;margin:28px auto 0;padding:18px 24px;border:1px solid var(--border);border-radius:12px;background:var(--bg-elevated);">
@@ -2253,7 +2261,7 @@
                 <button class="faq-question">Which plan is right for me?</button>
                 <div class="faq-answer">
                     <p><strong>Band 4</strong> ($99/yr, up to 4 players), <strong>Band 6</strong> ($124/yr, up to 6 players) and <strong>Band 8</strong> ($149/yr, up to 8) are the same plan — pick the one that fits your line-up. All cover everything a gigging band needs: unlimited songs, instant transpose, wireless master/slave sync, foot-pedal navigation, annotations, and — unlike most apps — the full projection suite: pre-show, intermission and post-show slideshows plus per-song video and images.</p>
-                    <p><strong>Band 12 · Pro</strong> ($249, up to 12 players) adds multiple band profiles, MusicXML sheet music, and DMX/MIDI control (coming soon), and includes 3 years of updates.</p>
+                    <p><strong>Band 12 · Pro</strong> ($499, up to 12 players) adds multiple band profiles, MusicXML sheet music, and DMX/MIDI control (coming soon), and includes 3 years of updates. Run more than one band from a single Pro licence — separate libraries, setlists and invoices for each.</p>
                     <p>The free <strong>Band 2</strong> tier runs in the cloud — nothing to install — and supports 2 devices so you can try master/slave sync, with up to 25 songs.</p>
                     <p>Every licence is <strong>perpetual</strong>: you're paying for a window of updates and priority support, not renting the software. No per-musician fees on any plan.</p>
                 </div>
@@ -2999,6 +3007,27 @@
                 document.getElementById('st-bubble-badge').style.display = 'flex';
             }
         }, 8000);
+    </script>
+    <!-- Pricing single-source: fill every [data-price] from pricing.json (synced from the app's canonical) -->
+    <script>
+    (function () {
+        function fmt(t) {
+            if (!t || t.period === 'free' || t.price === 0) return 'Free';
+            var amt = '$' + t.price;
+            if (t.period === 'yr') return amt + '<sub>/yr</sub>';
+            if (t.period === '3yr') return amt + '<sub> / 3 yrs</sub>';
+            if (t.period === 'perpetual') return amt + '<sub> once</sub>';
+            return amt;
+        }
+        fetch('pricing.json').then(function (r) { return r.json(); }).then(function (data) {
+            var byId = {};
+            (data.tiers || []).forEach(function (t) { byId[t.id] = t; });
+            document.querySelectorAll('[data-price]').forEach(function (el) {
+                var t = byId[el.getAttribute('data-price')];
+                if (t) el.innerHTML = fmt(t);
+            });
+        }).catch(function () { /* keep the hard-coded fallback prices */ });
+    })();
     </script>
 </body>
 </html>
