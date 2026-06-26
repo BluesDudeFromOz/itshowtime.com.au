@@ -13,9 +13,15 @@ window.SHOWTIME_CONFIG = {
     fadeMs: 1200,         // cross-fade duration between visuals
     // add / remove / reorder freely — each visual has a name and an image path
     frames: [
-      { name: 'Yellow beams + crowd',   src: 'static/hero_frame1.jpg' },
+      { name: 'Yellow beams + crowd',    src: 'static/hero_frame1.jpg' },
       { name: 'Orange crowd, light bars', src: 'static/hero_frame2.jpg' },
-      { name: 'Red light-rig',           src: 'static/hero_frame3.jpg' }
+      { name: 'Red light-rig',           src: 'static/hero_frame3.jpg' },
+      { name: 'Concert hall',            src: 'static/ConcertHall.png' },
+      { name: 'Neon stage',              src: 'static/NeonIreal.png' },
+      { name: 'Orange silhouettes',      src: 'static/orange-silhouettes.png' },
+      { name: 'Laser light show',        src: 'static/vibrant-laser-light-show-concert.png' },
+      { name: 'Blue silhouettes',        src: 'static/BlueSilhouettes.png' },
+      { name: 'Green silhouettes',       src: 'static/greenWithSilhouettes.png' }
     ]
   },
 
@@ -24,13 +30,19 @@ window.SHOWTIME_CONFIG = {
   // Set enabled:false for a plain dark page; or list a single image for a static backdrop.
   wallpaper: {
     enabled: true,
-    opacity: 0.14,        // 0.10 = whisper, 0.20 = bolder; readability drops above ~0.22
+    opacity: 0.22,        // 0.10 = whisper, 0.20 = bolder; readability drops above ~0.22
     holdMs: 9000,         // how long each photo holds before fading
     fadeMs: 1600,         // cross-fade duration
     frames: [
       'static/hero_frame1.jpg',
       'static/hero_frame2.jpg',
-      'static/hero_frame3.jpg'
+      'static/hero_frame3.jpg',
+      'static/ConcertHall.png',
+      'static/NeonIreal.png',
+      'static/orange-silhouettes.png',
+      'static/vibrant-laser-light-show-concert.png',
+      'static/BlueSilhouettes.png',
+      'static/greenWithSilhouettes.png'
     ]
   }
 };
