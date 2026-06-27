@@ -27,7 +27,11 @@
   :root{--bg:#0a0a0f;--panel:#16161f;--text:#e8e8ef;--muted:#9aa4b2;--cyan:#00BFFF;--purple:#8B5CF6;--border:#23232f}
   *{box-sizing:border-box}
   body{margin:0;padding-top:80px;color:var(--text);font-family:'Outfit','Segoe UI',system-ui,Arial,sans-serif;line-height:1.6;
-       background:linear-gradient(rgba(8,8,14,.84),rgba(8,8,14,.90)),#0a0a0f url('static/concert_art.svg') center top/cover no-repeat fixed}
+       background:#0a0a0f}
+  /* Rotating page backdrop (config.js -> wallpaper) — sits behind everything, subtle */
+  .page-wallpaper{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+  .page-wallpaper .wp-frame{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.6s ease-in-out}
+  .page-wallpaper .wp-frame.is-active{opacity:var(--wp-opacity,0.14)}
   a{color:var(--cyan);text-decoration:none}
 
   /* Same fixed nav as the rest of the site */
@@ -60,6 +64,7 @@
 </style>
 </head>
 <body>
+  <div class="page-wallpaper" aria-hidden="true"></div>
   <nav>
     <a href="index.html" class="logo"><img src="ShowDirectorLogo.png" alt="ShowTime" style="height:44px;width:auto;"></a>
     <ul class="nav-links">
@@ -94,5 +99,37 @@
     <a class="cta" href="index.html#pricing">See pricing &amp; get started</a>
     <span class="sub">Free to start — your own private cloud library in under a minute.</span>
   </div>
+
+  <script>
+    // Page backdrop — subtle rotating wallpaper from window.SHOWTIME_CONFIG.wallpaper (config.js)
+    (function () {
+      var cfg = (window.SHOWTIME_CONFIG && window.SHOWTIME_CONFIG.wallpaper) || {};
+      var frames = cfg.frames || [];
+      var stage = document.querySelector('.page-wallpaper');
+      if (!stage || !frames.length || cfg.enabled === false) return;
+      var fadeMs = (cfg.fadeMs != null) ? cfg.fadeMs : 1600;
+      var holdMs = (cfg.holdMs != null) ? cfg.holdMs : 9000;
+      var opacity = (cfg.opacity != null) ? cfg.opacity : 0.14;
+      stage.style.setProperty('--wp-opacity', opacity);
+      stage.innerHTML = '';
+      var els = frames.map(function (f) {
+        var src = (typeof f === 'string') ? f : f.src;
+        var d = document.createElement('div');
+        d.className = 'wp-frame';
+        d.style.backgroundImage = "url('" + src + "')";
+        d.style.transitionDuration = fadeMs + 'ms';
+        stage.appendChild(d);
+        return d;
+      });
+      els[0].classList.add('is-active');
+      if (els.length < 2) return;
+      var i = 0;
+      setInterval(function () {
+        els[i].classList.remove('is-active');
+        i = (i + 1) % els.length;
+        els[i].classList.add('is-active');
+      }, holdMs + fadeMs);
+    })();
+  </script>
 </body>
 </html>
