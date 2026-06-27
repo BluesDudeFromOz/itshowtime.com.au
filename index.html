@@ -1183,19 +1183,10 @@
 
         table.compare thead th.col-band {
             color: var(--cyan);
-            background-color: var(--bg-dark);
-            background-image: linear-gradient(rgba(0,191,255,0.07), rgba(0,191,255,0.07));
-            border-top: 2px solid var(--cyan);
-            border-left: 2px solid var(--cyan);
-            border-right: 2px solid var(--cyan);
-            border-radius: 12px 12px 0 0;
         }
 
         table.compare thead th.col-pro {
             color: var(--yellow);
-            background-color: var(--bg-dark);
-            background-image: linear-gradient(rgba(255,215,0,0.05), rgba(255,215,0,0.05));
-            border-radius: 12px 12px 0 0;
         }
 
         table.compare thead .th-plan {
@@ -1260,82 +1251,23 @@
             margin-top: 2px;
         }
 
-        /* Subtle top-to-bottom tint on the highlighted Band 4 + Pro columns */
-        table.compare tbody td.col-band { background: rgba(0,191,255,0.07); }
-        table.compare tbody td.col-pro  { background: rgba(255,215,0,0.05); }
-
-        table.compare tbody td.col-free {
+        /* Product columns: centered, fully clear — no highlight backgrounds */
+        table.compare tbody td.col-free, table.compare tbody td.col-duo,
+        table.compare tbody td.col-band, table.compare tbody td.col-band6,
+        table.compare tbody td.col-bandplus, table.compare tbody td.col-pro,
+        table.compare tfoot td.col-free, table.compare tfoot td.col-duo,
+        table.compare tfoot td.col-band, table.compare tfoot td.col-band6,
+        table.compare tfoot td.col-bandplus, table.compare tfoot td.col-pro {
             text-align: center;
-            background: var(--bg-elevated);
-        }
-
-        table.compare tbody td.col-band {
-            text-align: center;
-            background: rgba(0,191,255,0.05);
-            border-left: 2px solid var(--cyan);
-            border-right: 2px solid var(--cyan);
-        }
-
-        table.compare tbody td.col-pro {
-            text-align: center;
-            background: rgba(255,215,0,0.03);
         }
 
         table.compare tfoot td {
             padding: 20px 24px;
         }
 
-        table.compare tfoot td.col-free {
-            background: var(--bg-elevated);
-            border-radius: 0 0 12px 12px;
-            text-align: center;
-        }
-
-        table.compare tfoot td.col-band {
-            background: rgba(0,191,255,0.05);
-            border-left: 2px solid var(--cyan);
-            border-right: 2px solid var(--cyan);
-            border-bottom: 2px solid var(--cyan);
-            border-radius: 0 0 12px 12px;
-            text-align: center;
-        }
-
-        table.compare tfoot td.col-pro {
-            background: rgba(255,215,0,0.03);
-            border-radius: 0 0 12px 12px;
-            text-align: center;
-        }
-
-        /* Band+ column (same family as Band, lighter tint so Band stays the highlight) */
+        table.compare thead th.col-band6,
         table.compare thead th.col-bandplus {
             color: var(--text);
-            background: rgba(0,191,255,0.05);
-            border-radius: 12px 12px 0 0;
-        }
-        table.compare tbody td.col-bandplus {
-            text-align: center;
-            background: rgba(0,191,255,0.035);
-        }
-        table.compare tfoot td.col-bandplus {
-            background: rgba(0,191,255,0.035);
-            border-radius: 0 0 12px 12px;
-            text-align: center;
-        }
-
-        /* Band 6 column (same family as Band 4, lighter tint so Band 4 stays the highlight) */
-        table.compare thead th.col-band6 {
-            color: var(--text);
-            background: rgba(0,191,255,0.05);
-            border-radius: 12px 12px 0 0;
-        }
-        table.compare tbody td.col-band6 {
-            text-align: center;
-            background: rgba(0,191,255,0.035);
-        }
-        table.compare tfoot td.col-band6 {
-            background: rgba(0,191,255,0.035);
-            border-radius: 0 0 12px 12px;
-            text-align: center;
         }
 
         .check-yes  { color: #00FF88; font-size: 20px; }
