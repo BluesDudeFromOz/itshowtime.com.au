@@ -1179,13 +1179,11 @@
 
         table.compare thead th.col-free {
             color: var(--text);
-            background: var(--bg-elevated);
-            border-radius: 12px 12px 0 0;
         }
 
         table.compare thead th.col-band {
             color: var(--cyan);
-            background-color: var(--bg-elevated);
+            background-color: var(--bg-dark);
             background-image: linear-gradient(rgba(0,191,255,0.07), rgba(0,191,255,0.07));
             border-top: 2px solid var(--cyan);
             border-left: 2px solid var(--cyan);
@@ -1195,7 +1193,7 @@
 
         table.compare thead th.col-pro {
             color: var(--yellow);
-            background-color: var(--bg-elevated);
+            background-color: var(--bg-dark);
             background-image: linear-gradient(rgba(255,215,0,0.05), rgba(255,215,0,0.05));
             border-radius: 12px 12px 0 0;
         }
@@ -1261,6 +1259,10 @@
             font-size: 12px;
             margin-top: 2px;
         }
+
+        /* Subtle top-to-bottom tint on the highlighted Band 4 + Pro columns */
+        table.compare tbody td.col-band { background: rgba(0,191,255,0.07); }
+        table.compare tbody td.col-pro  { background: rgba(255,215,0,0.05); }
 
         table.compare tbody td.col-free {
             text-align: center;
