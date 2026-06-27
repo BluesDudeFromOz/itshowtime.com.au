@@ -677,7 +677,7 @@
         /* Screenshots Gallery */
         .screenshots {
             padding: 120px 40px;
-            background: var(--bg-dark);
+            background: transparent;
             position: relative;
             z-index: 1;
         }
@@ -869,7 +869,7 @@
         /* FAQ */
         .faq {
             padding: 120px 40px;
-            background: var(--bg-card);
+            background: transparent;
             position: relative;
             z-index: 1;
         }
@@ -1140,6 +1140,10 @@
             max-height: 80vh;
             overflow: auto;
             -webkit-overflow-scrolling: touch;
+            background-color: var(--bg-dark);
+            background-image: linear-gradient(rgba(0,191,255,0.045), rgba(0,191,255,0.045));
+            border: 1px solid var(--border);
+            border-radius: 14px;
         }
 
         .compare-wrap h3 {
@@ -1167,7 +1171,8 @@
             position: sticky;
             top: 0;
             z-index: 3;
-            background: var(--bg-dark);
+            background-color: var(--bg-dark);
+            background-image: linear-gradient(rgba(0,191,255,0.045), rgba(0,191,255,0.045));
         }
 
         table.compare thead th.col-feature {
