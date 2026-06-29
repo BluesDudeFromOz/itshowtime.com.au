@@ -1146,6 +1146,15 @@
             border-radius: 14px;
         }
 
+        .info-panel {
+            max-width: 1100px;
+            margin: 28px auto 0;
+            padding: 18px 24px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: color-mix(in srgb, var(--bg-elevated) 50%, transparent);
+        }
+
         .compare-wrap h3 {
             text-align: center;
             font-size: 22px;
@@ -1772,6 +1781,15 @@
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
                     <tr>
+                        <td class="col-feature">Gigs &amp; invoicing<small>Track gigs, fees &amp; member splits, GST, send branded tax invoices, run year-end reports</small></td>
+                        <td class="col-free"><span class="check-no">✗</span></td>
+                        <td class="col-duo"><span class="check-yes">✓</span></td>
+                        <td class="col-band"><span class="check-yes">✓</span></td>
+                        <td class="col-band6"><span class="check-yes">✓</span></td>
+                        <td class="col-bandplus"><span class="check-yes">✓</span></td>
+                        <td class="col-pro"><span class="check-yes">✓</span></td>
+                    </tr>
+                    <tr>
                         <td class="col-feature">Crew app &amp; messaging<small>Sound, lighting, stage &amp; roadies on their phones, with tap-to-acknowledge alerts — free on every plan</small></td>
                         <td class="col-free"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Free</small></td>
                         <td class="col-duo"><span class="check-yes">✓</span></td>
@@ -1847,43 +1865,45 @@
             </table>
         </div>
 
-        <div style="max-width:1100px;margin:28px auto 0;padding:18px 24px;border:1px solid var(--border);border-radius:12px;background:var(--bg-elevated);display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
-            <p style="margin:0;flex:1;min-width:240px;color:var(--text);font-size:15px;line-height:1.7;">
-                <strong style="color:var(--cyan);">Just two players?</strong><br>
-                <strong>Band 2</strong> — two players, <strong>unlimited songs</strong> and the full paid feature set &mdash; <strong data-price="duo">$59 once</strong>, perpetual. Perfect for acoustic pairs and solo-plus-one acts.
-            </p>
-            <a href="mailto:robb@itsshowtime.com.au?subject=Band%202%20licence" class="btn btn-primary" style="font-size:14px;padding:12px 20px;white-space:nowrap;">Get Band 2</a>
-        </div>
-
-        <div style="max-width:1100px;margin:28px auto 0;padding:18px 24px;border:1px solid var(--border);border-radius:12px;background:var(--bg-elevated);">
+        <div class="info-panel">
             <p style="margin:0;color:var(--text);font-size:15px;line-height:1.7;">
                 <strong style="color:var(--cyan);">AI Assistant &mdash; optional, and <em>not</em> a subscription.</strong><br>
                 ShowTime's AI helper runs on <strong>your own Anthropic (Claude) account</strong> &mdash; you pay Anthropic directly, <strong>pay&#8209;as&#8209;you&#8209;use</strong> at their standard rates, only for the questions you actually ask. No monthly fee, no lock&#8209;in. It helps you learn the app, build setlists, and tidy up charts.
             </p>
         </div>
 
-        <p style="max-width:840px;margin:28px auto 0;text-align:center;color:var(--text-muted);font-size:14.5px;line-height:1.7;">
-            <strong style="color:var(--text);">Standard on every plan — including Free:</strong>
-            HTML chord charts · Song metadata (key, BPM, time sig, notes) · Page-view modes · Mirror mode ·
-            Circle of Fifths reference · Master / Slave sync · QR-code band onboarding ·
-            Foot-pedal &amp; keyboard navigation · Rehearsal &amp; practice links
-        </p>
+        <div class="info-panel">
+            <p style="margin:0;color:var(--text-muted);font-size:14.5px;line-height:1.7;">
+                <strong style="color:var(--text);">Standard on every plan — including Free:</strong>
+                HTML chord charts · Song metadata (key, BPM, time sig, notes) · Page-view modes · Mirror mode ·
+                Circle of Fifths reference · Master / Slave sync · QR-code band onboarding ·
+                Foot-pedal &amp; keyboard navigation · Rehearsal &amp; practice links
+            </p>
+        </div>
 
-        <p style="max-width:840px;margin:18px auto 0;text-align:center;color:var(--text-muted);font-size:15px;line-height:1.7;">
-            <strong style="color:var(--text);">Every paid licence includes a Cloud (SaaS) subscription.</strong>
-            You get <strong style="color:var(--text);">both</strong> — the <strong style="color:var(--text);">desktop app</strong>, perpetual and yours to keep (it works forever even after your free-update window ends), <strong>and</strong> the hosted <strong style="color:var(--text);">Cloud (SaaS)</strong> version for the length of your licence: always on the latest version, run your whole show from anywhere with nothing to install.
-            Renew to keep Cloud running and unlock new features — we'll remind you a month before it lapses so nothing stops mid-season.
-            Your songs and media live on your own device (no storage caps); Cloud plans add hosted storage.
-            <br><br>
-            <strong style="color:var(--text);">Trying it free?</strong> The <strong style="color:var(--text);">Try-It&nbsp;2</strong> tier runs in the Cloud too — explore ShowTime online with nothing to install. Free Cloud accounts are kept for <strong>3 months</strong>; upgrade to any paid licence (Band&nbsp;2 or above) to keep your Cloud library, otherwise it's removed after 3 months. The free desktop app keeps working regardless.
-        </p>
+        <div class="info-panel">
+            <p style="margin:0;color:var(--text-muted);font-size:15px;line-height:1.7;">
+                <strong style="color:var(--text);">Every paid licence includes a Cloud (SaaS) subscription.</strong>
+                You get <strong style="color:var(--text);">both</strong> — the <strong style="color:var(--text);">desktop app</strong>, perpetual and yours to keep (it works forever even after your free-update window ends), <strong>and</strong> the hosted <strong style="color:var(--text);">Cloud (SaaS)</strong> version for the length of your licence: always on the latest version, run your whole show from anywhere with nothing to install.
+                Renew to keep Cloud running and unlock new features — we'll remind you a month before it lapses so nothing stops mid-season.
+                Your songs and media live on your own device (no storage caps); Cloud plans add hosted storage.
+            </p>
+        </div>
 
-        <p style="max-width:760px;margin:18px auto 0;text-align:center;color:var(--text-muted);font-size:15px;line-height:1.6;">
-            <strong style="color:var(--text);">Schools, studios &amp; large ensembles:</strong>
-            running a class of 30, a choir, or any group bigger than Pro's 12?
-            <a href="mailto:support@itsshowtime.com.au?subject=ShowTime%20education%2Flarge-group%20licence" style="color:var(--cyan);">Get in touch</a>
-            for a custom education / multi-seat key — we'll set you up directly.
-        </p>
+        <div class="info-panel">
+            <p style="margin:0;color:var(--text-muted);font-size:15px;line-height:1.7;">
+                <strong style="color:var(--text);">Trying it free?</strong> The <strong style="color:var(--text);">Try-It&nbsp;2</strong> tier runs in the Cloud too — explore ShowTime online with nothing to install. Free Cloud accounts are kept for <strong>3 months</strong>; upgrade to any paid licence (Band&nbsp;2 or above) to keep your Cloud library, otherwise it's removed after 3 months. The free desktop app keeps working regardless.
+            </p>
+        </div>
+
+        <div class="info-panel">
+            <p style="margin:0;color:var(--text-muted);font-size:15px;line-height:1.6;">
+                <strong style="color:var(--text);">Schools, studios &amp; large ensembles:</strong>
+                running a class of 30, a choir, or any group bigger than Pro's 12?
+                <a href="mailto:support@itsshowtime.com.au?subject=ShowTime%20education%2Flarge-group%20licence" style="color:var(--cyan);">Get in touch</a>
+                for a custom education / multi-seat key — we'll set you up directly.
+            </p>
+        </div>
 
     </section>
     <section class="screenshots" id="screenshots">
