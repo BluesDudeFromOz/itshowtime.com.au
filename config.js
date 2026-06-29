@@ -6,6 +6,11 @@ window.SHOWTIME_CONFIG = {
   // Format: 'G-XXXXXXXXXX'. Leave blank ('') and nothing loads / no tracking.
   gaMeasurementId: 'G-N9YQL53K74',
 
+  // AI assistant endpoint — the SaaS proxies Anthropic; the API key stays server-side there.
+  // Leave blank to auto-pick: localhost while testing → your :5000 app; live site → the SaaS.
+  // The SaaS needs ANTHROPIC_API_KEY set (fly secrets) for the assistant to actually answer.
+  aiEndpoint: '',
+
   // Hero "splash" — the cycling stage visuals behind the headline panel.
   hero: {
     enabled: true,        // false = single static backdrop (no cycling)
@@ -21,7 +26,8 @@ window.SHOWTIME_CONFIG = {
       { name: 'Orange silhouettes',      src: 'static/orange-silhouettes.png' },
       { name: 'Laser light show',        src: 'static/vibrant-laser-light-show-concert.png' },
       { name: 'Blue silhouettes',        src: 'static/BlueSilhouettes.png' },
-      { name: 'Green silhouettes',       src: 'static/greenWithSilhouettes.png' }
+      { name: 'Green silhouettes',       src: 'static/greenWithSilhouettes.png' },
+      { name: 'Multi Colours',           src: 'static/multicoloured.jpg' }
     ]
   },
 
@@ -42,7 +48,8 @@ window.SHOWTIME_CONFIG = {
       'static/orange-silhouettes.png',
       'static/vibrant-laser-light-show-concert.png',
       'static/BlueSilhouettes.png',
-      'static/greenWithSilhouettes.png'
+      'static/greenWithSilhouettes.png',
+      'static/multicoloured.jpg'
     ]
   }
 };
