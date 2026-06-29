@@ -1140,7 +1140,7 @@
             max-height: 80vh;
             overflow: auto;
             -webkit-overflow-scrolling: touch;
-            background-color: var(--bg-dark);
+            background-color: color-mix(in srgb, var(--bg-dark) 50%, transparent);
             background-image: linear-gradient(rgba(0,191,255,0.045), rgba(0,191,255,0.045));
             border: 1px solid var(--border);
             border-radius: 14px;
@@ -1171,7 +1171,7 @@
             position: sticky;
             top: 0;
             z-index: 3;
-            background-color: var(--bg-dark);
+            background-color: color-mix(in srgb, var(--bg-dark) 50%, transparent);
             background-image: linear-gradient(rgba(0,191,255,0.045), rgba(0,191,255,0.045));
         }
 
@@ -1255,6 +1255,14 @@
             font-size: 12px;
             margin-top: 2px;
         }
+
+        table.compare tbody td.col-feature ul {
+            margin: 6px 0 0;
+            padding-left: 18px;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+        table.compare tbody td.col-feature ul li { margin: 3px 0; }
 
         /* Product columns: centered, fully clear — no highlight backgrounds */
         table.compare tbody td.col-free, table.compare tbody td.col-duo,
@@ -1747,7 +1755,15 @@
                         <td class="col-pro"><span class="check-yes">✓</span><br><small style="color:var(--text-muted);font-size:11px">Unlimited</small></td>
                     </tr>
                     <tr>
-                        <td class="col-feature">Full performance &amp; show suite<small>Instant transpose, Eb/Bb/F/G instrument modes, draggable annotations, pre-show &amp; intermission slideshows, per-song video/images, backing track to the PA, beat-sync visualiser and open-mic mode</small></td>
+                        <td class="col-feature">Full performance &amp; show suite<ul>
+                            <li>Instant transpose &amp; Eb/Bb/F/G instrument modes</li>
+                            <li>Draggable annotations</li>
+                            <li>Pre-show &amp; intermission slideshows</li>
+                            <li>Per-song video &amp; images</li>
+                            <li>Backing track to the PA</li>
+                            <li>Beat-sync visualiser</li>
+                            <li>Open-mic / backing-band mode</li>
+                        </ul></td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-duo"><span class="check-yes">✓</span></td>
                         <td class="col-band"><span class="check-yes">✓</span></td>
@@ -1765,7 +1781,11 @@
                         <td class="col-pro"><span class="check-yes">✓</span></td>
                     </tr>
                     <tr>
-                        <td class="col-feature">Pro extras<small>MusicXML sheet music, multiple band profiles, plus DMX &amp; MIDI control (coming soon)</small></td>
+                        <td class="col-feature">Pro extras<ul>
+                            <li>MusicXML sheet music</li>
+                            <li>Multiple band profiles</li>
+                            <li>DMX &amp; MIDI control (coming soon)</li>
+                        </ul></td>
                         <td class="col-free"><span class="check-no">✗</span></td>
                         <td class="col-duo"><span class="check-no">✗</span></td>
                         <td class="col-band"><span class="check-no">✗</span></td>
@@ -1808,7 +1828,7 @@
                             <a href="#download" class="btn btn-primary" style="font-size:14px;padding:12px 20px;">Start Free</a>
                         </td>
                         <td class="col-duo">
-                            <a href="mailto:robb@itsshowtime.com.au?subject=Band%202%20Paid%20licence" class="btn btn-primary" style="font-size:14px;padding:12px 20px;">Get Band 2 Paid</a>
+                            <a href="mailto:robb@itsshowtime.com.au?subject=Band%202%20licence" class="btn btn-primary" style="font-size:14px;padding:12px 20px;">Get Band 2</a>
                         </td>
                         <td class="col-band">
                             <button class="btn btn-primary" style="font-size:14px;padding:12px 20px;" onclick="openCheckout('band')">Get Band 4</button>
@@ -2229,6 +2249,7 @@
                 <li><a href="terms.html">Terms</a></li>
                 <li><a href="privacy.html">Privacy</a></li>
                 <li><a href="mailto:support@itsshowtime.com.au">Support</a></li>
+                <li><a href="mailto:support@itsshowtime.com.au?subject=ShowTime%20enquiry">Contact us</a></li>
             </ul>
             <div class="footer-copy">© 2026 ShowTime. Made in Adelaide, Australia.</div>
         </div>
