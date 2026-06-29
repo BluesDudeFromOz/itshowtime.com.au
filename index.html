@@ -2723,7 +2723,7 @@
 
     <!-- Chat bubble button -->
     <button id="st-chat-bubble" onclick="stChatToggle()" aria-label="Open support chat">
-        <span id="st-bubble-icon">💬</span>
+        <span id="st-bubble-icon"><img src="static/ai.png" alt="AI" style="width:32px;height:32px;vertical-align:middle;"></span>
         <span class="st-bubble-badge" id="st-bubble-badge">1</span>
     </button>
 
@@ -2771,7 +2771,7 @@
         function stChatToggle() {
             stPanelOpen = !stPanelOpen;
             document.getElementById('st-chat-panel').classList.toggle('open', stPanelOpen);
-            document.getElementById('st-bubble-icon').textContent = stPanelOpen ? '✕' : '💬';
+            document.getElementById('st-bubble-icon').innerHTML = stPanelOpen ? '✕' : '<img src="static/ai.png" alt="AI" style="width:32px;height:32px;vertical-align:middle;">';
             document.getElementById('st-bubble-badge').style.display = 'none';
 
             if (stPanelOpen && !stGreeted) {
@@ -2893,87 +2893,6 @@
             });
         }).catch(function () { /* keep the hard-coded fallback prices */ });
     })();
-    </script>
-
-    <!-- ═══ ShowTime AI assistant — asks the SaaS /api/ai-ask in website mode ═══ -->
-    <style>
-      #stAiBtn{position:fixed;right:20px;bottom:20px;z-index:9000;width:60px;height:60px;border-radius:50%;
-        border:none;cursor:pointer;background:#1d1d2e;box-shadow:0 6px 22px rgba(0,0,0,.5);display:flex;
-        align-items:center;justify-content:center;padding:0;transition:transform .15s;outline:2px solid rgba(124,58,237,.5);}
-      #stAiBtn:hover{transform:scale(1.07);}
-      #stAiBtn img{width:34px;height:34px;}
-      #stAiPanel{position:fixed;right:20px;bottom:92px;z-index:9001;width:360px;max-width:calc(100vw - 40px);
-        height:480px;max-height:calc(100vh - 130px);background:#15151f;border:1px solid #2a2a40;border-radius:14px;
-        box-shadow:0 14px 44px rgba(0,0,0,.6);display:none;flex-direction:column;overflow:hidden;}
-      #stAiPanel.open{display:flex;}
-      #stAiHead{padding:13px 16px;background:#1d1d2e;color:#fff;font-weight:600;display:flex;align-items:center;
-        justify-content:space-between;font-size:15px;}
-      #stAiHead img{width:22px;height:22px;vertical-align:middle;margin-right:8px;}
-      #stAiClose{cursor:pointer;color:#9a9ab0;font-size:24px;line-height:1;background:none;border:none;padding:0;}
-      #stAiMsgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;font-size:14px;color:#e8e8f0;}
-      .st-ai-msg{padding:9px 12px;border-radius:11px;max-width:86%;line-height:1.45;white-space:pre-wrap;}
-      .st-ai-user{align-self:flex-end;background:#7c3aed;color:#fff;}
-      .st-ai-bot{align-self:flex-start;background:#23233a;color:#e8e8f0;}
-      #stAiRow{display:flex;gap:8px;padding:10px;border-top:1px solid #2a2a40;background:#1a1a28;}
-      #stAiInput{flex:1;resize:none;height:42px;max-height:110px;padding:10px;border-radius:8px;border:1px solid #33334d;
-        background:#0f0f18;color:#fff;font-family:inherit;font-size:14px;}
-      #stAiSend{background:#7c3aed;color:#fff;border:none;border-radius:8px;padding:0 16px;cursor:pointer;font-weight:600;}
-      #stAiSend:disabled{opacity:.5;cursor:default;}
-    </style>
-    <button id="stAiBtn" title="Ask ShowTime AI" onclick="stAiToggle()"><img src="static/ai.png" alt="AI"></button>
-    <div id="stAiPanel">
-      <div id="stAiHead"><span><img src="static/ai.png" alt="">ShowTime Assistant</span><button id="stAiClose" onclick="stAiToggle()" title="Close">&times;</button></div>
-      <div id="stAiMsgs"></div>
-      <div id="stAiRow">
-        <textarea id="stAiInput" placeholder="Ask about features or pricing…" rows="1"></textarea>
-        <button id="stAiSend" onclick="stAiSend()">Send</button>
-      </div>
-    </div>
-    <script>
-      (function(){
-        var cfg = window.SHOWTIME_CONFIG || {};
-        var endpoint = cfg.aiEndpoint ||
-          ((location.hostname==='localhost'||location.hostname==='127.0.0.1')
-            ? 'http://localhost:5000/api/ai-ask' : 'https://showtime-saas.fly.dev/api/ai-ask');
-        var history = [], greeted = false;
-        function add(who, text){
-          var m=document.createElement('div');
-          m.className='st-ai-msg '+(who==='user'?'st-ai-user':'st-ai-bot');
-          m.textContent=text;
-          var box=document.getElementById('stAiMsgs');
-          box.appendChild(m); box.scrollTop=box.scrollHeight; return m;
-        }
-        window.stAiToggle=function(){
-          var p=document.getElementById('stAiPanel');
-          p.classList.toggle('open');
-          if(p.classList.contains('open')){
-            if(!greeted){ add('bot',"Hi! I'm the ShowTime assistant — ask me anything about features or pricing."); greeted=true; }
-            document.getElementById('stAiInput').focus();
-          }
-        };
-        window.stAiSend=function(){
-          var inp=document.getElementById('stAiInput'); var q=(inp.value||'').trim();
-          if(!q) return;
-          inp.value=''; add('user',q); history.push({role:'user',content:q});
-          var send=document.getElementById('stAiSend'); send.disabled=true;
-          var thinking=add('bot','…');
-          fetch(endpoint,{method:'POST',headers:{'content-type':'application/json'},
-            body:JSON.stringify({mode:'website',messages:history})})
-            .then(function(r){return r.json();})
-            .then(function(d){
-              var ans=(d&&d.ok&&d.answer)?d.answer:(d&&d.error)?d.error:"Sorry, I couldn't answer that.";
-              thinking.textContent=ans; history.push({role:'assistant',content:ans});
-            })
-            .catch(function(){ thinking.textContent="Sorry — I couldn't reach the assistant right now."; })
-            .finally(function(){ send.disabled=false; });
-        };
-        document.addEventListener('DOMContentLoaded',function(){
-          var inp=document.getElementById('stAiInput');
-          if(inp) inp.addEventListener('keydown',function(e){
-            if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); stAiSend(); }
-          });
-        });
-      })();
     </script>
 </body>
 </html>
