@@ -141,8 +141,9 @@ renew updates any time. Prices are in AUD.
 
 ## AI assistant
 
-ShowTime offers an **optional** AI helper. It runs on **your own Anthropic (Claude) account** —
-you pay Anthropic directly, pay-as-you-use, only for the questions you ask. No monthly fee and no
+ShowTime offers an **optional** AI helper. It runs on **one Anthropic (Claude) account per band**
+— the band leader adds the key once (in the Licence panel) and every member of the band uses it.
+You pay Anthropic directly, pay-as-you-use, only for the questions you ask — no monthly fee and no
 lock-in. It helps you learn the app, build setlists, and tidy up charts.
 
 ## On the roadmap (coming soon)
