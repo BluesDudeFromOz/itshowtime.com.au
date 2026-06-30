@@ -88,14 +88,15 @@ managed in the **Media Manager** (the same place as song media):
 ## Seeing a song's story / history on stage (the "i" info button)
 Keywords: song story, song history, history of the song, history of this song, artist notes, song info, information, the i button, small i, backstory, background, see the metadata while playing, song notes
 
-The song story/history you typed into the song's metadata is **one tap** away while you're playing —
-you do NOT need to open the Setup menu or the metadata editor:
+When a song has a story/history saved in its metadata, a **small "i" (information) icon appears** in
+the toolbar next to the song title. **If the song has no history saved, the icon doesn't show** — so
+seeing the "i" means there's something to read.
 
-- Tap the **small "i" (information) button** in the toolbar, next to the song title — it instantly
-  pops up the **song story & artist notes**. Tap again (or anywhere) to close.
+- A **single tap / finger touch** on the "i" exposes the saved **song story & artist notes**.
+- A **single tap** (anywhere) returns you to the song page.
 
-So if you've been reaching it the long way through Edit Song Metadata, the **"i" button is the quick
-on-stage path**. (Beside it are the small **MIDI** and **DMX** buttons for those scenes.)
+You don't need the Setup menu or the metadata editor — the "i" is the one-tap on-stage path. (Small
+**MIDI** and **DMX** icons appear beside it the same way when those are set for the song.)
 
 ---
 
