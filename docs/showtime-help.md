@@ -230,6 +230,10 @@ musicians getting comfortable with chord sequences:
   somewhere else** on the diagram and borrow its **neighbouring chords** to move into a new key
   **without it sounding disjointed**. The same trick works off the **2-5-1** and **1-6-2-5-1** diagrams.
 
+That key change *is* transposing in effect — but you're getting there **naturally, through harmonic
+chord changes (modulation)**, not the **mechanical** semitone shift of the Transpose ▲/▼ button. The
+music glides into the new key instead of being shifted into it.
+
 ---
 
 ## Sending messages to crew / roadies
