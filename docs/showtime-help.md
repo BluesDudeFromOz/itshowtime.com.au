@@ -216,19 +216,21 @@ with it. (If the transpose button isn't visible, you're not on a song chart yet 
 ---
 
 ## The Circle of Fifths / Circle of Keys button — a playing & improvising aid
-Keywords: circle of fifths, circle of keys, key wheel, related chords, chords in a key, chord relationships, 1-4-5, 145, blues chords, blues, 2-5-1, 251, 1-6-2-5-1, common progressions, what chords go together, improvise, improvising, modulate, change key smoothly, neighbouring chords, next chord, focus on the tune, how do I use the circle
+Keywords: circle of fifths, circle of keys, key wheel, related chords, chords in a key, chord relationships, 1-4-5, 145, blues chords, blues, 2-5-1, 251, 1-6-2-5-1, common progressions, what chords go together, improvise, improvising, soloing, solo, lead break, writing songs, songwriting, write a song, compose, composing, modulate, change key smoothly, change keys gracefully, neighbouring chords, next chord, focus on the tune, how do I use the circle
 
 Open a song, then tap the **Circle of Fifths / Circle of Keys** button in the chart toolbar (next to
-Transpose). It's not just a reference — it's a **playing and improvising aid**, especially for
+Transpose). It's not just a reference — it's a **playing, writing and improvising aid**, especially for
 musicians getting comfortable with chord sequences:
 
 - It shows the **related chords for each key**, so you don't have to *think* about the next chord —
   you can focus on the **tune** you're playing.
 - **Common progressions are easy to spot** straight off the diagram: for **1-4-5** blues-type songs the
   three chords are right there; same for **2-5-1** and **1-6-2-5-1** sequences.
-- **For improvising and smooth key changes:** when you reach a given chord, find that **same chord
-  somewhere else** on the diagram and borrow its **neighbouring chords** to move into a new key
-  **without it sounding disjointed**. The same trick works off the **2-5-1** and **1-6-2-5-1** diagrams.
+- **Writing songs:** it's a map of which chords sit naturally together, so you can build progressions
+  that work and pick chords that complement each other as you compose.
+- **For soloing and improvising — changing keys gracefully:** when you reach a given chord, find that
+  **same chord somewhere else** on the diagram and borrow its **neighbouring chords** to move into a new
+  key **without it sounding disjointed**. The same trick works off the **2-5-1** and **1-6-2-5-1** diagrams.
 
 That key change *is* transposing in effect — but you're getting there **naturally, through harmonic
 chord changes (modulation)**, not the **mechanical** semitone shift of the Transpose ▲/▼ button. The

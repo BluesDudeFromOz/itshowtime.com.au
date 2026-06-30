@@ -3,7 +3,7 @@
 # The order here is the order they appear. No quotes or commas needed — just plain text.
 
 Professional chord-chart, notation & setlist manager for live performers
-Sync your whole band wirelessly
+Sync your whole band using wifi
 Master/slave setlist navigation
 Transpose chord charts & notation instantly
 Transpose for Eb, Bb, F & G instruments across the setlist
@@ -17,8 +17,10 @@ Projector slideshows — video, JPG & PNG for each song
 Intermission video & slideshow - preshow, intermission & end of show
 More than 30 visualisation designs with a beat detector
 Automatic MIDI instrument setup for each song - coming soon
-DMX lighting support — coming soon
-Software as a Service or Cloud and/or 
+DMX stage lighting — trigger lighting scenes per song
+Billing Engine, pdf billing produced and emailed with a couple of clicks
+Finance reports produced for all musicians for nominal period
+Software as a Service or Cloud and/or Local Webserver
 Standalone network for all devices Mac, PC, iOS, Android & linux
 Auto database sync between standalone and cloud
 ShowTime server for Mac, PC & Linux or Software As A Service (SAAS)
