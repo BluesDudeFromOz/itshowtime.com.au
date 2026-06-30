@@ -93,6 +93,29 @@ open its chart.
 
 ---
 
+## Playing hands-free / foot pedal navigation (no mouse on stage)
+Keywords: foot pedal, footswitch, foot controller, no mouse, hands free, hands-free, pedal, play without mouse, navigate without touching, up down left right, page turn pedal, four button pedal
+
+You never need a mouse while performing. ShowTime is fully touch-friendly (tap any on-screen button),
+and for true hands-free control it drives from a **4-button foot pedal — Up / Down / Left / Right**:
+
+- **Left / Right** — move along the toolbar to **select** the function you want.
+- **Up / Down** — **execute** the selected function (and, for some functions, perform the action
+  directly).
+
+Examples:
+- **Home**: **Up** jumps to the **setlist you were playing from**; **Down** drops the cursor into the
+  **search box**.
+- **Transpose**: **Up** transposes the chords **up** a semitone, **Down** transposes **down** (same
+  for changing the key).
+- **Instrument transpose** (Eb / Bb / F / G modes): **Up / Down** scroll through the available
+  **instrument keys**; press **Right** to **select** the highlighted one.
+
+(On a multi-device gig, the **Master** player's controls follow to everyone in sync, so often only one
+person needs to act at all.)
+
+---
+
 ## Transposing a song / changing key
 Keywords: transpose, change key, key change, circle of keys, circle of fifths, capo, raise key, lower key, what key, where is transpose
 
