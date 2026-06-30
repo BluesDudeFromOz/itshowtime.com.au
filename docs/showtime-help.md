@@ -60,6 +60,18 @@ To change a song's *details* (BPM, key, drum pattern) instead, use **Edit Song M
 
 ---
 
+## Adding images or videos to a song
+Keywords: add video, add image, add a video, song video, per-song video, slideshow, media, picture, manage images and videos, attach video, video playback
+
+Per-song images and videos are managed in the **Media Manager**:
+1. Open the song's **Edit Song Metadata** (config / Setup menu → Edit Song Metadata).
+2. Click **Manage Images & Videos**.
+3. In the **Media Manager**, add your image(s) or video(s) for this song.
+
+These power the per-song slideshow and video playback during performance.
+
+---
+
 ## Finding / opening a song
 Keywords: find a song, search, open a song, song library, where are my songs
 
