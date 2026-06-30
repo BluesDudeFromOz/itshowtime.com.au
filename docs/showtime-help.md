@@ -30,7 +30,8 @@ Keywords: add musician, add band member, add player, new member, band lineup, wh
 
 ShowTime manages members as **Payees** — there is **no** separate "Add Band Member" button.
 
-1. Open **Gigs & Billing** (the band-admin area).
+1. From the **Home / Search** screen, open **Gigs & Billing** (the band-admin area) — the button is
+   on the Home / Search page.
 2. Go to the **Payees** tab → add the person; tick **Default player** and list which band(s) they
    play in.
 3. The **Bands** tab then shows them in that band's default lineup (you can swap in a reserve
