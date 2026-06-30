@@ -72,6 +72,19 @@ These power the per-song slideshow and video playback during performance.
 
 ---
 
+## Pre-show, intermission & post-show slideshows / videos (projection)
+Keywords: pre-show, preshow, intermission, intermission video, post-show, postshow, slideshow, projection, before the show, between sets, after the show, walk-in visuals, break video
+
+These play on the projection screen before the show, during the break, and after the show. They're
+managed in the **Media Manager** (the same place as song media):
+1. Open the **Media Manager** (Edit Song Metadata → Manage Images & Videos).
+2. Add your image(s) or video(s) and set each item's **type** to **Pre-Show**, **Intermission**, or
+   **Post-Show** (the type selector / filter buttons).
+3. Use **Slideshow Settings** in the Media Manager to control timing and transitions.
+4. Start a pre-show or post-show from your **playlist's** show buttons.
+
+---
+
 ## Finding / opening a song
 Keywords: find a song, search, open a song, song library, where are my songs
 
