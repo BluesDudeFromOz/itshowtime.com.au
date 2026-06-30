@@ -58,6 +58,31 @@ To edit the current song's chart (chords, lyrics, spacing):
 
 To change a song's *details* (BPM, key, drum pattern) instead, use **Edit Song Metadata**.
 
+> Want **your own** version, or to add **passing chords** without changing the leader's chart? Don't
+> use Edit Chart — see **Making your own version of a chart** below.
+
+---
+
+## Making your own version of a chart — passing chords & personal changes (without changing the leader's chart)
+Keywords: passing chords, add a passing chord, my own chart, my own version, my version, make my chart different, the leader gave me, leader's chart, change my chart only, personalise chart, personalize chart, customise chords, customize chords, extra chord, add my own chords, different from the leader, my part, alternate chart, second chart
+
+If the leader shared the charts but you want **your own** version — different voicings, extra
+**passing chords**, personal reminders — there are **two non-destructive ways** that do **not** alter
+the leader's original chart:
+
+1. **Add your own chart for the song.** At the **top-left**, next to the **Chart** selector (it shows
+   the current chart, e.g. "Lyrics"), tap the green **➕** to **add a new chart** for this song. Edit
+   your new chart freely and add your passing chords. The leader's original stays intact as a separate
+   chart you can switch back to from the same selector at any time.
+2. **Add an annotation (an overlay).** Open the **Setup / cog menu on the right-hand side** to expand
+   it, then tap the **Annotations** button. You can drop **extra chords, notes, or a key signature**
+   straight onto the chart **without editing it** — and annotations **transpose with the song** if you
+   change key.
+
+Use **Edit Chart** (config/cog menu → Edit Chart) **only** when you genuinely want to change *this*
+chart itself. For a separate personal version, use the **➕ new chart**; for quick non-destructive
+markings, use **Annotations**.
+
 ---
 
 ## Adding images or videos to a song
