@@ -47,6 +47,18 @@ as a ShowTime chart you can transpose and save like any other.
 
 ---
 
+## Editing a song
+Keywords: edit song, edit chart, edit this song, fix chords, change lyrics, fix spacing, edit menu, edit mode, how do I edit
+
+To edit the current song's chart:
+1. Open the **Edit** menu in the toolbar (expand it).
+2. Select **Edit Chart** (Edit Song) — you can then fix the chords, lyrics, spacing and formatting,
+   then save.
+
+To change a song's *details* instead (BPM, key, drum pattern), use **Edit Song Metadata**.
+
+---
+
 ## Finding / opening a song
 Keywords: find a song, search, open a song, song library, where are my songs
 
