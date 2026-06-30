@@ -54,11 +54,24 @@ open its chart.
 
 ---
 
-## Transposing a song
-Keywords: transpose, change key, key change, capo, raise key, lower key
+## Transposing a song / changing key
+Keywords: transpose, change key, key change, circle of keys, circle of fifths, capo, raise key, lower key, what key, where is transpose
 
-Use the transpose controls on the chart toolbar to move the whole chart up or down. On a synced gig
-the transpose follows to every connected device in real time, and annotations move with it.
+Open a song first — the transpose controls live in the **chart toolbar** (top of the screen):
+- The **Transpose** button (then the **▲ / ▼** arrows) shifts the whole chart up or down a semitone.
+- Next to it is the **Circle of Fifths** button — the "circle of keys" — a visual key reference.
+
+On a synced gig the transpose follows to every connected device in real time, and annotations move
+with it. (If the transpose button isn't visible, you're not on a song chart yet — open a song first.)
+
+---
+
+## Sending messages to crew / roadies
+Keywords: crew message, message roadies, send to crew, alert crew, stage manager, lighting, sound, send a message
+
+Tap the **Send crew message** button in the toolbar (the crew / 📢 icon) to open the Crew Message
+panel, then send your message. Crew on their phones receive it and can tap to **acknowledge** so you
+know it landed. Crew connect free and never use a musician slot.
 
 ---
 
