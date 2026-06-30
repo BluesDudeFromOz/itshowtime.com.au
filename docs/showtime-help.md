@@ -108,6 +108,26 @@ managed in the **Media Manager** (the same place as song media):
 3. Use **Slideshow Settings** in the Media Manager to control timing and transitions.
 4. Start a pre-show or post-show from your **playlist's** show buttons.
 
+> Want the band's **screens** dark during the break (but keep the projector lighting the stage)? Use
+> the **Sleep / snooze (alarm-clock) icon** — see below.
+
+---
+
+## Blanking the band's screens for a break (Sleep / snooze — the alarm-clock icon)
+Keywords: blank screen, blank the screens, black screen, sleep, snooze, alarm clock, alarm clock icon, break, intermission, interval, turn off screens, screens too bright, screen light, dim screens, hide the charts, dark screens between sets, blackout devices, lighting the stage, rest the screens
+
+To black out the **band's device screens** (so the tablets/phones aren't lit up or showing charts
+during a break), use the **Sleep / snooze button — the alarm-clock icon** in the toolbar.
+
+- When the **Master** taps it, **every connected screen — the master and all slave devices — blanks to
+  black** at once (it broadcasts to everyone). Tap it again to wake them and bring the charts back.
+- The **projector is NOT affected** — it keeps showing whatever's on it.
+
+So for "the screens are giving off light / we want to light the stage during the break": tap the
+**alarm-clock (sleep) icon** to black out the band's screens, and let the **projector's Intermission
+slideshow/video** light the room (see *Pre-show, intermission & post-show slideshows* above). The two
+work together — dark band screens, lit stage.
+
 ---
 
 ## Seeing a song's story / history on stage (the "i" info button)
