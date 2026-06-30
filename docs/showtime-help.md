@@ -109,7 +109,7 @@ Examples:
 - **Transpose**: **Up** transposes the chords **up** a semitone, **Down** transposes **down** (same
   for changing the key).
 - **Instrument transpose** (Eb / Bb / F / G modes): **Up / Down** scroll through the available
-  **instrument keys**; press **Right** to **select** the highlighted one.
+  **instrument keys**; press **Left or Right** to **select** the highlighted one.
 
 (On a multi-device gig, the **Master** player's controls follow to everyone in sync, so often only one
 person needs to act at all.)
