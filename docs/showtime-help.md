@@ -108,6 +108,18 @@ open its chart.
 
 ---
 
+## The dots on the bottom bar — visual metronome (BPM beat dots)
+Keywords: dots, four dots, 4 dots, bottom bar dots, beat dots, metronome, visual metronome, tempo, pulsing dots, flashing dots, what are the dots, turn off the dots, BPM dots, speed guide
+
+The dots along the bottom bar are a **visual metronome** (BPM beat dots) — **not** a page indicator.
+When a song has a **BPM** and **time signature** set in its metadata, the dots pulse in time as a
+silent speed guide for the song. The number of dots matches the time signature — **4/4 → 4 dots,
+3/4 → 3 dots, 6/8 → 6 dots**.
+
+If they're distracting, **turn them off with the "BPM beat dots" toggle switch right next to them**.
+
+---
+
 ## The two menus — top toolbar vs the Setup (cog) menu
 Keywords: top menu, top toolbar, right menu, side menu, cog, cog menu, gear icon, setup menu, two menus, why two menus, difference between the menus, what is the cog, the menu on the right
 
