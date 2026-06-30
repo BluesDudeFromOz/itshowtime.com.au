@@ -204,14 +204,31 @@ person needs to act at all.)
 ---
 
 ## Transposing a song / changing key
-Keywords: transpose, change key, key change, circle of keys, circle of fifths, capo, raise key, lower key, what key, where is transpose
+Keywords: transpose, change key, key change, capo, raise key, lower key, what key, where is transpose
 
 Open a song first — the transpose controls live in the **chart toolbar** (top of the screen):
 - The **Transpose** button (then the **▲ / ▼** arrows) shifts the whole chart up or down a semitone.
-- Next to it is the **Circle of Fifths** button — the "circle of keys" — a visual key reference.
+- Next to it is the **Circle of Keys** button — a playing/improvising aid (see its own entry below).
 
 On a synced gig the transpose follows to every connected device in real time, and annotations move
 with it. (If the transpose button isn't visible, you're not on a song chart yet — open a song first.)
+
+---
+
+## The Circle of Fifths / Circle of Keys button — a playing & improvising aid
+Keywords: circle of fifths, circle of keys, key wheel, related chords, chords in a key, chord relationships, 1-4-5, 145, blues chords, blues, 2-5-1, 251, 1-6-2-5-1, common progressions, what chords go together, improvise, improvising, modulate, change key smoothly, neighbouring chords, next chord, focus on the tune, how do I use the circle
+
+Open a song, then tap the **Circle of Fifths / Circle of Keys** button in the chart toolbar (next to
+Transpose). It's not just a reference — it's a **playing and improvising aid**, especially for
+musicians getting comfortable with chord sequences:
+
+- It shows the **related chords for each key**, so you don't have to *think* about the next chord —
+  you can focus on the **tune** you're playing.
+- **Common progressions are easy to spot** straight off the diagram: for **1-4-5** blues-type songs the
+  three chords are right there; same for **2-5-1** and **1-6-2-5-1** sequences.
+- **For improvising and smooth key changes:** when you reach a given chord, find that **same chord
+  somewhere else** on the diagram and borrow its **neighbouring chords** to move into a new key
+  **without it sounding disjointed**. The same trick works off the **2-5-1** and **1-6-2-5-1** diagrams.
 
 ---
 
