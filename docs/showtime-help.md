@@ -93,6 +93,21 @@ open its chart.
 
 ---
 
+## The two menus — top toolbar vs the Setup (cog) menu
+Keywords: top menu, top toolbar, right menu, side menu, cog, cog menu, gear icon, setup menu, two menus, why two menus, difference between the menus, what is the cog, the menu on the right
+
+ShowTime has two menus, on purpose:
+- **Top toolbar** = **performance controls** you use *while playing* — transpose, play, crew messages,
+  blackout, page view, fullscreen, etc. It stays clean and tap-friendly on stage.
+- **Setup menu** = the **cog / gear icon on the right**; click it to expand the **admin & editing**
+  tools you use *before or after* a gig — Edit Chart, Edit Song Metadata, Manage Images & Videos,
+  System Configuration, and more.
+
+They're kept separate so the performance toolbar stays focused on what you tap mid-song, and the
+editing tools are tucked away on the right where you won't hit them by accident while playing.
+
+---
+
 ## Playing hands-free / foot pedal navigation (no mouse on stage)
 Keywords: foot pedal, footswitch, foot controller, no mouse, hands free, hands-free, pedal, play without mouse, navigate without touching, up down left right, page turn pedal, four button pedal
 
