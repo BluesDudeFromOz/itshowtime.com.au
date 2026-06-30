@@ -247,6 +247,22 @@ know it landed. Crew connect free and never use a musician slot.
 
 ---
 
+## DMX stage lighting — per-song lighting scenes
+Keywords: dmx, lighting, stage lighting, lights, lighting scene, lighting control, light show, par cans, washes, colours, lighting operator, lighting cues, lights per song, skip a song lighting, out of order lighting
+
+ShowTime can drive your **DMX stage lighting** from the setlist. You attach a **DMX lighting scene to a
+song**, and ShowTime fires that scene automatically the moment that song comes up — colours, washes and
+looks change with the music, no separate lighting operator needed.
+
+The key advantage: because each scene is tied to its **song**, not a fixed cue timeline, the lighting
+**follows however you actually play the set**. **Skip a song, reorder on the fly, or take a request on
+the night** — the correct lighting still loads automatically. There's no rigid pre-programmed cue stack
+to fall apart when you go off-script. On a synced gig the **Master** triggers the rig for everyone.
+
+(DMX is a **Pro**-tier feature. Per-song **MIDI** setups are coming soon.)
+
+---
+
 ## When you don't know
 If a question isn't covered above, say so briefly and suggest emailing **support@itsshowtime.com.au**.
 Do not invent buttons, menus or settings that aren't documented here.
