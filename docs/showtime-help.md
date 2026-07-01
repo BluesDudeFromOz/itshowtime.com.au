@@ -47,6 +47,22 @@ as an It's Showtime chart you can transpose and save like any other.
 
 ---
 
+## Sheet music & MusicXML (importing and creating notation)
+Keywords: MusicXML, sheet music, notation, .mxl, MuseScore, Sibelius, Finale, import score, engraved notation, dots, staff, stave
+
+It's Showtime reads and displays **MusicXML** sheet music — the standard format that notation apps export —
+and renders it as clean, engraved notation on your performance screen.
+
+- **Import a score as a song:** **Import Songs → Sheet Music**, then choose a **.musicxml** or **.mxl**
+  (compressed) file. It becomes a new song with the notation attached, named from the score's own title.
+- **No MusicXML file yet?** Write your notation for free in **MuseScore** (musescore.org) — the popular,
+  free, open-source notation editor — then **File → Export → MusicXML** and import it here. You can export
+  the same way from Sibelius or Finale. It's Showtime handles the performing; MuseScore handles the writing.
+- **Just a hook or riff?** You don't need a separate file — draw a few bars straight onto the chart with
+  the built-in notation snippet tools, and It's Showtime engraves them professionally.
+
+---
+
 ## Editing a song's chords / chart
 Keywords: edit song, edit chart, edit chords, edit this song, fix chords, change lyrics, fix spacing, edit menu, config menu, how do I edit
 
