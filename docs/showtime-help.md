@@ -1,7 +1,7 @@
-# ShowTime — How-To Help
+# It's Showtime — How-To Help
 
-This is the functionality reference the ShowTime AI assistants (in-app + website) answer from. It is
-product documentation — how to USE ShowTime — not source code. Keep entries short, each with a
+This is the functionality reference the It's Showtime AI assistants (in-app + website) answer from. It is
+product documentation — how to USE It's Showtime — not source code. Keep entries short, each with a
 **Keywords** line so the assistant matches however a user phrases the question. If something isn't
 covered here, say so briefly and point the user to **support@itsshowtime.com.au** — never invent a
 button or setting.
@@ -28,7 +28,7 @@ instrument/annotation filter.)
 ## Adding band members
 Keywords: add musician, add band member, add player, new member, band lineup, who plays in the band, manage members
 
-ShowTime manages members as **Payees** — there is **no** separate "Add Band Member" button.
+It's Showtime manages members as **Payees** — there is **no** separate "Add Band Member" button.
 
 1. From the **Home / Search** screen, open **Gigs & Billing** (the band-admin area) — the button is
    on the Home / Search page.
@@ -43,7 +43,7 @@ ShowTime manages members as **Payees** — there is **no** separate "Add Band Me
 Keywords: import, iReal, iReal Pro, ireal chart, ChordPro, import setlist, add a chart, paste chords
 
 Tap **Import Songs** to bring in iReal Pro charts, ChordPro files, or pasted chords. The chart renders
-as a ShowTime chart you can transpose and save like any other.
+as an It's Showtime chart you can transpose and save like any other.
 
 ---
 
@@ -168,7 +168,7 @@ If they're distracting, **turn them off with the "BPM beat dots" toggle switch r
 ## The two menus — top toolbar vs the Setup (cog) menu
 Keywords: top menu, top toolbar, right menu, side menu, cog, cog menu, gear icon, setup menu, two menus, why two menus, difference between the menus, what is the cog, the menu on the right
 
-ShowTime has two menus, on purpose:
+It's Showtime has two menus, on purpose:
 - **Top toolbar** = **performance controls** you use *while playing* — transpose, play, crew messages,
   blackout, page view, fullscreen, etc. It stays clean and tap-friendly on stage.
 - **Setup menu** = the **cog / gear icon on the right**; click it to expand the **admin & editing**
@@ -183,7 +183,7 @@ editing tools are tucked away on the right where you won't hit them by accident 
 ## Playing hands-free / foot pedal navigation (no mouse on stage)
 Keywords: foot pedal, footswitch, foot controller, no mouse, hands free, hands-free, pedal, play without mouse, navigate without touching, up down left right, page turn pedal, four button pedal
 
-You never need a mouse while performing. ShowTime is fully touch-friendly (tap any on-screen button),
+You never need a mouse while performing. It's Showtime is fully touch-friendly (tap any on-screen button),
 and for true hands-free control it drives from a **4-button foot pedal — Up / Down / Left / Right**:
 
 - **Left / Right** — move along the toolbar to **select** the function you want.
@@ -250,8 +250,8 @@ know it landed. Crew connect free and never use a musician slot.
 ## DMX stage lighting — per-song lighting scenes
 Keywords: dmx, lighting, stage lighting, lights, lighting scene, lighting control, light show, par cans, washes, colours, lighting operator, lighting cues, lights per song, skip a song lighting, out of order lighting
 
-ShowTime can drive your **DMX stage lighting** from the setlist. You attach a **DMX lighting scene to a
-song**, and ShowTime fires that scene automatically the moment that song comes up — colours, washes and
+It's Showtime can drive your **DMX stage lighting** from the setlist. You attach a **DMX lighting scene to a
+song**, and It's Showtime fires that scene automatically the moment that song comes up — colours, washes and
 looks change with the music, no separate lighting operator needed.
 
 The key advantage: because each scene is tied to its **song**, not a fixed cue timeline, the lighting
