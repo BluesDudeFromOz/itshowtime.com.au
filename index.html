@@ -505,10 +505,21 @@
         /* How It Works */
         .how-it-works {
             padding: 120px 40px;
-            background: var(--bg-card);
+            background: var(--bg-dark);
             position: relative;
             z-index: 1;
+            overflow: hidden;
         }
+        /* Section-scoped rotating wallpaper — same frames as the page backdrop, bolder here */
+        .hiw-wallpaper { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+        .hiw-wallpaper .wp-frame {
+            position: absolute; inset: 0;
+            background-size: cover; background-position: center;
+            opacity: 0; transition: opacity 1600ms ease;
+        }
+        .hiw-wallpaper .wp-frame.is-active { opacity: var(--hiw-opacity, 0.35); }
+        .how-it-works > .section-header,
+        .how-it-works > .steps { position: relative; z-index: 1; }
 
         .steps {
             display: flex;
@@ -521,9 +532,16 @@
 
         .step {
             flex: 1;
-            min-width: 280px;
+            min-width: 260px;
+            max-width: 340px;
             text-align: center;
             padding: 40px 30px;
+            background: rgba(18, 18, 26, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 16px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
         }
 
         .step-number {
@@ -1573,6 +1591,7 @@
 
     <!-- How It Works -->
     <section class="how-it-works">
+        <div class="hiw-wallpaper" aria-hidden="true"></div>
         <div class="section-header">
             <div class="section-label">How It Works</div>
             <h2 class="section-title">Up and Running in Minutes</h2>
@@ -2411,6 +2430,34 @@
             els[0].classList.add('is-active');
             if (els.length < 2) return;   // single image => static backdrop (rotate regardless of reduce-motion)
             var i = 0;
+            setInterval(function () {
+                els[i].classList.remove('is-active');
+                i = (i + 1) % els.length;
+                els[i].classList.add('is-active');
+            }, holdMs + fadeMs);
+        })();
+
+        // How-It-Works section backdrop — same frames as the page wallpaper, bolder + offset so it
+        // feels like its own rotating showcase (not in lockstep with the page backdrop).
+        (function () {
+            var cfg = (window.SHOWTIME_CONFIG && window.SHOWTIME_CONFIG.wallpaper) || {};
+            var frames = cfg.frames || [];
+            var stage = document.querySelector('.hiw-wallpaper');
+            if (!stage || !frames.length) return;
+            var fadeMs = 1600, holdMs = 6500;
+            stage.style.setProperty('--hiw-opacity', (cfg.hiwOpacity != null ? cfg.hiwOpacity : 0.35));
+            var els = frames.map(function (f) {
+                var src = (typeof f === 'string') ? f : f.src;
+                var d = document.createElement('div');
+                d.className = 'wp-frame';
+                d.style.backgroundImage = "url('" + src + "')";
+                d.style.transitionDuration = fadeMs + 'ms';
+                stage.appendChild(d);
+                return d;
+            });
+            var i = Math.min(1, els.length - 1);   // start on a different frame than the page backdrop
+            els[i].classList.add('is-active');
+            if (els.length < 2) return;
             setInterval(function () {
                 els[i].classList.remove('is-active');
                 i = (i + 1) % els.length;
