@@ -272,6 +272,24 @@
         }
         .hero-badge img { width: 18px; height: 18px; display: block; }
 
+        /* Plain-language "what it is" line — the one statement a first-time viewer needs. */
+        .hero-tagline {
+            max-width: 640px;
+            margin: 4px auto 18px;
+            font-size: clamp(17px, 2.5vw, 21px);
+            font-weight: 600;
+            line-height: 1.45;
+            color: var(--text);
+            animation: fadeInUp 0.8s ease 0.05s both;
+        }
+        .hero-tagline .ht-list {
+            background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
         .hero h1 {
             font-size: clamp(40px, 6vw, 68px);
             font-weight: 800;
@@ -1428,6 +1446,7 @@
         <div class="hero-stage" aria-hidden="true"><!-- stage visuals injected from config.js --></div>
         <div class="hero-content">
             <div class="hero-badge"><img src="static/redfavicon-32.png" alt="It's Showtime"> Trusted by musicians across Australia</div>
+            <p class="hero-tagline">Everything your band needs on stage and off — <span class="ht-list">lyrics, chords, notation, stage lighting, video &amp; billing</span> — in one app.</p>
             <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;">Your Stage. Your Show. Everyone on the same page.</h1>
             <div class="hero-cycle" aria-hidden="true">
               <div class="hc-phrase active"><span class="hc-line">Your <span class="hc-grad">Stage.</span></span></div>
