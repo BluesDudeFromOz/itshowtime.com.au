@@ -40,10 +40,27 @@ It's Showtime manages members as **Payees** — there is **no** separate "Add Ba
 ---
 
 ## Importing songs (iReal Pro, ChordPro, pasted chords)
-Keywords: import, iReal, iReal Pro, ireal chart, ChordPro, import setlist, add a chart, paste chords
+Keywords: import, iReal, iReal Pro, ireal chart, ChordPro, import setlist, add a chart, paste chords, export from ireal, ireal file, ireal html, change font, chord font, breathing space, lyrics line
 
-Tap **Import Songs** to bring in iReal Pro charts, ChordPro files, or pasted chords. The chart renders
-as an It's Showtime chart you can transpose and save like any other.
+Tap **Import Songs** and pick a source:
+- **iReal Pro** — in the iReal Pro app, share a song (or make a backup) as the **HTML** export, email or
+  transfer the file to your device, then choose **"Choose exported iReal Pro file"** here. It's Showtime
+  reads iReal's own format and renders a proper **lead-sheet grid** — bars aligned in rows, **section
+  markers (A/B/C)**, **repeats and 1st/2nd/3rd endings**, the **time signature**, and chords spaced **on
+  the beat** (three chords in a 4/4 bar = first chord holds 2 beats). Preview it first; a single song opens
+  straight away.
+- **Paste a chart** — paste a ChordPro (`[C]`) or chords-over-lyrics chart you already have (covers
+  Ultimate Guitar, OnSong, SongBook, etc.). It becomes a new song and opens.
+- **It's Showtime (.showtimeset)** — restore a portable It's Showtime backup (songs, charts & annotations).
+- **Sheet Music** — a MusicXML file (see the Sheet Music entry below).
+
+The imported chart transposes and saves like any other. **Change the chord font** with the **Font**
+selector in the toolbar. An iReal grid also has a blank **"breathing space"** line under each row where you
+can type your **own** words — it ships empty, because It's Showtime distributes no lyrics of its own.
+
+It's Showtime **only imports material you're allowed to use** (your own charts, ones you're licensed for,
+or open-source / public-domain). It never fetches or scrapes charts from the web — you bring your own
+exported file.
 
 ---
 
@@ -276,6 +293,75 @@ the night** — the correct lighting still loads automatically. There's no rigid
 to fall apart when you go off-script. On a synced gig the **Master** triggers the rig for everyone.
 
 (DMX is a **Pro**-tier feature. Per-song **MIDI** setups are coming soon.)
+
+---
+
+## Setlist markers — set breaks & dividers in a playlist
+Keywords: set marker, set break, setlist divider, mark the set, add a marker, first set, second set, split the setlist, set 1 set 2, breaks between sets, intermission in the setlist
+
+To mark where a set ends / the break falls, **right-click a song** in the playlist and add a **marker**
+before or after it. Markers show as dividers in the list, are **not** played as songs, and stay anchored
+when you drag-reorder. Right-click also offers **remove all markers**.
+
+When you **export** the setlist, the markers become **page breaks between sets** (they work in Word), and
+the titles-only export is a clean **table** — overall number, per-set number (restarts each set), song
+title, and metadata.
+
+---
+
+## Emailing the band or a gig's lineup (group email)
+Keywords: email the band, email members, group email, bulk email, email everyone, email players, message the band, email lineup, email payees, contact the band, email history
+
+You can email a group straight from It's Showtime, with a log of who was sent what and when:
+- **From a gig** — open the gig in Gigs & Billing; each player has a checkbox (all ticked by default) and
+  the subject is pre-filled with the gig/venue.
+- **From the Bands tab** — email selected members of a band.
+- **From Payees** — email selected payees.
+
+Every send is recorded in an **email log** (viewable per-gig and in full). Sending needs the outgoing
+email (SMTP) set up in configuration.
+
+---
+
+## Gigs, invoices, payment splits & year-end reports (Gigs & Billing)
+Keywords: gig, gigs, booking, invoice, invoices, tax invoice, GST, ABN, bill the venue, payment split, pay the band, who gets paid, year end report, income report, venue, agency, billing, run the band as a business
+
+**Gigs & Billing** (the band-admin area, reached from Home / Search) runs the band as a business:
+- **Gigs** with a status flow (Enquiry → Booked → Billed → Paid), the venue, fee (inc-GST auto-splits into
+  GST + ex-GST), agency and reference.
+- **Venues** and **Payees** (with banking details for disbursements).
+- **Invoices** — an AU **tax invoice** (GST + ABN) you can view, print and **email to the venue**; invoice
+  numbers are allocated automatically. You can add the band's logo to the top and bottom.
+- **Payment splits** — set who gets paid what per gig.
+- **Year-end reports** — gross income, GST collected, per-venue / per-band / per-payee totals and
+  outstanding amounts (AU financial year).
+
+---
+
+## Inviting someone to join your band (cloud)
+Keywords: invite, invite member, invite to band, join code, band code, invite link, add someone to my band online, send an invite, accept invitation
+
+On the cloud version, the band **leader** invites someone by email. They get an email with an **"Accept
+invitation"** button:
+- **New to It's Showtime** — the button opens a sign-up already filled in (email + band); they just set a
+  password and they're **in the band and signed straight in**.
+- **Already have an account** — they sign in and the band is **added to their bands**.
+
+If the button ever doesn't work, the email also shows a **join code** they can enter under **🎸 Band →
+Join a band** after signing in.
+
+---
+
+## Where song & show media (slideshows, videos) are stored
+Keywords: media storage, where are my videos, slideshow files, media folder, cloud storage, local drive, where is media saved, storage location, back up media
+
+Your media (song, slideshow, and pre-/post-show videos & images) lives on **your own device**, stored
+**beside your database file** by default — so copying that folder backs everything up, and it works fully
+offline. You can point media at a specific **local folder** in configuration.
+
+For the **actual show, a local drive is the most reliable** — gig venues have flaky networks — while the
+cloud is best for the **configuring** phase (building songs and slideshows from any device). It's Showtime
+doesn't host your media; you keep it, so you control who can see it.
 
 ---
 
