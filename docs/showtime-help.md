@@ -81,13 +81,23 @@ and renders it as clean, engraved notation on your performance screen.
 ---
 
 ## Editing a song's chords / chart
-Keywords: edit song, edit chart, edit chords, edit this song, fix chords, change lyrics, fix spacing, edit menu, config menu, how do I edit
+Keywords: edit song, edit chart, edit chords, edit this song, fix chords, change lyrics, fix spacing, edit menu, config menu, how do I edit, font size, text size, bigger text, make lyrics bigger, resize text, bold italic underline, page breaks, fit on a page, edit button greyed out
 
 To edit the current song's chart (chords, lyrics, spacing):
 1. Open the **config / Setup menu** in the toolbar (the config / cog icon).
 2. Choose **Edit Chart** — the edit icon that appears **just below the config icon**. (This is NOT
    the "Chart / Lyrics" view dropdown — that only switches what you're *viewing*.)
 3. Make your changes, then save.
+
+While editing:
+- **Resize text** with **A− / A+** (or the size dropdown). **Highlight** some words first to resize
+  just that selection — the highlight stays put, so you can keep pressing to step it up or down. With
+  **nothing** selected, it resizes the **whole chart**. **B / I / U** (bold/italic/underline) also
+  apply to the highlighted text.
+- The editor shows the **same page breaks** you'll see on stage (portrait, or the landscape two-page
+  spread), so you can lay a chorus out to fit a page and keep it readable.
+- If the **Edit** button looks greyed out for a moment after you change songs, that's normal — it
+  simply waits until the chart has finished loading, then lights up so editing always opens cleanly.
 
 To change a song's *details* (BPM, key, drum pattern) instead, use **Edit Song Metadata**.
 
@@ -109,10 +119,12 @@ Each song can hold several **charts**, and they come in four standard types:
 **Switching what you see:** the **Chart** selector at the **top-left** switches which chart you're *viewing* right now. It does **not** change anyone else's screen.
 
 **Making a Lyrics-only or Chords-only chart (done while editing):** chart prep is a desk job, so the strip buttons live in the **edit toolbox** (the same toolbox as Save / Cancel / HTML-view). Open **Edit Chart** (config/cog menu → Edit Chart) on a Lyrics & Chords chart, then:
-- **🎤 Lyr** — copies the chart and **strips the chords off**, saving it as a new **Lyrics** chart.
-- **🎸 Chd** — copies the chart and **strips the lyrics off**, saving it as a new **Chords** chart (chords in white).
+- **🎤 Lyr** — makes a **Lyrics** chart from the current one, with the chords **stripped off**.
+- **🎸 Chd** — makes a **Chords** chart, with the lyrics **stripped off** (chords shown in white).
 
-Your original Lyrics & Chords chart is left untouched — the stripped version is added as a **separate** chart you can pick from the Chart selector. After stripping, the new chart appears in the selector ready for any final tweaks.
+Your original Lyrics & Chords chart is left untouched — treat it as the **master**. The stripped versions are **derived** charts you pick from the Chart selector.
+
+**Keeping the derived charts in sync (re-stripping after arrangement changes):** the idea is to make all your changes in the **Lyrics & Chords** master, then regenerate the derived charts from it. If you later change the arrangement (e.g. add a solo), just press **🎤 Lyr** / **🎸 Chd** again. If a Lyrics or Chords chart already exists, It's Showtime asks to **update that existing chart to match** — so it refreshes it instead of piling up duplicates. (Updating overwrites that derived chart, replacing anything you'd tweaked *directly* on it, which is why it confirms first.)
 
 **Each device remembers its choice (per-device sticky preference):** whatever chart type you select **sticks for that device** as you move through the setlist. So the singer sets her tablet to **Lyrics** once, and every following song shows its **Lyrics** chart if it has one — and quietly falls back to **Lyrics & Chords** if that song has no Lyrics chart. Meanwhile the guitarist's screen can stay on Lyrics & Chords. This works in the page-flip "book" view too, and the preference is remembered per device, not shared across the band.
 
