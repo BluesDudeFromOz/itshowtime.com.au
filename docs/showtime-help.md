@@ -96,6 +96,28 @@ To change a song's *details* (BPM, key, drum pattern) instead, use **Edit Song M
 
 ---
 
+## Chart types — Lyrics-only for the singer, Chords-only, and more
+Keywords: chart type, chart types, lyrics only, words only, chords only, lyrics and chords, notation, strip chords, strip lyrics, remove chords, remove lyrics, bigger lyrics, singer screen, singer view, singer's chart, vocalist, no chords, take the chords off, lyrics without chords, make a lyrics chart, make a chords chart, chart dropdown, chart selector, per-device chart, each screen different, different chart on each device
+
+Each song can hold several **charts**, and they come in four standard types:
+
+- **Lyrics & Chords** — the normal chart (chords sitting above the words). This is the default for new songs.
+- **Lyrics** — words only, no chords. Because there are no chords crowding the lines, the lyrics can be shown **bigger** — ideal for a singer who just wants clean, large words.
+- **Chords** — chords only, no lyrics. The chords are shown in **white** (in a Lyrics & Chords chart they're yellow to stand out from the words, but in a chords-only chart there are no words to distinguish them from).
+- **Notation** — proper sheet music, created from a **MusicXML** import.
+
+**Switching what you see:** the **Chart** selector at the **top-left** switches which chart you're *viewing* right now. It does **not** change anyone else's screen.
+
+**Making a Lyrics-only or Chords-only chart (done while editing):** chart prep is a desk job, so the strip buttons live in the **edit toolbox** (the same toolbox as Save / Cancel / HTML-view). Open **Edit Chart** (config/cog menu → Edit Chart) on a Lyrics & Chords chart, then:
+- **🎤 Lyr** — copies the chart and **strips the chords off**, saving it as a new **Lyrics** chart.
+- **🎸 Chd** — copies the chart and **strips the lyrics off**, saving it as a new **Chords** chart (chords in white).
+
+Your original Lyrics & Chords chart is left untouched — the stripped version is added as a **separate** chart you can pick from the Chart selector. After stripping, the new chart appears in the selector ready for any final tweaks.
+
+**Each device remembers its choice (per-device sticky preference):** whatever chart type you select **sticks for that device** as you move through the setlist. So the singer sets her tablet to **Lyrics** once, and every following song shows its **Lyrics** chart if it has one — and quietly falls back to **Lyrics & Chords** if that song has no Lyrics chart. Meanwhile the guitarist's screen can stay on Lyrics & Chords. This works in the page-flip "book" view too, and the preference is remembered per device, not shared across the band.
+
+---
+
 ## Making your own version of a chart — passing chords & personal changes (without changing the leader's chart)
 Keywords: passing chords, add a passing chord, my own chart, my own version, my version, make my chart different, the leader gave me, leader's chart, change my chart only, personalise chart, personalize chart, customise chords, customize chords, extra chord, add my own chords, different from the leader, my part, alternate chart, second chart
 
