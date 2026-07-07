@@ -399,6 +399,39 @@ doesn't host your media; you keep it, so you control who can see it.
 
 ---
 
+## Printing or exporting a setlist with each song's key (HTML, Word, PDF)
+Keywords: print setlist, export setlist, setlist pdf, setlist word, song key, key of each song, setlist with keys, print the set, running order, setlist for the band, pdf setlist, no word, members without word, share the setlist, setlist sheet
+
+**Right-click a setlist** and choose **"Setlist — titles + keys"** in **HTML**, **Word**, or **PDF**. You get the
+running order as a clean table: number, song **title**, **key**, artist and BPM, split by your set markers.
+
+- The **key** is worked out from each song's **last chord** (the note it resolves to), so even older songs
+  show a real key — no more writing keys on the sheet by hand.
+- Choose **PDF** for band members who don't have Microsoft Word — a PDF opens on any phone or computer.
+- **HTML** opens in a browser (print it for a paper copy); **Word** downloads a `.doc`.
+
+---
+
+## Roles & what band members can see (permissions)
+Keywords: roles, permissions, who can see, musician role, band owner, group manager, site administrator, hide from members, restrict access, read only, read-only, make invisible, custom role, member can't see, hide banking, hide earnings, scope, what members see, assign a role, role designer
+
+On the cloud version, members can be given a **role** that limits what they see and change:
+- A **musician** (a member scoped to a band) sees **only their own band's** setlists and roster — not other
+  bands, and not the demo library. The account **owner** sees everything.
+- Set or change a member's role in the **Bands** area — each member has a **role dropdown**. Promote a
+  trusted member to **Group Manager** (also shown as Band owner) so they can invite others and run the gig
+  billing; a plain member just views.
+
+**Custom roles (the Role Designer):** the owner can also build their own roles. Click the **🎛 Roles** button
+(bottom-left when signed in) to open a floating **Role Designer** you can drag out of the way. Name a role
+(Booking Agent, Sound, Accounts — anything), pick a **pen** — **Editable**, **Read-only** or **Invisible** —
+then **draw a box** over fields on screen to set what that role can see or edit (e.g. hide the banking columns,
+make fees read-only). **Highlight unclassified** shows fields not set yet; **Preview as this role** shows the
+result live. Starter roles (**Owner, Site Administrator, Group Manager, Member**) are provided and fully
+renamable to fit any group — a band, a talent agency, a cruise line, a TV production.
+
+---
+
 ## When you don't know
 If a question isn't covered above, say so briefly and suggest emailing **support@itsshowtime.com.au**.
 Do not invent buttons, menus or settings that aren't documented here.
