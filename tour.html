@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>It's Showtime — Guided Tour</title>
+<style>
+  :root{
+    --bg:#0b0d17; --panel:#12152b; --line:#2b3050; --cyan:#00BFFF; --gold:#f4b740;
+    --text:#e8eaf0; --muted:#8a93b2;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;overflow:hidden}
+  .wrap{display:flex;flex-direction:column;height:100vh}
+
+  /* stage */
+  .stage{flex:1;position:relative;display:flex;align-items:center;justify-content:center;
+    padding:14px 14px 6px;min-height:0;
+    background:radial-gradient(120% 90% at 50% 0%,rgba(0,191,255,.06),transparent 60%),var(--bg)}
+  .frame{max-width:100%;max-height:100%;border-radius:10px;border:1px solid var(--line);
+    box-shadow:0 24px 70px rgba(0,0,0,.6);object-fit:contain;background:#000;cursor:pointer;
+    transition:opacity .18s ease}
+  .frame.fading{opacity:.35}
+
+  /* click zones (prev/next halves) */
+  .zone{position:absolute;top:14px;bottom:6px;width:34%;cursor:pointer;z-index:2}
+  .zone.prev{left:14px}
+  .zone.next{right:14px}
+  .zone .hint{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;
+    border-radius:50%;background:rgba(18,21,43,.72);border:1px solid var(--line);color:var(--text);
+    display:flex;align-items:center;justify-content:center;font-size:22px;opacity:0;transition:opacity .18s}
+  .zone.prev .hint{left:6px}.zone.next .hint{right:6px}
+  .zone:hover .hint{opacity:1}
+  .zone.disabled{cursor:default}.zone.disabled .hint{display:none}
+
+  /* control bar */
+  .bar{display:flex;align-items:center;gap:14px;padding:10px 16px;background:var(--panel);
+    border-top:1px solid var(--line)}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:.02em;white-space:nowrap}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(244,183,64,.18)}
+  .brand b{color:var(--cyan)}
+  .btn{background:#1a2140;border:1px solid var(--line);color:var(--text);border-radius:8px;
+    padding:8px 12px;font:600 13px var(--sans);cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+    transition:.15s;white-space:nowrap}
+  .btn:hover{border-color:var(--cyan)}
+  .btn.primary{background:var(--cyan);color:#04121b;border-color:var(--cyan)}
+  .btn:disabled{opacity:.4;cursor:default;border-color:var(--line)}
+  .counter{color:var(--muted);font-variant-numeric:tabular-nums;font-size:13px;min-width:70px;text-align:center}
+  .track{flex:1;height:6px;background:#0d1120;border-radius:20px;overflow:hidden;cursor:pointer;min-width:80px}
+  .track .fill{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),#7fdcff);transition:width .18s}
+  .speedbox{display:flex;align-items:center;gap:8px;background:#0d1120;border:1px solid var(--line);
+    border-radius:8px;padding:6px 11px;white-space:nowrap}
+  .speedbox .slabel{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .speedbox .sread{font-size:12px;color:var(--cyan);font-variant-numeric:tabular-nums;min-width:34px;text-align:right;font-weight:600}
+  #speed{-webkit-appearance:none;appearance:none;width:120px;height:5px;border-radius:20px;
+    background:linear-gradient(90deg,#233056,#3a68b8);outline:none;cursor:pointer}
+  #speed::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;
+    background:var(--cyan);border:2px solid #04121b;cursor:pointer;box-shadow:0 1px 5px rgba(0,0,0,.5)}
+  #speed::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--cyan);
+    border:2px solid #04121b;cursor:pointer}
+  @media(max-width:680px){
+    .bar{flex-wrap:wrap;gap:8px}.track{order:5;flex-basis:100%}.brand{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="stage" id="stage">
+    <img class="frame" id="frame" alt="It's Showtime tour" draggable="false">
+    <div class="zone prev" id="zPrev" title="Previous"><span class="hint">&lsaquo;</span></div>
+    <div class="zone next" id="zNext" title="Next"><span class="hint">&rsaquo;</span></div>
+  </div>
+  <div class="bar">
+    <div class="brand"><span class="dot"></span>It&rsquo;s&nbsp;<b>Showtime</b> — Tour</div>
+    <button class="btn" id="first" title="Start (Home)">&laquo;</button>
+    <button class="btn" id="prev" title="Previous (&larr;)">&lsaquo; Back</button>
+    <button class="btn primary" id="play" title="Play / Pause (Space)">&#9654; Play</button>
+    <button class="btn" id="next" title="Next (&rarr;)">Next &rsaquo;</button>
+    <button class="btn" id="sound" title="Key-click sound on each slide">&#128264; Sound</button>
+    <div class="counter" id="counter">1 / 1</div>
+    <div class="track" id="track" title="Jump"><div class="fill" id="fill"></div></div>
+    <div class="speedbox" title="Drag to set the slideshow speed">
+      <span class="slabel">Slow</span>
+      <input type="range" id="speed" min="1" max="16" step="1" value="12">
+      <span class="slabel">Fast</span>
+      <span class="sread" id="speedRead">5.0s</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // Frames are ST0..ST107 with 45 and 96 missing.
+  var MISSING = {45:1, 96:1};
+  var frames = [];
+  for (var i=0;i<=107;i++){ if(!MISSING[i]) frames.push(i); }
+  var idx = 0, playing = false, timer = null;
+  var img = document.getElementById('frame');
+  var counter = document.getElementById('counter');
+  var fill = document.getElementById('fill');
+  var playBtn = document.getElementById('play');
+  var speed = document.getElementById('speed');
+  var speedRead = document.getElementById('speedRead');
+  function curDuration(){ return 500 + (16 - parseInt(speed.value,10)) * 500; }   // slider 1..16 → 8s..0.5s
+  function updateSpeedRead(){ speedRead.textContent = (curDuration()/1000).toFixed(1) + 's'; }
+
+  // ── synthesized key-press "tick" on each advance (Web Audio, no files) ──
+  var actx = null, audioOn = false, soundBtn = document.getElementById('sound');
+  function keyClick(){
+    if(!audioOn || !actx) return;
+    var t = actx.currentTime;
+    // percussive noise "clack"
+    var len = Math.floor(actx.sampleRate * 0.03), buf = actx.createBuffer(1, len, actx.sampleRate), d = buf.getChannelData(0);
+    for(var i=0;i<len;i++) d[i] = (Math.random()*2-1) * Math.pow(1 - i/len, 3);
+    var noise = actx.createBufferSource(); noise.buffer = buf;
+    var bp = actx.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=2400; bp.Q.value=0.7;
+    var g = actx.createGain(); g.gain.setValueAtTime(0.22, t); g.gain.exponentialRampToValueAtTime(0.001, t+0.04);
+    noise.connect(bp); bp.connect(g); g.connect(actx.destination); noise.start(t); noise.stop(t+0.05);
+    // low "thock"
+    var osc = actx.createOscillator(); osc.type='sine';
+    osc.frequency.setValueAtTime(170, t); osc.frequency.exponentialRampToValueAtTime(85, t+0.03);
+    var g2 = actx.createGain(); g2.gain.setValueAtTime(0.16, t); g2.gain.exponentialRampToValueAtTime(0.001, t+0.05);
+    osc.connect(g2); g2.connect(actx.destination); osc.start(t); osc.stop(t+0.06);
+  }
+  soundBtn.onclick = function(){
+    audioOn = !audioOn;
+    if(audioOn && !actx){ try{ actx = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ audioOn=false; return; } }
+    if(actx && actx.state==='suspended') actx.resume();
+    soundBtn.classList.toggle('primary', audioOn);
+    soundBtn.innerHTML = audioOn ? '🔊 Sound' : '🔇 Muted';
+    if(audioOn) keyClick();
+  };
+
+  function src(n){ return 'showtimeSimulator/ST' + n + '.webp'; }
+
+  // Preload neighbours so advancing is instant.
+  var cache = {};
+  function preload(n){ if(n<0||n>=frames.length||cache[n]) return; var im=new Image(); im.src=src(frames[n]); cache[n]=im; }
+
+  function show(n, animate){
+    idx = Math.max(0, Math.min(frames.length-1, n));
+    var url = src(frames[idx]);
+    if(cache[idx] && cache[idx].complete){
+      img.src = url; img.classList.remove('fading');          // warmed frame → instant swap
+    } else {
+      if(animate) img.classList.add('fading');
+      var pre = new Image();
+      pre.onload = function(){ img.src = url; img.classList.remove('fading'); };
+      pre.onerror = function(){ img.src = url; img.classList.remove('fading'); };
+      pre.src = url;
+    }
+    counter.textContent = (idx+1) + ' / ' + frames.length;
+    fill.style.width = (frames.length<2?100:(idx/(frames.length-1))*100) + '%';
+    document.getElementById('prev').disabled = idx===0;
+    document.getElementById('first').disabled = idx===0;
+    document.getElementById('next').disabled = idx===frames.length-1;
+    document.getElementById('zPrev').classList.toggle('disabled', idx===0);
+    document.getElementById('zNext').classList.toggle('disabled', idx===frames.length-1);
+    preload(idx+1); preload(idx+2); preload(idx-1);
+    if(playing && idx===frames.length-1) stop();   // auto-stop at the end
+  }
+
+  function go(delta){ keyClick(); show(idx+delta, true); }
+
+  function play(){
+    if(idx>=frames.length-1) show(0,true);
+    playing=true; playBtn.innerHTML='&#10073;&#10073; Pause';
+    schedule();
+  }
+  function stop(){ playing=false; playBtn.innerHTML='&#9654; Play'; clearTimeout(timer); }
+  function toggle(){ playing ? stop() : play(); }
+  function schedule(){
+    clearTimeout(timer);
+    if(!playing) return;
+    timer = setTimeout(function(){ if(idx<frames.length-1){ go(1); schedule(); } else stop(); }, curDuration());
+  }
+
+  // wire controls
+  document.getElementById('next').onclick = function(){ stop(); go(1); };
+  document.getElementById('prev').onclick = function(){ stop(); go(-1); };
+  document.getElementById('first').onclick = function(){ stop(); show(0,true); };
+  document.getElementById('zNext').onclick = function(){ stop(); go(1); };
+  document.getElementById('zPrev').onclick = function(){ stop(); go(-1); };
+  img.onclick = function(){ stop(); go(1); };
+  playBtn.onclick = toggle;
+  speed.oninput = function(){ updateSpeedRead(); if(playing) schedule(); };   // live speed while dragging
+  document.getElementById('track').onclick = function(e){
+    var r=this.getBoundingClientRect(); var p=(e.clientX-r.left)/r.width;
+    stop(); show(Math.round(p*(frames.length-1)), true);
+  };
+  document.addEventListener('keydown', function(e){
+    if(e.key==='ArrowRight'||e.key==='PageDown'){ stop(); go(1); e.preventDefault(); }
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){ stop(); go(-1); e.preventDefault(); }
+    else if(e.key===' '){ toggle(); e.preventDefault(); }
+    else if(e.key==='Home'){ stop(); show(0,true); e.preventDefault(); }
+    else if(e.key==='End'){ stop(); show(frames.length-1,true); e.preventDefault(); }
+  });
+
+  updateSpeedRead();
+  show(0,false);
+  play();   // auto-run the slideshow from the first frame
+  // Warm the whole cache in the background so fast playback isn't gated by image load time.
+  setTimeout(function(){ for(var k=0;k<frames.length;k++) preload(k); }, 700);
+})();
+</script>
+</body>
+</html>
