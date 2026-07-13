@@ -60,6 +60,74 @@
     background:var(--cyan);border:2px solid #04121b;cursor:pointer;box-shadow:0 1px 5px rgba(0,0,0,.5)}
   #speed::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--cyan);
     border:2px solid #04121b;cursor:pointer}
+  .tunebar{display:none;flex-direction:column;gap:8px;padding:9px 16px;background:#0e1329;
+    border-top:1px solid var(--line);font-size:13px}
+  .tunebar.on{display:flex}
+  .tunebar .trow{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .tunebar b{color:var(--cyan)}
+  .tunebar input[type=number],.tunebar input[type=text]{background:#0d1120;border:1px solid var(--line);
+    color:var(--text);border-radius:7px;padding:6px 8px;font:inherit}
+  .tunebar input.num{width:60px}.tunebar input.txt{width:150px}
+  .tunebar select{background:#0d1120;border:1px solid var(--line);color:var(--text);border-radius:7px;padding:6px 8px;font:inherit}
+  .tunebar .thint{color:var(--muted);font-size:12px}
+  .tunebar .glyphs{display:inline-flex;gap:4px}
+  .tunebar .glyphs button{background:#1a2140;border:1px solid var(--line);color:var(--text);
+    border-radius:6px;padding:4px 9px;cursor:pointer;font-size:14px;line-height:1}
+  .tunebar .glyphs button:hover{border-color:var(--cyan)}
+
+  /* ── data-driven key-hint overlay (sits over the screenshot, near the action) ── */
+  .keyoverlay{position:absolute;pointer-events:none;z-index:3;overflow:visible}
+  .keyhint{position:absolute;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:9px;
+    padding:7px 11px;border-radius:11px;background:rgba(8,11,24,.84);border:1px solid var(--line);
+    box-shadow:0 8px 24px rgba(0,0,0,.5);white-space:nowrap;font:600 13px var(--sans)}
+  .keyhint .caps{display:inline-flex;gap:5px}
+  .keycap{min-width:28px;height:28px;padding:0 7px;border-radius:7px;display:inline-flex;align-items:center;
+    justify-content:center;font-weight:800;font-size:15px;line-height:1;border:1px solid;border-bottom-width:4px;
+    transition:transform .14s ease,border-bottom-width .14s ease,box-shadow .14s ease,filter .14s ease}
+  /* pressed & HELD for the whole slide (not a momentary tap) */
+  .keyhint.held .keycap{transform:translateY(3px);border-bottom-width:1px;filter:brightness(1.18)}
+  .keyhint.nav.held .keycap{box-shadow:0 0 0 2px rgba(0,191,255,.35),0 0 14px rgba(0,191,255,.5)}
+  .keyhint.action.held .keycap{box-shadow:0 0 0 2px rgba(244,183,64,.35),0 0 14px rgba(244,183,64,.55)}
+  .keyhint .klabel{font-size:12.5px;letter-spacing:.01em}
+  /* two languages: nav = move around (cyan), action = does a function like transpose (gold) */
+  .keyhint.nav{color:#cfeaff}
+  .keyhint.nav .keycap{background:#123049;border-color:#2a6fa0;border-bottom-color:#0f2740;color:#eaf6ff}
+  .keyhint.nav .klabel{color:#7fc8f5}
+  .keyhint.action{color:#ffe6b0}
+  .keyhint.action .keycap{background:#3a2c0e;border-color:#7a5a1e;border-bottom-color:#3a2a0b;color:#ffeec6}
+  .keyhint.action .klabel{color:var(--gold)}
+  /* prominent button-graphic hints (static/button_icons/*_button.png) */
+  .keyhint .keybtn{display:block;height:56px;width:auto;transition:transform .14s ease,filter .14s ease;
+    filter:drop-shadow(0 4px 9px rgba(0,0,0,.55))}
+  .keyhint.held .keybtn{transform:translateY(3px) scale(.97);filter:drop-shadow(0 1px 3px rgba(0,0,0,.55)) brightness(1.22)}
+  .keyhint.hasimg{background:none;border:none;box-shadow:none;padding:0}   /* let the graphic stand on its own */
+  @media(prefers-reduced-motion:reduce){.keycap,.keybtn{transition:none}}
+
+  /* text caption overlay (also data-driven, so captions aren't baked into the screenshots) */
+  .textnote{position:absolute;transform:translate(-50%,-50%);max-width:46%;padding:9px 13px;border-radius:10px;
+    background:rgba(8,11,24,.86);border:1px solid var(--line);border-left:3px solid var(--cyan);
+    box-shadow:0 8px 24px rgba(0,0,0,.5);color:var(--text);font:600 14px var(--sans);line-height:1.35;
+    white-space:pre-wrap;animation:noteIn .28s ease}
+  .textnote.s{font-size:12.5px;padding:7px 10px}
+  .textnote.l{font-size:17px;padding:11px 15px}
+  @keyframes noteIn{from{opacity:0;transform:translate(-50%,-46%)}to{opacity:1;transform:translate(-50%,-50%)}}
+  @media(prefers-reduced-motion:reduce){.textnote{animation:none}}
+
+  /* end-of-tour call to action */
+  .cta{position:absolute;inset:14px 14px 6px;z-index:6;display:none;align-items:center;justify-content:center;
+    background:radial-gradient(120% 90% at 50% 40%,rgba(0,191,255,.14),rgba(11,13,23,.86) 70%);
+    backdrop-filter:blur(4px);border-radius:10px}
+  .cta.on{display:flex;animation:noteIn .35s ease}
+  .ctabox{text-align:center;padding:26px 30px;max-width:520px}
+  .ctatitle{font-size:26px;font-weight:800;letter-spacing:.01em;text-wrap:balance}
+  .ctasub{color:var(--muted);margin:8px 0 20px;font-size:15px}
+  .ctabtn{display:inline-flex;align-items:center;background:var(--cyan);color:#04121b;text-decoration:none;
+    font-weight:800;font-size:16px;padding:13px 26px;border-radius:10px;box-shadow:0 8px 28px rgba(0,191,255,.35);
+    transition:.15s}
+  .ctabtn:hover{transform:translateY(-1px);box-shadow:0 12px 34px rgba(0,191,255,.5)}
+  .ctarestart{display:block;margin:16px auto 0;background:none;border:none;color:var(--muted);cursor:pointer;
+    font:600 13px var(--sans)}
+  .ctarestart:hover{color:var(--text)}
   @media(max-width:680px){
     .bar{flex-wrap:wrap;gap:8px}.track{order:5;flex-basis:100%}.brand{display:none}
   }
@@ -71,6 +139,56 @@
     <img class="frame" id="frame" alt="It's Showtime tour" draggable="false">
     <div class="zone prev" id="zPrev" title="Previous"><span class="hint">&lsaquo;</span></div>
     <div class="zone next" id="zNext" title="Next"><span class="hint">&rsaquo;</span></div>
+    <div class="keyoverlay" id="keyoverlay"></div>
+    <div class="cta" id="cta">
+      <div class="ctabox">
+        <div class="ctatitle">That&rsquo;s the tour &mdash; now it&rsquo;s your turn.</div>
+        <div class="ctasub">Jump in and run your first show.</div>
+        <a class="ctabtn" id="ctaBtn" href="#" target="_blank" rel="noopener">&#9654;&nbsp; Try It&rsquo;s Showtime</a>
+        <button class="ctarestart" id="ctaRestart">&#8635; Watch again</button>
+      </div>
+    </div>
+  </div>
+  <div class="tunebar" id="tunebar">
+    <div class="trow">
+      <b>&#9881; Slide <span id="tSlide">1</span></b>
+      <span>shows for</span>
+      <input type="number" class="num" id="tSec" min="0.1" max="30" step="0.1" value="3"> sec
+      <button class="btn" id="tDefault" title="Use the default (slider) time for this slide">Use default</button>
+      <span class="thint">Step through, set timing + key hints, then</span>
+      <button class="btn primary" id="tCopy">&#128203; Copy config JSON</button>
+      <span id="tCopied" class="thint" style="color:#3fb37f;display:none">&#10003; Copied — paste into v2/manifest.json</span>
+    </div>
+    <div class="trow">
+      <b title="Key hint shown on this slide, over the screenshot">&#9000; Key hint</b>
+      <span class="glyphs" id="tGlyphs">
+        <button type="button" data-g="&#8593;">&#8593;</button><button type="button" data-g="&#8595;">&#8595;</button>
+        <button type="button" data-g="&#8592;">&#8592;</button><button type="button" data-g="&#8594;">&#8594;</button>
+        <button type="button" data-g="&#8629;">&#8629;</button><button type="button" data-g="Space">Space</button>
+      </span>
+      <input type="text" class="txt" id="tKeys" placeholder="keys e.g. &#8593; &#8595;" title="Space-separated key glyphs (or click the buttons)">
+      <input type="text" class="txt" id="tLabel" placeholder="label e.g. transpose">
+      <select id="tType" title="nav = move around · action = does a function"><option value="nav">nav (move)</option><option value="action">action (function)</option></select>
+      <span class="thint">x/y%</span>
+      <input type="number" class="num" id="tX" min="0" max="100" step="1" title="horizontal % across the screenshot">
+      <input type="number" class="num" id="tY" min="0" max="100" step="1" title="vertical % down the screenshot">
+      <button class="btn" id="tKclear" title="Remove this slide's key hint">Clear hint</button>
+    </div>
+    <div class="trow">
+      <b title="Text caption shown on this slide, over the screenshot">&#128172; Caption</b>
+      <input type="text" id="tText" style="flex:1;min-width:180px;background:#0d1120;border:1px solid var(--line);color:var(--text);border-radius:7px;padding:6px 8px;font:inherit" placeholder="caption text (blank = none)">
+      <select id="tSize" title="text size"><option value="s">small</option><option value="m" selected>medium</option><option value="l">large</option></select>
+      <span class="thint">x/y%</span>
+      <input type="number" class="num" id="tTX" min="0" max="100" step="1" title="horizontal %">
+      <input type="number" class="num" id="tTY" min="0" max="100" step="1" title="vertical %">
+      <button class="btn" id="tTclear" title="Remove this slide's caption">Clear caption</button>
+    </div>
+    <div class="trow">
+      <b title="What the AI voice reads on this slide">&#127908; Narration</b>
+      <input type="text" id="tSay" style="flex:1;min-width:220px;background:#0d1120;border:1px solid var(--line);color:var(--text);border-radius:7px;padding:6px 8px;font:inherit" placeholder="spoken line for this slide (blank = silent)">
+      <button class="btn" id="tSayPlay" title="Hear this line">&#9654; Say</button>
+      <button class="btn" id="tSclear" title="Remove this slide's narration">Clear</button>
+    </div>
   </div>
   <div class="bar">
     <div class="brand"><span class="dot"></span>It&rsquo;s&nbsp;<b>Showtime</b> — Tour</div>
@@ -79,6 +197,8 @@
     <button class="btn primary" id="play" title="Play / Pause (Space)">&#9654; Play</button>
     <button class="btn" id="next" title="Next (&rarr;)">Next &rsaquo;</button>
     <button class="btn" id="sound" title="Key-click sound on each slide">&#128264; Sound</button>
+    <button class="btn" id="voice" title="AI voice-over — reads each slide's narration aloud">&#127908; Voice</button>
+    <button class="btn" id="tune" title="Set per-slide timings" style="display:none">&#9881; Tune</button>
     <div class="counter" id="counter">1 / 1</div>
     <div class="track" id="track" title="Jump"><div class="fill" id="fill"></div></div>
     <div class="speedbox" title="Drag to set the slideshow speed">
@@ -92,10 +212,9 @@
 
 <script>
 (function(){
-  // Frames are ST0..ST107 with 45 and 96 missing.
-  var MISSING = {45:1, 96:1};
+  // Frame ids and play order come from v2/manifest.json ("order": ["st1.0","st2.0",…]). Kept empty
+  // until that fetch resolves (bottom of this script); every render happens in its callback.
   var frames = [];
-  for (var i=0;i<=107;i++){ if(!MISSING[i]) frames.push(i); }
   var idx = 0, playing = false, timer = null;
   var img = document.getElementById('frame');
   var counter = document.getElementById('counter');
@@ -105,6 +224,109 @@
   var speedRead = document.getElementById('speedRead');
   function curDuration(){ return 500 + (16 - parseInt(speed.value,10)) * 500; }   // slider 1..16 → 8s..0.5s
   function updateSpeedRead(){ speedRead.textContent = (curDuration()/1000).toFixed(1) + 's'; }
+
+  // ── per-slide timings (from timings.json; the slider is the DEFAULT for un-tuned slides) ──
+  var TIMINGS = { default: 3, frames: {} };
+  var OV = {};   // live per-frame overrides in SECONDS (frameNumber → seconds)
+  function durationFor(i){
+    // Reading-time FLOOR only (the slide's set seconds / slider). When voice is on, narration drives
+    // the real advance via speech onend (tryGo) — so nothing truncates and there's no manual padding.
+    var f = frames[i];
+    var s = (OV[f] != null) ? OV[f] : (curDuration()/1000);
+    return Math.max(150, Math.round(s * 1000));
+  }
+  function setSliderFromSeconds(sec){
+    var v = Math.round(16 - (sec*1000 - 500)/500);      // inverse of curDuration
+    speed.value = String(Math.max(1, Math.min(16, v)));
+  }
+
+  // ── per-slide KEY HINTS (data-driven overlay drawn over the screenshot) ──
+  // Config lives in timings.json under "keys": { frameNumber: {keys,label,type,x,y} }.
+  // Two visual languages keep the meanings apart: type "nav" (move around) vs "action" (a function like transpose).
+  var KEYS = {};   // frameNumber → {keys:[...], label, type, x, y}
+  var TEXTS = {};  // frameNumber → {text, x, y, size}
+  var SAY = {};    // frameNumber → narration text (spoken by the AI voice-over)
+  var overlay = document.getElementById('keyoverlay');
+  var POS = { 'top-left':[16,13],'top':[50,11],'top-right':[84,13],'left':[13,50],'center':[50,50],
+              'right':[87,50],'bottom-left':[16,87],'bottom':[50,89],'bottom-right':[84,87] };
+  function normKeys(v){
+    if(v==null) return [];
+    if(Array.isArray(v)) return v.map(String).filter(function(s){return s.length;});
+    return String(v).trim().split(/\s+/).filter(Boolean);
+  }
+  function normHint(h){
+    if(!h) return null;
+    var x=(typeof h.x==='number')?h.x:null, y=(typeof h.y==='number')?h.y:null;
+    if((x==null||y==null) && h.pos && POS[h.pos]){ x=POS[h.pos][0]; y=POS[h.pos][1]; }
+    if(x==null) x=84; if(y==null) y=13;
+    return { keys:normKeys(h.keys), label:h.label||'', type:(h.type==='action'?'action':'nav'), x:x, y:y, img:h.img||'' };
+  }
+  function normText(t){
+    if(!t) return null;
+    var x=(typeof t.x==='number')?t.x:null, y=(typeof t.y==='number')?t.y:null;
+    if((x==null||y==null) && t.pos && POS[t.pos]){ x=POS[t.pos][0]; y=POS[t.pos][1]; }
+    if(x==null) x=50; if(y==null) y=16;
+    var sz=(t.size==='s'||t.size==='l')?t.size:'m';
+    return { text:String(t.text||''), x:x, y:y, size:sz };
+  }
+  function positionOverlay(){
+    if(!overlay) return;
+    var s = document.getElementById('stage').getBoundingClientRect();
+    var r = img.getBoundingClientRect();
+    overlay.style.left = (r.left-s.left)+'px'; overlay.style.top = (r.top-s.top)+'px';
+    overlay.style.width = r.width+'px'; overlay.style.height = r.height+'px';
+  }
+  // Key hints appear near the END of the slide (screen + narration explain first, THEN the keypress
+  // that advances) — Rob. KEY_LEAD = how long before the slide flips the key presses in.
+  var keyTimer = null, KEY_LEAD = 800;
+  function drawKeyHint(h){
+    var box = document.createElement('div');
+    box.className = 'keyhint ' + (h.type==='action'?'action':'nav') + (h.img?' hasimg':'');
+    box.style.left = h.x + '%'; box.style.top = h.y + '%';
+    if(h.img){                                   // prominent button graphic
+      var im = document.createElement('img'); im.className='keybtn'; im.src=h.img; im.alt='';
+      box.appendChild(im);
+    } else if(h.keys.length){                     // fallback: text keycaps
+      var caps = document.createElement('span'); caps.className='caps';
+      h.keys.forEach(function(k){ var c=document.createElement('span'); c.className='keycap'; c.textContent=k; caps.appendChild(c); });
+      box.appendChild(caps);
+    }
+    if(h.label){ var l=document.createElement('span'); l.className='klabel'; l.textContent=h.label; box.appendChild(l); }
+    overlay.appendChild(box);
+    void box.offsetWidth; box.classList.add('held');   // press down
+  }
+  function renderCurrentHint(showKey){
+    if(!overlay) return;
+    overlay.innerHTML = '';
+    var f = frames[idx];
+    // text caption (always immediate)
+    var t = TEXTS[f];
+    if(t && t.text){
+      var note = document.createElement('div');
+      note.className = 'textnote' + (t.size==='s'?' s':t.size==='l'?' l':'');
+      note.style.left = t.x + '%'; note.style.top = t.y + '%';
+      note.textContent = t.text;
+      overlay.appendChild(note);
+    }
+    // key hint immediately only when NOT deferring (e.g. the ?tune editor) — showKey===false skips it
+    var h = KEYS[f];
+    if(showKey !== false && h && (h.keys.length || h.label)) drawKeyHint(h);
+    positionOverlay();
+  }
+  // Draw + press the key (called near the end of the slide, or immediately when parked/stepping).
+  function revealKeyHint(withSound){
+    if(!overlay || overlay.querySelector('.keyhint')) return;
+    var h = KEYS[frames[idx]];
+    if(h && (h.keys.length || h.label)){ drawKeyHint(h); if(withSound) keyClick(); }
+  }
+  function scheduleKeyHint(){
+    clearTimeout(keyTimer);
+    var h = KEYS[frames[idx]];
+    if(!(h && (h.keys.length || h.label))) return;
+    if(!playing) revealKeyHint(false);    // parked/stepping → show now; during play tryGo presses it in at the real end
+  }
+  img.addEventListener('load', positionOverlay);
+  window.addEventListener('resize', positionOverlay);
 
   // ── synthesized key-press "tick" on each advance (Web Audio, no files) ──
   var actx = null, audioOn = false, soundBtn = document.getElementById('sound');
@@ -133,7 +355,62 @@
     if(audioOn) keyClick();
   };
 
-  function src(n){ return 'showtimeSimulator/ST' + n + '.webp'; }
+  // ── AI voice-over (browser speech synthesis reads the per-slide 'say' line) ──
+  // Zero-setup and works today; for studio quality, drop per-slide MP3s later (see audio hook below).
+  var voiceOn = false, synth = window.speechSynthesis || null, pickedVoice = null,
+      voiceBtn = document.getElementById('voice');
+  function chooseVoice(){
+    if(!synth) return;
+    var vs = synth.getVoices() || [];
+    pickedVoice =
+      vs.find(function(v){ return /natural|neural/i.test(v.name) && /^en/i.test(v.lang); }) ||
+      vs.find(function(v){ return /en[-_]?AU/i.test(v.lang); }) ||
+      vs.find(function(v){ return /Aria|Jenny|Google US English|Samantha|Zira/i.test(v.name); }) ||
+      vs.find(function(v){ return /^en/i.test(v.lang); }) || vs[0] || null;
+  }
+  if(synth){ chooseVoice(); if('onvoiceschanged' in synth) synth.onvoiceschanged = chooseVoice; }
+  function stopSpeech(){ if(synth){ try{ synth.cancel(); }catch(e){} } }
+  // Normalize for the voice only (stored text keeps "2-5-1"): a hyphen BETWEEN digits reads as "dash"
+  // in TTS, so turn "2-5-1"/"6-2-5-1" into "2 5 1"/"6 2 5 1" → spoken "two five one" etc.
+  function sayText(f){ return (SAY[f] || '').trim().replace(/(\d)\s*-\s*(?=\d)/g, '$1 '); }
+  function speak(text){
+    if(!synth || !text) return;
+    stopSpeech();
+    var u = new SpeechSynthesisUtterance(text);
+    if(pickedVoice) u.voice = pickedVoice;
+    u.rate = 0.98; u.pitch = 1.0;
+    u.onend = function(){ if(playing) tryGo(); };   // auto-wait: advance once narration finishes
+    synth.speak(u);
+  }
+  function speakCurrent(){ stopSpeech(); if(voiceOn) speak(sayText(frames[idx])); }
+  function estSpeechMs(text){ var w = (String(text).trim().match(/\S+/g) || []).length; return w ? (w*360 + 900) : 0; }
+  if(!synth && voiceBtn){ voiceBtn.disabled = true; voiceBtn.title = 'Voice-over needs a browser that supports speech synthesis'; }
+  voiceBtn.onclick = function(){
+    if(!synth) return;
+    voiceOn = !voiceOn;
+    voiceBtn.classList.toggle('primary', voiceOn);
+    voiceBtn.innerHTML = voiceOn ? '🎙 Voice on' : '🎤 Voice';
+    if(voiceOn) speakCurrent(); else stopSpeech();
+    if(playing) schedule();   // re-time so a narrated slide isn't cut off
+  };
+
+  // Default Voice + Sound ON (Rob). Browsers gate audio until a user gesture, so set the on-state +
+  // button UI now, and unlock the AudioContext / start narration on the first click or keypress.
+  (function defaultsOn(){
+    if(synth){ voiceOn = true; voiceBtn.classList.add('primary'); voiceBtn.innerHTML = '🎙 Voice on'; }
+    audioOn = true; soundBtn.classList.add('primary'); soundBtn.innerHTML = '🔊 Sound';
+    try{ if(!actx) actx = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ audioOn = false; }
+    function unlock(){
+      try{ if(actx && actx.state==='suspended') actx.resume(); }catch(e){}
+      if(voiceOn) speakCurrent();                 // kick narration for the current slide once allowed
+      window.removeEventListener('pointerdown', unlock);
+      window.removeEventListener('keydown', unlock);
+    }
+    window.addEventListener('pointerdown', unlock);
+    window.addEventListener('keydown', unlock);
+  })();
+
+  function src(n){ return 'showtimeSimulator/' + n + '.webp'; }
 
   // Preload neighbours so advancing is instant.
   var cache = {};
@@ -153,6 +430,10 @@
     }
     counter.textContent = (idx+1) + ' / ' + frames.length;
     fill.style.width = (frames.length<2?100:(idx/(frames.length-1))*100) + '%';
+    renderCurrentHint(false); scheduleKeyHint();   // caption now; key presses in near the slide's end
+    speakCurrent();                              // narrate this slide (if voice-over is on)
+    setCTA(idx === frames.length-1);             // show the "try it" card on the last slide
+    if(tuneMode) updateTune();
     document.getElementById('prev').disabled = idx===0;
     document.getElementById('first').disabled = idx===0;
     document.getElementById('next').disabled = idx===frames.length-1;
@@ -169,12 +450,39 @@
     playing=true; playBtn.innerHTML='&#10073;&#10073; Pause';
     schedule();
   }
-  function stop(){ playing=false; playBtn.innerHTML='&#9654; Play'; clearTimeout(timer); }
-  function toggle(){ playing ? stop() : play(); }
+  function stop(){ playing=false; playBtn.innerHTML='&#9654; Play'; clearTimeout(timer); clearTimeout(keyTimer); }
+  function toggle(){ if(playing){ stop(); stopSpeech(); } else play(); }
+
+  // end-of-tour call-to-action
+  var cta = document.getElementById('cta');
+  function setCTA(on){ if(cta) cta.classList.toggle('on', !!on); }
+  var TRY_URL = 'https://showtime-saas.fly.dev';   // overridable via timings.json "tryUrl"
+  (function(){
+    var b=document.getElementById('ctaBtn'); if(b) b.href = TRY_URL;
+    var r=document.getElementById('ctaRestart');
+    if(r) r.onclick = function(){ setCTA(false); stopSpeech(); show(0,true); play(); };
+  })();
+  // Auto-wait-for-narration + a beat after button slides. schedule() runs the reading-time FLOOR;
+  // the slide only advances once BOTH the floor elapsed AND narration finished (tryGo), then pauses
+  // BUTTON_BREAK ms after a button/key slide so explanations don't run together (Rob).
+  var minDone = false, BUTTON_BREAK = 800;    // beat after a button EXPLANATION (not rapid nav steps)
   function schedule(){
     clearTimeout(timer);
     if(!playing) return;
-    timer = setTimeout(function(){ if(idx<frames.length-1){ go(1); schedule(); } else stop(); }, curDuration());
+    minDone = false;
+    timer = setTimeout(function(){ minDone = true; tryGo(); }, durationFor(idx));
+  }
+  function tryGo(){
+    if(!playing || !minDone) return;
+    if(voiceOn && synth && (synth.speaking || synth.pending)) return;   // still narrating → wait for onend
+    revealKeyHint(true);                                                // press the button in at the real end
+    // break only after a button EXPLANATION (keyed slide that dwells ≥1s) — skips rapid nav-stepping slides
+    var brk = (KEYS[frames[idx]] && durationFor(idx) >= 1000) ? BUTTON_BREAK : 0;
+    clearTimeout(timer);
+    timer = setTimeout(function(){
+      if(!playing) return;
+      if(idx < frames.length - 1){ show(idx+1, true); schedule(); } else stop();
+    }, brk);
   }
 
   // wire controls
@@ -198,11 +506,115 @@
     else if(e.key==='End'){ stop(); show(frames.length-1,true); e.preventDefault(); }
   });
 
-  updateSpeedRead();
-  show(0,false);
-  play();   // auto-run the slideshow from the first frame
-  // Warm the whole cache in the background so fast playback isn't gated by image load time.
-  setTimeout(function(){ for(var k=0;k<frames.length;k++) preload(k); }, 700);
+  // ── timing tuner (opened by adding ?tune to the URL — hidden from normal visitors) ──
+  var tuneMode = false;
+  var tuneBtn = document.getElementById('tune'), tunebar = document.getElementById('tunebar');
+  var tSlide = document.getElementById('tSlide'), tSec = document.getElementById('tSec'),
+      tCopied = document.getElementById('tCopied');
+  var tKeys=document.getElementById('tKeys'), tLabel=document.getElementById('tLabel'),
+      tType=document.getElementById('tType'), tX=document.getElementById('tX'),
+      tY=document.getElementById('tY'), tGlyphs=document.getElementById('tGlyphs'),
+      tKclear=document.getElementById('tKclear');
+  var tText=document.getElementById('tText'), tSize=document.getElementById('tSize'),
+      tTX=document.getElementById('tTX'), tTY=document.getElementById('tTY'), tTclear=document.getElementById('tTclear');
+  var tSay=document.getElementById('tSay'), tSayPlay=document.getElementById('tSayPlay'), tSclear=document.getElementById('tSclear');
+  function curHint(){ var f=frames[idx]; if(!KEYS[f]) KEYS[f]={keys:[],label:'',type:'nav',x:84,y:13}; return KEYS[f]; }
+  function curText(){ var f=frames[idx]; if(!TEXTS[f]) TEXTS[f]={text:'',x:50,y:16,size:'m'}; return TEXTS[f]; }
+  function updateTune(){
+    if(!tuneMode) return;
+    tSlide.textContent = (idx+1);
+    var f = frames[idx];
+    tSec.value = (OV[f] != null ? OV[f] : (curDuration()/1000)).toFixed(1);
+    var h = KEYS[f] || {keys:[],label:'',type:'nav',x:84,y:13};
+    tKeys.value = h.keys.join(' '); tLabel.value = h.label || '';
+    tType.value = h.type || 'nav'; tX.value = h.x; tY.value = h.y;
+    var t = TEXTS[f] || {text:'',x:50,y:16,size:'m'};
+    tText.value = t.text || ''; tSize.value = t.size || 'm'; tTX.value = t.x; tTY.value = t.y;
+    tSay.value = SAY[f] || '';
+    tCopied.style.display = 'none';
+  }
+  if(location.search.indexOf('tune') >= 0){
+    tuneBtn.style.display = '';
+    tuneBtn.onclick = function(){
+      tuneMode = !tuneMode;
+      tunebar.classList.toggle('on', tuneMode);
+      tuneBtn.classList.toggle('primary', tuneMode);
+      if(tuneMode){ stop(); updateTune(); }
+    };
+    tSec.oninput = function(){ var v = parseFloat(tSec.value); if(v>0){ OV[frames[idx]] = Math.round(v*10)/10; } tCopied.style.display='none'; };
+    document.getElementById('tDefault').onclick = function(){ delete OV[frames[idx]]; updateTune(); };
+    // key-hint editors — mutate KEYS live and re-render the overlay so you place it by eye
+    tKeys.oninput  = function(){ curHint().keys = normKeys(tKeys.value); renderCurrentHint(); };
+    tLabel.oninput = function(){ curHint().label = tLabel.value; renderCurrentHint(); };
+    tType.onchange = function(){ curHint().type = tType.value; renderCurrentHint(); };
+    tX.oninput = function(){ var v=parseFloat(tX.value); if(!isNaN(v)) curHint().x=Math.max(0,Math.min(100,v)); renderCurrentHint(); };
+    tY.oninput = function(){ var v=parseFloat(tY.value); if(!isNaN(v)) curHint().y=Math.max(0,Math.min(100,v)); renderCurrentHint(); };
+    tGlyphs.onclick = function(e){ var b=e.target.closest('button'); if(!b) return;
+      var arr=normKeys(tKeys.value); arr.push(b.getAttribute('data-g')); tKeys.value=arr.join(' ');
+      curHint().keys=arr; renderCurrentHint(); };
+    tKclear.onclick = function(){ delete KEYS[frames[idx]]; updateTune(); renderCurrentHint(); };
+    // caption editors
+    tText.oninput = function(){ curText().text = tText.value; renderCurrentHint(); };
+    tSize.onchange = function(){ curText().size = tSize.value; renderCurrentHint(); };
+    tTX.oninput = function(){ var v=parseFloat(tTX.value); if(!isNaN(v)) curText().x=Math.max(0,Math.min(100,v)); renderCurrentHint(); };
+    tTY.oninput = function(){ var v=parseFloat(tTY.value); if(!isNaN(v)) curText().y=Math.max(0,Math.min(100,v)); renderCurrentHint(); };
+    tTclear.onclick = function(){ delete TEXTS[frames[idx]]; updateTune(); renderCurrentHint(); };
+    // narration editors
+    tSay.oninput = function(){ var v=tSay.value.trim(); if(v) SAY[frames[idx]]=v; else delete SAY[frames[idx]]; };
+    tSayPlay.onclick = function(){ speak(tSay.value.trim()); };
+    tSclear.onclick = function(){ delete SAY[frames[idx]]; updateTune(); stopSpeech(); };
+    document.getElementById('tCopy').onclick = function(){
+      var cfg = { default: Math.round((curDuration()/1000)*10)/10, order: frames.slice(), frames: {}, keys: {}, text: {}, say: {} };
+      // Frame ids are strings now (e.g. "st6.1.2") — sort by PLAY ORDER, not Number() (which is NaN).
+      var byOrder = function(a,b){ return frames.indexOf(a) - frames.indexOf(b); };
+      Object.keys(OV).sort(byOrder).forEach(function(k){ cfg.frames[k] = OV[k]; });
+      Object.keys(KEYS).sort(byOrder).forEach(function(k){
+        var h=KEYS[k]; if(h && (h.keys.length || h.label)){ cfg.keys[k]={keys:h.keys,label:h.label,type:h.type,x:h.x,y:h.y}; }
+      });
+      Object.keys(TEXTS).sort(byOrder).forEach(function(k){
+        var t=TEXTS[k]; if(t && t.text){ cfg.text[k]={text:t.text,x:t.x,y:t.y,size:t.size}; }
+      });
+      Object.keys(SAY).sort(byOrder).forEach(function(k){
+        var s=String(SAY[k]||'').trim(); if(s){ cfg.say[k]=s; }
+      });
+      if(!Object.keys(cfg.keys).length) delete cfg.keys;
+      if(!Object.keys(cfg.text).length) delete cfg.text;
+      if(!Object.keys(cfg.say).length) delete cfg.say;
+      var txt = JSON.stringify(cfg, null, 2);
+      var done = function(){ tCopied.style.display=''; setTimeout(function(){ tCopied.style.display='none'; }, 5000); };
+      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done).catch(function(){ prompt('Copy into v2/manifest.json:', txt); }); }
+      else prompt('Copy into v2/manifest.json:', txt);
+    };
+  }
+
+  // Load the v2 manifest (frame order + per-slide config), then start the slideshow.
+  fetch('showtimeSimulator/manifest.json', {cache:'no-store'})
+    .then(function(r){ return r.ok ? r.json() : {}; }).catch(function(){ return {}; })
+    .then(function(cfg){
+      if(cfg && Array.isArray(cfg.order) && cfg.order.length) frames = cfg.order.slice();
+      if(cfg && typeof cfg.default === 'number') TIMINGS.default = cfg.default;
+      if(cfg && cfg.frames && typeof cfg.frames === 'object'){
+        Object.keys(cfg.frames).forEach(function(k){ var v=parseFloat(cfg.frames[k]); if(v>0) OV[k]=v; });
+      }
+      if(cfg && cfg.keys && typeof cfg.keys === 'object'){
+        Object.keys(cfg.keys).forEach(function(k){ var h=normHint(cfg.keys[k]); if(h) KEYS[k]=h; });
+      }
+      if(cfg && cfg.text && typeof cfg.text === 'object'){
+        Object.keys(cfg.text).forEach(function(k){ var tt=normText(cfg.text[k]); if(tt) TEXTS[k]=tt; });
+      }
+      if(cfg && cfg.say && typeof cfg.say === 'object'){
+        Object.keys(cfg.say).forEach(function(k){ var s=String(cfg.say[k]||'').trim(); if(s) SAY[k]=s; });
+      }
+      if(cfg && typeof cfg.tryUrl === 'string' && cfg.tryUrl){
+        TRY_URL = cfg.tryUrl; var b=document.getElementById('ctaBtn'); if(b) b.href = TRY_URL;
+      }
+      setSliderFromSeconds(TIMINGS.default);
+      updateSpeedRead();
+      if(!frames.length){ counter.textContent = '0 / 0'; return; }   // manifest missing → nothing to play
+      show(0,false);
+      play();   // auto-run the slideshow from the first frame
+      setTimeout(function(){ for(var k=0;k<frames.length;k++) preload(k); }, 700);
+    });
 })();
 </script>
 </body>

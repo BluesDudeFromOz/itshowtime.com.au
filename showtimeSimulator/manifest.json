@@ -1,0 +1,1468 @@
+{
+ "_comment": "Guided tour (2nd-attempt). Built by build_manifest.py from slideshow_timings_descriptions.xlsx.",
+ "default": 3,
+ "order": [
+  "st1.0",
+  "st2.0",
+  "st2.1",
+  "st2.2",
+  "st2.3",
+  "st2.4",
+  "st2.5",
+  "st2.6",
+  "st2.7",
+  "st2.8",
+  "st2.9",
+  "st2.10",
+  "st2.11",
+  "st2.12",
+  "st2.13",
+  "st2.14",
+  "st2.15",
+  "st2.16",
+  "st2.17",
+  "st3.0",
+  "st4.0",
+  "st5.0",
+  "st5.1",
+  "st5.2",
+  "st5.3",
+  "st5.4",
+  "st5.5",
+  "st6.0",
+  "st6.1",
+  "st6.1.1",
+  "st6.1.2",
+  "st6.1.3",
+  "st6.1.4",
+  "st6.1.5",
+  "st6.1.6",
+  "st6.2",
+  "st6.2.1",
+  "st6.2.2",
+  "st6.2.3",
+  "st6.2.4",
+  "st6.3",
+  "st6.4.0",
+  "st6.4.1",
+  "st6.4.2",
+  "st6.4.3",
+  "st6.4.4",
+  "st6.4.5",
+  "st6.4.6",
+  "st6.5",
+  "st6.6.0",
+  "st6.6.1",
+  "st6.6.2",
+  "st6.6.3",
+  "st6.6.4",
+  "st6.6.5",
+  "st6.6.6",
+  "st6.7",
+  "st7.0",
+  "st8.0",
+  "st8.1",
+  "st8.2",
+  "st9.0",
+  "sk9.1",
+  "sk10.0",
+  "sk11.0",
+  "sk11.1",
+  "sk11.2",
+  "sk12.0",
+  "sk12.1",
+  "sk12.2",
+  "sk12.3",
+  "sk12.4",
+  "sk12.5",
+  "sk12.6",
+  "sk12.7",
+  "sk12.8",
+  "sk12.9",
+  "sk13.0",
+  "sk13.1",
+  "sk13.2",
+  "sk13.3",
+  "sk13.4",
+  "sk13.5",
+  "sk13.6",
+  "sk13.7",
+  "sk13.8",
+  "sk13.9",
+  "sk13.10",
+  "sk13.11",
+  "sk13.12",
+  "sk13.13",
+  "sk13.14",
+  "sk13.15",
+  "sk13.16",
+  "sk13.17",
+  "sk14.0",
+  "sk14.1",
+  "sk14.2",
+  "sk14.3",
+  "sk14.4",
+  "sk14.5",
+  "sk14.6",
+  "sk14.7",
+  "sk14.8",
+  "sk14.9",
+  "sk14.10",
+  "sk15.0",
+  "sk16.0",
+  "sk17.0",
+  "sk18.0",
+  "sk18.1",
+  "sk18.2",
+  "sk18.3",
+  "sk18.4",
+  "sk18.5",
+  "sk19.0",
+  "sk19.1",
+  "sk20.0",
+  "sk21.0",
+  "sk21.1",
+  "sk22.0",
+  "sk22.1",
+  "sk23.0",
+  "sk23.1",
+  "sk23.2",
+  "sk23.3",
+  "sk23.4",
+  "sk23.5",
+  "sk23.6",
+  "sk24.0",
+  "sk24.1",
+  "sk24.2",
+  "sk24.3",
+  "sk24.4",
+  "sk24.5",
+  "sk24.6",
+  "sk25.0",
+  "sk25.1",
+  "sk26.0",
+  "sk27.0",
+  "sk28.0",
+  "sk28.1",
+  "sk29.0",
+  "sk30.0",
+  "sk30.1",
+  "sk31.0",
+  "sk31.1",
+  "sk31.2",
+  "sk32.0",
+  "sk32.1",
+  "sk32.2",
+  "sk33.0",
+  "sk34.0",
+  "sk34.1",
+  "sk34.2",
+  "sk34.3",
+  "sk34.4",
+  "sk35.0",
+  "sk36.0",
+  "sk37.0",
+  "sk37.1",
+  "sk38.0",
+  "sk38.1.0",
+  "sk38.1.1",
+  "sk38.2.0",
+  "sk38.2.1",
+  "sk38.3.0",
+  "sk38.3.1",
+  "sk38.4.0",
+  "sk38.4.1",
+  "sk38.5.0",
+  "sk38.5.1",
+  "sk38.6.0",
+  "sk38.6.1",
+  "sk39.0",
+  "sk39.1",
+  "sk39.1.1",
+  "sk39.1.1.1",
+  "sk39.2",
+  "sk39.3",
+  "sk39.4",
+  "sk39.4.1",
+  "sk39.5.0",
+  "sk39.6.0",
+  "sk40.0",
+  "sk40.1",
+  "sk40.1.1",
+  "sk40.1.2",
+  "sk40.1.3",
+  "sk40.2",
+  "sk40.3"
+ ],
+ "frames": {
+  "st1.0": 4.0,
+  "st2.0": 2.0,
+  "st2.1": 10.0,
+  "st2.2": 5.0,
+  "st2.3": 2.0,
+  "st2.4": 2.0,
+  "st2.5": 2.0,
+  "st2.6": 2.0,
+  "st2.7": 2.0,
+  "st2.8": 5.5,
+  "st2.9": 6.0,
+  "st2.10": 10.0,
+  "st2.11": 6.0,
+  "st2.12": 3.0,
+  "st2.13": 3.0,
+  "st2.14": 2.0,
+  "st2.15": 2.0,
+  "st2.16": 6.0,
+  "st2.17": 3.0,
+  "st3.0": 3.0,
+  "st4.0": 1.0,
+  "st5.0": 1.0,
+  "st5.1": 2.0,
+  "st5.2": 0.5,
+  "st5.3": 0.5,
+  "st5.4": 0.5,
+  "st5.5": 2.0,
+  "st6.0": 7.0,
+  "st6.1": 2.0,
+  "st6.1.1": 0.3,
+  "st6.1.2": 0.3,
+  "st6.1.3": 0.3,
+  "st6.1.4": 0.3,
+  "st6.1.5": 0.3,
+  "st6.1.6": 0.3,
+  "st6.2": 3.0,
+  "st6.2.1": 0.3,
+  "st6.2.2": 0.3,
+  "st6.2.3": 0.3,
+  "st6.2.4": 0.3,
+  "st6.3": 3.0,
+  "st6.4.0": 3.0,
+  "st6.4.1": 1.0,
+  "st6.4.2": 1.0,
+  "st6.4.3": 1.0,
+  "st6.4.4": 1.0,
+  "st6.4.5": 2.0,
+  "st6.4.6": 2.0,
+  "st6.5": 2.0,
+  "st6.6.0": 6.0,
+  "st6.6.1": 0.3,
+  "st6.6.2": 0.3,
+  "st6.6.3": 0.3,
+  "st6.6.4": 0.3,
+  "st6.6.5": 0.3,
+  "st6.6.6": 0.3,
+  "st6.7": 3.0,
+  "st7.0": 2.0,
+  "st8.0": 2.0,
+  "st8.1": 0.3,
+  "st8.2": 3.0,
+  "st9.0": 2.0,
+  "sk9.1": 2.0,
+  "sk10.0": 2.0,
+  "sk11.0": 1.0,
+  "sk11.1": 3.0,
+  "sk11.2": 1.0,
+  "sk12.0": 1.0,
+  "sk12.1": 0.5,
+  "sk12.2": 0.5,
+  "sk12.3": 0.5,
+  "sk12.4": 0.5,
+  "sk12.5": 0.5,
+  "sk12.6": 0.5,
+  "sk12.7": 0.5,
+  "sk12.8": 0.5,
+  "sk12.9": 1.0,
+  "sk13.0": 1.0,
+  "sk13.1": 0.5,
+  "sk13.2": 1.0,
+  "sk13.3": 1.0,
+  "sk13.4": 0.5,
+  "sk13.5": 1.0,
+  "sk13.6": 1.0,
+  "sk13.7": 1.0,
+  "sk13.8": 1.0,
+  "sk13.9": 1.0,
+  "sk13.10": 0.5,
+  "sk13.11": 1.0,
+  "sk13.12": 1.0,
+  "sk13.13": 0.3,
+  "sk13.14": 0.3,
+  "sk13.15": 0.3,
+  "sk13.16": 0.5,
+  "sk13.17": 1.0,
+  "sk14.0": 3.0,
+  "sk14.1": 2.0,
+  "sk14.2": 2.0,
+  "sk14.3": 2.0,
+  "sk14.4": 2.0,
+  "sk14.5": 2.0,
+  "sk14.6": 0.3,
+  "sk14.7": 0.3,
+  "sk14.8": 0.3,
+  "sk14.9": 0.3,
+  "sk14.10": 1.0,
+  "sk15.0": 0.5,
+  "sk16.0": 2.0,
+  "sk17.0": 2.0,
+  "sk18.0": 1.0,
+  "sk18.1": 3.0,
+  "sk18.2": 1.0,
+  "sk18.3": 1.0,
+  "sk18.4": 1.0,
+  "sk18.5": 2.0,
+  "sk19.0": 3.0,
+  "sk19.1": 1.0,
+  "sk20.0": 3.0,
+  "sk21.0": 1.0,
+  "sk21.1": 1.0,
+  "sk22.0": 3.0,
+  "sk22.1": 2.0,
+  "sk23.0": 1.0,
+  "sk23.1": 2.0,
+  "sk23.2": 2.0,
+  "sk23.3": 3.0,
+  "sk23.4": 2.0,
+  "sk23.5": 2.0,
+  "sk23.6": 2.0,
+  "sk24.0": 2.0,
+  "sk24.1": 3.0,
+  "sk24.2": 4.0,
+  "sk24.3": 1.0,
+  "sk24.4": 1.0,
+  "sk24.5": 1.0,
+  "sk24.6": 1.0,
+  "sk25.0": 1.0,
+  "sk25.1": 3.0,
+  "sk26.0": 2.0,
+  "sk27.0": 2.0,
+  "sk28.0": 2.0,
+  "sk28.1": 2.0,
+  "sk29.0": 2.0,
+  "sk30.0": 2.0,
+  "sk30.1": 2.0,
+  "sk31.0": 2.0,
+  "sk31.1": 2.0,
+  "sk31.2": 2.0,
+  "sk32.0": 7.0,
+  "sk32.1": 2.0,
+  "sk32.2": 3.0,
+  "sk33.0": 1.0,
+  "sk34.0": 2.0,
+  "sk34.1": 6.0,
+  "sk34.2": 2.0,
+  "sk34.3": 2.0,
+  "sk34.4": 2.0,
+  "sk35.0": 6.0,
+  "sk36.0": 2.0,
+  "sk37.0": 2.0,
+  "sk37.1": 2.0,
+  "sk38.0": 3.0,
+  "sk38.1.0": 1.0,
+  "sk38.1.1": 1.0,
+  "sk38.2.0": 1.0,
+  "sk38.2.1": 1.0,
+  "sk38.3.0": 1.0,
+  "sk38.3.1": 1.0,
+  "sk38.4.0": 1.0,
+  "sk38.4.1": 1.0,
+  "sk38.5.0": 1.0,
+  "sk38.5.1": 1.0,
+  "sk38.6.0": 1.0,
+  "sk38.6.1": 1.0,
+  "sk39.0": 2.0,
+  "sk39.1": 1.0,
+  "sk39.1.1": 2.0,
+  "sk39.1.1.1": 2.0,
+  "sk39.2": 2.0,
+  "sk39.3": 1.0,
+  "sk39.4": 1.0,
+  "sk39.4.1": 2.0,
+  "sk39.5.0": 2.0,
+  "sk39.6.0": 2.0,
+  "sk40.0": 1.0,
+  "sk40.1": 2.0,
+  "sk40.1.1": 1.0,
+  "sk40.1.2": 2.0,
+  "sk40.1.3": 2.0,
+  "sk40.2": 5.0,
+  "sk40.3": 4.0
+ },
+ "keys": {
+  "st3.0": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "st4.0": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "st5.0": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "st5.1": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "st5.2": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "st5.3": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "st5.4": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "st5.5": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "st6.0": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "st6.1": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "st6.1.1": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "st6.1.2": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "st6.1.3": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "st6.1.4": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "st6.1.5": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "st6.1.6": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "st6.2": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "st6.2.1": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "st6.2.2": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "st6.2.3": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "st6.2.4": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "st6.3": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "st6.4.0": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "st6.4.1": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "st6.4.2": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "st6.4.3": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "st6.4.4": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "st6.4.5": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "st6.4.6": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "st6.5": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "st6.6.0": {
+   "keys": [
+    "←"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/left_button.png"
+  },
+  "st6.6.1": {
+   "keys": [
+    "←"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/left_button.png"
+  },
+  "st6.6.2": {
+   "keys": [
+    "←"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/left_button.png"
+  },
+  "st6.6.3": {
+   "keys": [
+    "←"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/left_button.png"
+  },
+  "st6.6.4": {
+   "keys": [
+    "←"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/left_button.png"
+  },
+  "st6.6.5": {
+   "keys": [
+    "←"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/left_button.png"
+  },
+  "st6.6.6": {
+   "keys": [
+    "←"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/left_button.png"
+  },
+  "st6.7": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "st7.0": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "st8.0": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "st8.1": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "st8.2": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "st9.0": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "sk9.1": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk10.0": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk11.0": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "sk11.1": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "sk11.2": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk12.0": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "sk12.1": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "sk12.2": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "sk12.3": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "sk12.4": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk12.5": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk12.6": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk12.7": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk12.8": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk12.9": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk13.0": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk13.1": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk13.2": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk13.3": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk13.4": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk13.5": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk13.6": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk13.7": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk13.8": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk13.9": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk13.10": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk13.11": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk13.12": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk13.13": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk13.14": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk13.15": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk13.16": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk13.17": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk14.0": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk14.1": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk14.2": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk14.3": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk14.4": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk14.5": {
+   "keys": [
+    "←"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/left_button.png"
+  },
+  "sk14.6": {
+   "keys": [
+    "←"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/left_button.png"
+  },
+  "sk14.7": {
+   "keys": [
+    "←"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/left_button.png"
+  },
+  "sk14.8": {
+   "keys": [
+    "←"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/left_button.png"
+  },
+  "sk14.9": {
+   "keys": [
+    "←"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/left_button.png"
+  },
+  "sk14.10": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk15.0": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk16.0": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk17.0": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk18.0": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "sk18.1": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk18.2": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk18.3": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk18.4": {
+   "keys": [
+    "↓"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/down_button.png"
+  },
+  "sk18.5": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  },
+  "sk19.0": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
+  "sk19.1": {
+   "keys": [
+    "→"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/right_button.png"
+  }
+ },
+ "_text_comment": "Optional captions: id -> {text,size(s|m|l),x,y percent}.",
+ "text": {},
+ "say": {
+  "st1.0": "This is the start-up screen. You can wait for the master device to pick a song, or press Up to jump straight to the song search box.",
+  "st2.0": "This is the start-up screen, with the Home button in focus.",
+  "st2.1": "This is the performance toolbar. It holds every function you'll use while you play. The basics are simple: move left or right to choose a function, press Up or Down to run it, and touch or mouse work everywhere too.",
+  "st2.2": "The Home button takes you to search, your playlists, and the utility menu. Search for a song, or open your setlist.",
+  "st2.3": "This button steps to the previous song in your setlist or search results. Press Up or Down.",
+  "st2.4": "This button steps to the next song in your setlist or search results. Press Up or Down.",
+  "st2.5": "This button increases the page font size, shown as a number on the button. Aim to keep the whole chart on two pages in landscape, or one page in portrait, which may need a page turn.",
+  "st2.6": "This button reduces the page font size. Again, aim for two pages in landscape or one page in portrait. Press Up or Down.",
+  "st2.7": "Toggle between landscape two-page view and portrait single-page view. Press Up or Down.",
+  "st2.8": "This button toggles full screen. Full screen hides the window frame for the biggest possible display; press it again to bring the frame back and shrink the app a little.",
+  "st2.9": "This button transposes a chord chart one semitone at a time. Press Up to transpose up, or Down to transpose down.",
+  "st2.10": "This button transposes for your instrument. Every chord, note, and key signature moves to suit E-flat, B-flat, F, G, or C instruments. Press Up or Down to open the menu, then left or right to choose.",
+  "st2.11": "This button opens the circle of keys. It includes the standard circle and its related chords, plus two-five-one and six-two-five-one changes. Great for songwriting and improvising.",
+  "st2.12": "Next is the Play button. It starts the visualisation set up for the song, along with any backing track you've configured to play with it.",
+  "st2.13": "Next is the rotate button. It turns the display ninety degrees with each press.",
+  "st2.14": "This is the intermission button, for before, after, and between sets. It blanks the screen to cut the light coming off your device. A tap brings the app back when you're ready.",
+  "st2.15": "This button messages your support crew when something needs attention mid-show. The messages are pre-set in a text file, each with its own level of urgency.",
+  "st2.16": "This is the Master control. As master, you choose the song for the whole band, and every follower device jumps to it. Each player still turns their own pages. To take master control from another device, double-click the master icon and enter the password set in the app configuration.",
+  "st2.17": "This is the Edit menu. Open it to reveal the functions that need a full mouse and keyboard, usually done at home or the office while you prepare.",
+  "st3.0": "The Home button brings us to the search screen. Here you'll find song search, your playlist menu, and icons for the utility functions we'll explore later in this tour.",
+  "st4.0": "To start a performance, let's open a playlist. Press Down to move from the search box to your setlists, and the first song comes into focus.",
+  "st5.0": "Now move down to a playlist and press the right arrow to open it. We'll open Moonlight Sonata, a MusicXML file.",
+  "st5.1": "With the playlist open, press Down to reach Moonlight Sonata, a MusicXML song.",
+  "st5.2": "Moving to Moonlight Sonata.",
+  "st5.5": "With the song in focus, press Right to open and display it.",
+  "st6.0": "Moonlight Sonata, a MusicXML score, is now on screen. The main menu tucks away and a small MusicXML toolbar takes its place. The app picks a zoom level to suit your display. Press Left at any time to go back. Next, the scroll toggle.",
+  "st6.1": "Like several other buttons, this one starts and stops auto-scroll. Press Up or Down, or use your foot pedal, to start or stop scrolling.",
+  "st6.1.1": "Up",
+  "st6.1.2": "Up",
+  "st6.1.3": "Up",
+  "st6.1.4": "Up",
+  "st6.1.5": "Up",
+  "st6.1.6": "This button sets the zoom level. The app picks a sensible level to start with, and Up or Down zooms in and out.",
+  "st6.2": "Here's a quick zoom demonstration. Press Up to zoom in, or Down to zoom out.",
+  "st6.2.1": "Zoom in",
+  "st6.2.2": "and again",
+  "st6.2.3": "zoom out",
+  "st6.2.4": "and again",
+  "st6.3": "This button adjusts the note spacing within the MusicXML score.",
+  "st6.4.0": "This button transposes your MusicXML score, including the key signature.",
+  "st6.4.1": "To transpose up, press Up.",
+  "st6.4.2": "Up again",
+  "st6.4.3": "and again",
+  "st6.4.4": "Now we'll transpose down.",
+  "st6.4.5": "And back up to the original key. Notice the number beside the transpose button showing the amount of transposition.",
+  "st6.4.6": "We're back at the original key. Press Right to explore the next button.",
+  "st6.5": "This is the Play button for the MusicXML score. Next along is the annotate button.",
+  "st6.6.0": "This button opens the annotation tools for MusicXML. Add your own remarks to the score, anchored right where they belong.",
+  "st6.6.1": "Now let's head back to the main menu. Press Left.",
+  "st6.6.2": "back again",
+  "st6.6.3": "and again",
+  "st6.6.4": "and again",
+  "st6.6.5": "and again",
+  "st6.6.6": "last one",
+  "st6.7": "We're back at the main menu, ready to move to the next song. The Next button is in focus, so Up or Down runs it.",
+  "st7.0": "Press Right to move to the next toolbar function.",
+  "st8.0": "This is the Increase Font button. The current font size is shown in the top right corner.",
+  "st8.1": "Press Up or Down to increase the font by one point.",
+  "st8.2": "Increase it again by one point. Notice the chart re-paginates automatically, and once it runs past two pages a navigation pop-up appears. Now press Right to get back to the original size.",
+  "st9.0": "Press Up or Down to decrease the font. It returns to the size the app calculated for you.",
+  "sk9.1": "The font is back to its original size. Press Right to explore the next button.",
+  "sk10.0": "Toggle between landscape two-page view and portrait single-page view. Press Up or Down to switch.",
+  "sk11.0": "This is the maximise button. It hides the window frame and the operating-system status bar for the biggest display. Press it again to bring them back.",
+  "sk11.1": "Maximised display.",
+  "sk11.2": "Back to the normal display.",
+  "sk12.0": "This button transposes a chord chart one semitone at a time. Press Up to transpose up, or Down to transpose down.",
+  "sk12.1": "Let's try it. Transpose up.",
+  "sk12.2": "and up again",
+  "sk12.3": "up again",
+  "sk12.4": "and again",
+  "sk12.5": "Now transpose down.",
+  "sk12.6": "down again",
+  "sk12.7": "and again",
+  "sk12.8": "and again",
+  "sk12.9": "Back to the original key. The next button transposes to suit your instrument. Press Right.",
+  "sk13.0": "This is the instrument-transpose button. Press Down to open the options.",
+  "sk13.1": "First option: B-flat. Press Down.",
+  "sk13.2": "Press Left or Right to transpose for B-flat instruments.",
+  "sk13.3": "The chart is now transposed for B-flat instruments.",
+  "sk13.4": "Next, E-flat. Press Down to show the options.",
+  "sk13.5": "E-flat is in focus. Press Left or Right to transpose for E-flat instruments.",
+  "sk13.6": "The chart is now transposed for E-flat instruments. Next we'll try F. Press Down to show the options.",
+  "sk13.7": "For F instruments, press Down again.",
+  "sk13.8": "Press Left or Right to transpose for F instruments.",
+  "sk13.9": "The chart is now transposed for F instruments.",
+  "sk13.10": "For G instruments, press Down to focus G.",
+  "sk13.11": "Press Left or Right to transpose for G instruments.",
+  "sk13.12": "The chart is now transposed for G instruments.",
+  "sk13.13": "To return to C instruments, press Down to open the options.",
+  "sk13.14": "keep going down",
+  "sk13.15": "down",
+  "sk13.16": "C instruments are in focus. Press Left or Right to transpose back to C.",
+  "sk13.17": "The chart is back in the original C key. The next button is the circle of keys, or circle of fifths.",
+  "sk14.0": "The circle of keys offers a few tools to help with improvising and songwriting. Press Up or Down to browse them.",
+  "sk14.1": "This one shows a semi-transparent circle of keys with related chords.",
+  "sk14.2": "This one is a circle of keys for improvising.",
+  "sk14.3": "This one shows the major-scale chords for each key.",
+  "sk14.4": "This one focuses on two-five-one chord progressions.",
+  "sk14.5": "And this one on six-two-five-one progressions.",
+  "sk14.6": "Now back to the main menu. Press Left.",
+  "sk14.7": "back again",
+  "sk14.8": "and again",
+  "sk14.9": "and again",
+  "sk14.10": "We're back at the main menu.",
+  "sk15.0": "Next is the Play button. It starts the visualisation set up for the song, along with any backing track you've configured to play with it.",
+  "sk16.0": "Next is the rotate button. It turns the display ninety degrees with each press.",
+  "sk17.0": "This is the intermission button, for before, after, and between sets. It blanks the screen to cut the light coming off your device. A tap brings the app back when you're ready.",
+  "sk18.0": "This button messages your support crew when something needs attention mid-show. The messages are pre-set in a text file, each with its own level of urgency.",
+  "sk18.1": "This pop-up shows a QR code for the crew-messaging screen. Send messages during the show for your support crew to action.",
+  "sk18.2": "The crew-message pop-up lists the messages you can send.",
+  "sk18.3": "Navigate to the message you want. Press Down.",
+  "sk18.4": "down one more",
+  "sk18.5": "Now we're on the message we want. Press Left or Right to send it. A confirmation appears before the pop-up closes.",
+  "sk19.0": "The next button is the Master icon. Press Up or Down to become master. If another device is already master, double-click and enter the password to take over.",
+  "sk19.1": "This device is now acting as the master.",
+  "sk20.0": "The information icon, top right, shows the details held in the song's metadata: its Note and its Song Story.",
+  "sk21.0": "Click the cog icon on the right to open the editing menu. You'll need a mouse and keyboard to work in here.",
+  "sk21.1": "The Edit menu is open. It holds the editing tools for charts. A separate tour walks through entering charts step by step.",
+  "sk22.0": "The Edit menu for chord charts.",
+  "sk22.1": "A separate tour covers the editing tools in detail.",
+  "sk23.0": "Metadata. This form lets you gather everything about a song during the show. It offers links for learning the material, and it sets up the slideshows and visualisations for the projector, which you trigger from the Play button.",
+  "sk23.1": "Metadata shown in the status bar, the metronome, and the information pop-up.",
+  "sk23.2": "Metadata fields for notes, the song story, and useful learning links.",
+  "sk23.3": "Metadata: the media manager. Drop in files for slideshows, still images, or video.",
+  "sk23.4": "During setup you can preview the selected visualisation.",
+  "sk23.5": "Metadata: video playback and backing-track setup.",
+  "sk23.6": "The visualisation playback preview.",
+  "sk24.0": "This is the system configuration icon.",
+  "sk24.1": "The system-config form. Choose your database, and add your own binder graphics and app wallpaper.",
+  "sk24.2": "System config: set the transparency of the toolbar and status bar, and the default scroll speed for notation.",
+  "sk24.3": "more system settings",
+  "sk24.4": "more system settings",
+  "sk24.5": "more system settings",
+  "sk24.6": "the final system settings",
+  "sk25.0": "The backup and restore button. It saves your database to an external disk.",
+  "sk25.1": "The backup and restore window.",
+  "sk26.0": "The annotation toolbox. Add notes for your musicians.",
+  "sk27.0": "The notation notes toolbox. Add reminders to your MusicXML or chart.",
+  "sk28.0": "The DMX lighting button. Add DMX configuration files for this song.",
+  "sk28.1": "Choose a configuration file to upload and store, then send it to the controller. It's also sent automatically from the Play button.",
+  "sk29.0": "The MIDI setup button. Set MIDI patches for the current song across multiple MIDI devices.",
+  "sk30.0": "The keyboard icon shows an on-screen keyboard, handy for touch screens.",
+  "sk30.1": "This is the on-screen keyboard.",
+  "sk31.0": "The last tool is the training for this app. Updates ship online for as long as your licence is current.",
+  "sk31.1": "The list of tutorial topics for the app.",
+  "sk31.2": "The tutorial list.",
+  "sk32.0": "AI support, powered by Claude Haiku. It's Showtime keeps an up-to-date knowledge base drawn straight from the source. It needs an Anthropic key, entered in the system config or by clicking your licence type in the status bar. It isn't a subscription; around twenty dollars, once, is usually enough to get to know the app well. The support is interactive with the software.",
+  "sk32.1": "A sample question, answered by Claude Haiku.",
+  "sk32.2": "Claude Haiku answers with pointers that guide you to the right place.",
+  "sk33.0": "While we're on the Home button, let's look at the toolbar on the search screen.",
+  "sk34.0": "This is where you search for songs and open your playlists. Along the top are buttons to onboard other devices such as followers and projectors, sync with the cloud, add songs, review the library, import from other sources, handle billing, and edit playlists.",
+  "sk34.1": "The link button. Join the same Wi-Fi, scan the follower QR code, and your device is connected.",
+  "sk34.2": "Scan this QR code to attach a projector, or type the web address shown beneath it.",
+  "sk34.3": "For slideshows and the visualiser, we detect the beat so the visuals bounce in time. Scan this QR code on the device you want to use as the beat detector.",
+  "sk34.4": "Show this QR code to your support crew for messaging during the show.",
+  "sk35.0": "The cloud icon syncs your local database with the cloud, our Software-as-a-Service. The cloud handles locking and unlocking the database while editing. Just before a gig, sync so the local web-server app has the latest changes.",
+  "sk36.0": "Add a song to the library.",
+  "sk37.0": "The View Library toggle.",
+  "sk37.1": "The song library view.",
+  "sk38.0": "This is the import tool, for bringing in song documents in many formats, including iReal Pro, OnSong, Word, and MusicXML.",
+  "sk38.1.0": "The import form. Import an iReal Pro exported HTML file.",
+  "sk38.1.1": "The import form for iReal Pro.",
+  "sk38.2.0": "The import form for copy and paste.",
+  "sk38.2.1": "The import form for pasting.",
+  "sk38.3.0": "The import form for It's Showtime songs and playlists.",
+  "sk38.3.1": "Import It's Showtime exported songs and playlists.",
+  "sk38.4.0": "The import form for MusicXML files.",
+  "sk38.4.1": "The import form for MusicXML files.",
+  "sk38.5.0": "The import form for Word charts, typically written in Microsoft Word.",
+  "sk38.5.1": "The import form for Word charts.",
+  "sk38.6.0": "The import form for StageDirector RTF files.",
+  "sk38.6.1": "The import form for StageDirector RTF files.",
+  "sk39.0": "The band admin button. It covers billing, musicians, venues, band management, and reporting.",
+  "sk39.1": "This tab lists the band's gigs.",
+  "sk39.1.1": "The form for adding or editing a gig.",
+  "sk39.1.1.1": "The booking calendar, showing musician availability for a gig.",
+  "sk39.2": "The venues list, linked to your bands.",
+  "sk39.3": "The band list, sharing one song database.",
+  "sk39.4": "The musicians, or payees, tab.",
+  "sk39.4.1": "The musicians' calendar. Musicians can log their gigs and rehearsals, and block out times they're unavailable.",
+  "sk39.5.0": "Billing settings.",
+  "sk39.6.0": "Financial reports, typically used at the end of the financial year.",
+  "sk40.0": "This is the Edit Mode toggle for playlists.",
+  "sk40.1": "Once edit mode is on, extra icons appear.",
+  "sk40.1.1": "These red handles let you drag songs into order in the setlist.",
+  "sk40.1.2": "These buttons manage the slideshows and videos for before, after, and between sets.",
+  "sk40.1.3": "The checkbox selects songs for bulk-adding to another setlist, or for bulk deletion.",
+  "sk40.2": "Right-click at the playlist level for a menu that streamlines your prep. You can add markers to lay out the sets, set the band the setlist belongs to, and export the setlist in many formats. With one button you can email every band member the setlist as HTML, Word, and PDF, plus all the charts and lyrics as HTML.",
+  "sk40.3": "The song-list right-click menu: add a setlist marker, or add songs."
+ },
+ "tryUrl": "https://showtime-saas.fly.dev"
+}
