@@ -2,6 +2,7 @@
  "_comment": "Guided tour (2nd-attempt). Built by build_manifest.py from slideshow_timings_descriptions.xlsx.",
  "default": 3,
  "order": [
+  "intro",
   "st1.0",
   "st2.0",
   "st2.1",
@@ -32,10 +33,6 @@
   "st6.0",
   "st6.1",
   "st6.1.1",
-  "st6.1.2",
-  "st6.1.3",
-  "st6.1.4",
-  "st6.1.5",
   "st6.1.6",
   "st6.2",
   "st6.2.1",
@@ -194,6 +191,12 @@
   "sk40.2",
   "sk40.3"
  ],
+ "video": {
+  "intro": "intro.mp4",
+  "st6.1.1": "st6.1.1.mp4",
+  "sk23.4": "sk23.4.mp4",
+  "sk23.6": "sk23.6.mp4"
+ },
  "frames": {
   "st1.0": 4.0,
   "st2.0": 2.0,
@@ -470,15 +473,6 @@
    "img": "button_icons/right_button.png"
   },
   "st6.1": {
-   "keys": [
-    "↑"
-   ],
-   "type": "nav",
-   "x": 84,
-   "y": 87,
-   "img": "button_icons/up_button.png"
-  },
-  "st6.1.1": {
    "keys": [
     "↑"
    ],
@@ -1301,7 +1295,6 @@
   "st5.5": "With the song in focus, press Right to open and display it.",
   "st6.0": "Moonlight Sonata, a MusicXML score, is now on screen. The main menu tucks away and a small MusicXML toolbar takes its place. The app picks a zoom level to suit your display. Press Left at any time to go back. Next, the scroll toggle.",
   "st6.1": "Like several other buttons, this one starts and stops auto-scroll. Press Up or Down, or use your foot pedal, to start or stop scrolling.",
-  "st6.1.1": "Up",
   "st6.1.2": "Up",
   "st6.1.3": "Up",
   "st6.1.4": "Up",

@@ -137,6 +137,7 @@
 <div class="wrap">
   <div class="stage" id="stage">
     <img class="frame" id="frame" alt="It's Showtime tour" draggable="false">
+    <video class="frame" id="frameVideo" style="display:none" muted playsinline draggable="false"></video>
     <div class="zone prev" id="zPrev" title="Previous"><span class="hint">&lsaquo;</span></div>
     <div class="zone next" id="zNext" title="Next"><span class="hint">&rsaquo;</span></div>
     <div class="keyoverlay" id="keyoverlay"></div>
@@ -219,6 +220,7 @@
   var frames = [];
   var idx = 0, playing = false, timer = null;
   var img = document.getElementById('frame');
+  var vid = document.getElementById('frameVideo');
   var counter = document.getElementById('counter');
   var fill = document.getElementById('fill');
   var playBtn = document.getElementById('play');
@@ -248,6 +250,18 @@
   var KEYS = {};   // frameNumber → {keys:[...], label, type, x, y}
   var TEXTS = {};  // frameNumber → {text, x, y, size}
   var SAY = {};    // frameNumber → narration text (spoken by the AI voice-over)
+  // ── per-slide VIDEO clips: swap a still WebP for a real clip on motion-heavy slides ──
+  // Config lives in manifest.json under "video": { "<frameId>": "<file-or-ext>" }. Value forms:
+  //   "sk13.0.webm" (full filename, relative to showtimeSimulator/) · "webm" (extension → <id>.webm)
+  //   · true (→ <id>.mp4). Absent = still image, exactly as before. Clips play muted so the
+  //   voice-over narration still carries the slide; onended advances just like narration does.
+  var VIDEO = {};  // frameId → clip filename / extension / true
+  function videoFileFor(f){
+    var v = VIDEO[f];
+    if(!v) return null;
+    if(typeof v === 'string' && v){ return v.indexOf('.') >= 0 ? v : (f + '.' + v); }
+    return f + '.mp4';
+  }
   var overlay = document.getElementById('keyoverlay');
   var POS = { 'top-left':[16,13],'top':[50,11],'top-right':[84,13],'left':[13,50],'center':[50,50],
               'right':[87,50],'bottom-left':[16,87],'bottom':[50,89],'bottom-right':[84,87] };
@@ -271,10 +285,11 @@
     var sz=(t.size==='s'||t.size==='l')?t.size:'m';
     return { text:String(t.text||''), x:x, y:y, size:sz };
   }
+  function activeMedia(){ return (vid && vid.style.display !== 'none') ? vid : img; }
   function positionOverlay(){
     if(!overlay) return;
     var s = document.getElementById('stage').getBoundingClientRect();
-    var r = img.getBoundingClientRect();
+    var r = activeMedia().getBoundingClientRect();
     overlay.style.left = (r.left-s.left)+'px'; overlay.style.top = (r.top-s.top)+'px';
     overlay.style.width = r.width+'px'; overlay.style.height = r.height+'px';
   }
@@ -328,6 +343,7 @@
     if(!playing) revealKeyHint(false);    // parked/stepping → show now; during play tryGo presses it in at the real end
   }
   img.addEventListener('load', positionOverlay);
+  if(vid){ vid.addEventListener('loadeddata', positionOverlay); vid.addEventListener('loadedmetadata', positionOverlay); }
   window.addEventListener('resize', positionOverlay);
 
   // ── synthesized key-press "tick" on each advance (Web Audio, no files) ──
@@ -444,19 +460,32 @@
 
   // Preload neighbours so advancing is instant.
   var cache = {};
-  function preload(n){ if(n<0||n>=frames.length||cache[n]) return; var im=new Image(); im.src=src(frames[n]); cache[n]=im; }
+  function preload(n){ if(n<0||n>=frames.length||cache[n]) return; if(videoFileFor(frames[n])) return; var im=new Image(); im.src=src(frames[n]); cache[n]=im; }
 
   function show(n, animate){
     idx = Math.max(0, Math.min(frames.length-1, n));
-    var url = src(frames[idx]);
-    if(cache[idx] && cache[idx].complete){
-      img.src = url; img.classList.remove('fading');          // warmed frame → instant swap
-    } else {
-      if(animate) img.classList.add('fading');
-      var pre = new Image();
-      pre.onload = function(){ img.src = url; img.classList.remove('fading'); };
-      pre.onerror = function(){ img.src = url; img.classList.remove('fading'); };
-      pre.src = url;
+    var clip = videoFileFor(frames[idx]);
+    if(vid){ try{ vid.pause(); }catch(e){} vid.onended = null; }          // stop any clip from the previous slide
+    if(clip){                                                             // ── video slide ──
+      img.style.display = 'none'; img.classList.remove('fading');
+      vid.style.display = '';
+      vid.src = 'showtimeSimulator/' + clip;
+      try{ vid.currentTime = 0; }catch(e){}
+      var pv = vid.play(); if(pv && pv.catch) pv.catch(function(){});
+      vid.onended = function(){ if(playing) tryGo(); };                   // finished clip → advance (like narration onend)
+    } else {                                                             // ── still image slide (unchanged path) ──
+      if(vid){ vid.style.display = 'none'; vid.removeAttribute('src'); try{ vid.load(); }catch(e){} }
+      img.style.display = '';
+      var url = src(frames[idx]);
+      if(cache[idx] && cache[idx].complete){
+        img.src = url; img.classList.remove('fading');        // warmed frame → instant swap
+      } else {
+        if(animate) img.classList.add('fading');
+        var pre = new Image();
+        pre.onload = function(){ img.src = url; img.classList.remove('fading'); };
+        pre.onerror = function(){ img.src = url; img.classList.remove('fading'); };
+        pre.src = url;
+      }
     }
     counter.textContent = (idx+1) + ' / ' + frames.length;
     fill.style.width = (frames.length<2?100:(idx/(frames.length-1))*100) + '%';
@@ -479,9 +508,10 @@
   function play(){
     if(idx>=frames.length-1) show(0,true);
     playing=true; playBtn.innerHTML='&#10073;&#10073; Pause';
+    if(vid && videoFileFor(frames[idx]) && vid.paused){ var pv=vid.play(); if(pv && pv.catch) pv.catch(function(){}); }   // resume a paused clip
     schedule();
   }
-  function stop(){ playing=false; playBtn.innerHTML='&#9654; Play'; clearTimeout(timer); clearTimeout(keyTimer); }
+  function stop(){ playing=false; playBtn.innerHTML='&#9654; Play'; clearTimeout(timer); clearTimeout(keyTimer); if(vid){ try{ vid.pause(); }catch(e){} } }
   function toggle(){ if(playing){ stop(); stopSpeech(); } else play(); }
 
   // end-of-tour call-to-action
@@ -506,6 +536,7 @@
   function tryGo(){
     if(!playing || !minDone) return;
     if(voiceOn && ((synth && (synth.speaking || synth.pending)) || (curAudio && !curAudio.paused && !curAudio.ended))) return;   // still narrating → wait for onend
+    if(videoFileFor(frames[idx]) && vid && !vid.ended && !vid.error) return;   // video slide → advance only when the clip ENDS (or errors); never let the reading-time floor skip a still-buffering clip
     revealKeyHint(true);                                                // press the button in at the real end
     // break only after a button EXPLANATION (keyed slide that dwells ≥1s) — skips rapid nav-stepping slides
     var brk = (KEYS[frames[idx]] && durationFor(idx) >= 1000) ? BUTTON_BREAK : 0;
@@ -595,7 +626,7 @@
     tSayPlay.onclick = function(){ speak(tSay.value.trim()); };
     tSclear.onclick = function(){ delete SAY[frames[idx]]; updateTune(); stopSpeech(); };
     document.getElementById('tCopy').onclick = function(){
-      var cfg = { default: Math.round((curDuration()/1000)*10)/10, order: frames.slice(), frames: {}, keys: {}, text: {}, say: {} };
+      var cfg = { default: Math.round((curDuration()/1000)*10)/10, order: frames.slice(), frames: {}, keys: {}, text: {}, say: {}, video: {} };
       // Frame ids are strings now (e.g. "st6.1.2") — sort by PLAY ORDER, not Number() (which is NaN).
       var byOrder = function(a,b){ return frames.indexOf(a) - frames.indexOf(b); };
       Object.keys(OV).sort(byOrder).forEach(function(k){ cfg.frames[k] = OV[k]; });
@@ -608,9 +639,11 @@
       Object.keys(SAY).sort(byOrder).forEach(function(k){
         var s=String(SAY[k]||'').trim(); if(s){ cfg.say[k]=s; }
       });
+      Object.keys(VIDEO).sort(byOrder).forEach(function(k){ if(VIDEO[k]){ cfg.video[k]=VIDEO[k]; } });
       if(!Object.keys(cfg.keys).length) delete cfg.keys;
       if(!Object.keys(cfg.text).length) delete cfg.text;
       if(!Object.keys(cfg.say).length) delete cfg.say;
+      if(!Object.keys(cfg.video).length) delete cfg.video;
       var txt = JSON.stringify(cfg, null, 2);
       var done = function(){ tCopied.style.display=''; setTimeout(function(){ tCopied.style.display='none'; }, 5000); };
       if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done).catch(function(){ prompt('Copy into v2/manifest.json:', txt); }); }
@@ -635,6 +668,9 @@
       }
       if(cfg && cfg.say && typeof cfg.say === 'object'){
         Object.keys(cfg.say).forEach(function(k){ var s=String(cfg.say[k]||'').trim(); if(s) SAY[k]=s; });
+      }
+      if(cfg && cfg.video && typeof cfg.video === 'object'){
+        Object.keys(cfg.video).forEach(function(k){ if(cfg.video[k]) VIDEO[k]=cfg.video[k]; });
       }
       if(cfg && typeof cfg.tryUrl === 'string' && cfg.tryUrl){
         TRY_URL = cfg.tryUrl; var b=document.getElementById('ctaBtn'); if(b) b.href = TRY_URL;
