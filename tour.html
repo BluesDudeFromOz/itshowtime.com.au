@@ -467,8 +467,13 @@
     var clip = videoFileFor(frames[idx]);
     if(vid){ try{ vid.pause(); }catch(e){} vid.onended = null; }          // stop any clip from the previous slide
     if(clip){                                                             // ── video slide ──
+      // A <video> paints BLACK until its first frame decodes, which flashes when arriving from a PNG.
+      // (Hiding the video to wait it out backfires — a display:none video won't decode at all.) So keep
+      // the video visible and give it a POSTER = the matching still (<id>.webp); the poster covers the
+      // black until the clip's first frame is ready. Stills are 1920x1152 like the clips → no jump.
       img.style.display = 'none'; img.classList.remove('fading');
       vid.style.display = '';
+      vid.poster = src(frames[idx]);                                      // matching still shown until the first frame decodes
       vid.src = 'showtimeSimulator/' + clip;
       try{ vid.currentTime = 0; }catch(e){}
       var pv = vid.play(); if(pv && pv.catch) pv.catch(function(){});
