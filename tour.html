@@ -148,6 +148,7 @@
         <button class="ctarestart" id="ctaRestart">&#8635; Watch again</button>
       </div>
     </div>
+    <div id="ccbar" aria-live="polite" style="position:absolute;left:0;right:0;bottom:0;padding:14px 18px;text-align:center;background:linear-gradient(transparent,rgba(0,0,0,.78));color:#fff;font-size:clamp(15px,2.1vw,22px);font-weight:600;line-height:1.35;text-shadow:0 2px 6px rgba(0,0,0,.9);pointer-events:none;opacity:0;transition:opacity .15s"></div>
   </div>
   <div class="tunebar" id="tunebar">
     <div class="trow">
@@ -198,6 +199,7 @@
     <button class="btn" id="next" title="Next (&rarr;)">Next &rsaquo;</button>
     <button class="btn" id="sound" title="Key-click sound on each slide">&#128264; Sound</button>
     <button class="btn" id="voice" title="AI voice-over — reads each slide's narration aloud">&#127908; Voice</button>
+    <button class="btn" id="cc" title="Captions / subtitles on-off (for watching with the sound off)">CC</button>
     <button class="btn" id="tune" title="Set per-slide timings" style="display:none">&#9881; Tune</button>
     <div class="counter" id="counter">1 / 1</div>
     <div class="track" id="track" title="Jump"><div class="fill" id="fill"></div></div>
@@ -358,7 +360,7 @@
   // ── AI voice-over (browser speech synthesis reads the per-slide 'say' line) ──
   // Zero-setup and works today; for studio quality, drop per-slide MP3s later (see audio hook below).
   var voiceOn = false, synth = window.speechSynthesis || null, pickedVoice = null,
-      voiceBtn = document.getElementById('voice');
+      voiceBtn = document.getElementById('voice'), curAudio = null;
   function chooseVoice(){
     if(!synth) return;
     var vs = synth.getVoices() || [];
@@ -369,7 +371,10 @@
       vs.find(function(v){ return /^en/i.test(v.lang); }) || vs[0] || null;
   }
   if(synth){ chooseVoice(); if('onvoiceschanged' in synth) synth.onvoiceschanged = chooseVoice; }
-  function stopSpeech(){ if(synth){ try{ synth.cancel(); }catch(e){} } }
+  function stopSpeech(){
+    if(synth){ try{ synth.cancel(); }catch(e){} }
+    if(curAudio){ try{ curAudio.onended=null; curAudio.onerror=null; curAudio.pause(); }catch(e){} curAudio=null; }
+  }
   // Normalize for the voice only (stored text keeps "2-5-1"): a hyphen BETWEEN digits reads as "dash"
   // in TTS, so turn "2-5-1"/"6-2-5-1" into "2 5 1"/"6 2 5 1" → spoken "two five one" etc.
   function sayText(f){ return (SAY[f] || '').trim().replace(/(\d)\s*-\s*(?=\d)/g, '$1 '); }
@@ -382,7 +387,19 @@
     u.onend = function(){ if(playing) tryGo(); };   // auto-wait: advance once narration finishes
     synth.speak(u);
   }
-  function speakCurrent(){ stopSpeech(); if(voiceOn) speak(sayText(frames[idx])); }
+  function speakCurrent(){
+    stopSpeech();
+    if(!voiceOn) return;
+    var f = frames[idx], txt = sayText(f);
+    if(!txt) return;                                        // no narration on this slide
+    // Prefer a pre-rendered studio MP3 (showtimeSimulator/vo/<id>.mp3); fall back to browser speech.
+    var a = new Audio('showtimeSimulator/vo/' + encodeURIComponent(f) + '.mp3');
+    curAudio = a;
+    a.onended = function(){ if(playing && curAudio===a) tryGo(); };
+    a.onerror = function(){ if(curAudio===a){ curAudio = null; speak(txt); } };   // missing/failed → browser voice
+    var p = a.play();
+    if(p && p.catch) p.catch(function(){ if(curAudio===a){ curAudio = null; speak(txt); } });
+  }
   function estSpeechMs(text){ var w = (String(text).trim().match(/\S+/g) || []).length; return w ? (w*360 + 900) : 0; }
   if(!synth && voiceBtn){ voiceBtn.disabled = true; voiceBtn.title = 'Voice-over needs a browser that supports speech synthesis'; }
   voiceBtn.onclick = function(){
@@ -410,6 +427,19 @@
     window.addEventListener('keydown', unlock);
   })();
 
+  // ── On-screen captions (subtitles): show the spoken line, for sound-off viewers. Default ON. ──
+  var ccOn = true, ccBar = document.getElementById('ccbar'), ccBtn = document.getElementById('cc');
+  function renderCaption(){
+    if(!ccBar) return;
+    var t = ccOn ? (SAY[frames[idx]] || '').trim() : '';   // raw narration reads better than the TTS-normalized form
+    ccBar.textContent = t;
+    ccBar.style.opacity = (ccOn && t) ? '1' : '0';
+  }
+  if(ccBtn){
+    ccBtn.classList.add('primary');                        // default ON
+    ccBtn.onclick = function(){ ccOn = !ccOn; ccBtn.classList.toggle('primary', ccOn); renderCaption(); };
+  }
+
   function src(n){ return 'showtimeSimulator/' + n + '.webp'; }
 
   // Preload neighbours so advancing is instant.
@@ -431,6 +461,7 @@
     counter.textContent = (idx+1) + ' / ' + frames.length;
     fill.style.width = (frames.length<2?100:(idx/(frames.length-1))*100) + '%';
     renderCurrentHint(false); scheduleKeyHint();   // caption now; key presses in near the slide's end
+    renderCaption();                             // subtitle line — for viewers with the sound off
     speakCurrent();                              // narrate this slide (if voice-over is on)
     setCTA(idx === frames.length-1);             // show the "try it" card on the last slide
     if(tuneMode) updateTune();
@@ -474,7 +505,7 @@
   }
   function tryGo(){
     if(!playing || !minDone) return;
-    if(voiceOn && synth && (synth.speaking || synth.pending)) return;   // still narrating → wait for onend
+    if(voiceOn && ((synth && (synth.speaking || synth.pending)) || (curAudio && !curAudio.paused && !curAudio.ended))) return;   // still narrating → wait for onend
     revealKeyHint(true);                                                // press the button in at the real end
     // break only after a button EXPLANATION (keyed slide that dwells ≥1s) — skips rapid nav-stepping slides
     var brk = (KEYS[frames[idx]] && durationFor(idx) >= 1000) ? BUTTON_BREAK : 0;
