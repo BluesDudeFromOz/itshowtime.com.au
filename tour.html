@@ -23,6 +23,15 @@
     box-shadow:0 24px 70px rgba(0,0,0,.6);object-fit:contain;background:#000;cursor:pointer;
     transition:opacity .18s ease}
   .frame.fading{opacity:.35}
+  /* A transparent full-frame image (e.g. the iPad) that slides in over a static stage frame, out on advance.
+     A DIV (not an img) stretches to the inset box (an abs-positioned img would keep its intrinsic 1920x1152
+     size and ignore left/right); background-size:contain then letterboxes it to the SAME rect as .frame. */
+  .ipad-overlay{position:absolute;left:14px;top:14px;right:14px;bottom:6px;
+    background-repeat:no-repeat;background-position:center;background-size:contain;
+    pointer-events:none;z-index:1;transform:translateX(112%);opacity:0;
+    transition:transform .6s cubic-bezier(.22,.61,.36,1),opacity .4s ease}
+  .ipad-overlay.in{transform:translateX(0);opacity:1}
+  .ipad-overlay.out{transform:translateX(-112%);opacity:0}
 
   /* click zones (prev/next halves) */
   .zone{position:absolute;top:14px;bottom:6px;width:34%;cursor:pointer;z-index:2}
@@ -220,7 +229,29 @@
   var frames = [];
   var idx = 0, playing = false, timer = null;
   var img = document.getElementById('frame');
+  var VO_VERSION = '';   // cache-bust tag for the voice-over mp3s (manifest "voVersion"), so a new voice reaches listeners instead of stale cache
   var vid = document.getElementById('frameVideo');
+  var stage = document.getElementById('stage');
+  // Slide-in overlay (e.g. the iPad): a transparent full-frame image that glides in over a static stage
+  // frame and slides out on advance. Config: manifest "overlay":{ "<frameId>":"<transparent-image-file>" }.
+  var OVERLAY = {}, ipadEl = null, ipadOutTimer = null;
+  function clearOverlay(slideOut){
+    if(ipadOutTimer){ clearTimeout(ipadOutTimer); ipadOutTimer = null; }
+    var el = ipadEl; ipadEl = null;
+    if(!el) return;
+    if(slideOut){ el.classList.remove('in'); el.classList.add('out');
+      ipadOutTimer = setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); }, 650); }
+    else if(el.parentNode){ el.parentNode.removeChild(el); }
+  }
+  function showOverlay(file){
+    clearOverlay(false);
+    if(!stage || !file) return;
+    var el = document.createElement('div');
+    el.className = 'ipad-overlay';
+    el.style.backgroundImage = "url('showtimeSimulator/" + file + "')";
+    stage.appendChild(el); ipadEl = el;
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ if(ipadEl===el) el.classList.add('in'); }); });
+  }
   var counter = document.getElementById('counter');
   var fill = document.getElementById('fill');
   var playBtn = document.getElementById('play');
@@ -409,7 +440,7 @@
     var f = frames[idx], txt = sayText(f);
     if(!txt) return;                                        // no narration on this slide
     // Prefer a pre-rendered studio MP3 (showtimeSimulator/vo/<id>.mp3); fall back to browser speech.
-    var a = new Audio('showtimeSimulator/vo/' + encodeURIComponent(f) + '.mp3');
+    var a = new Audio('showtimeSimulator/vo/' + encodeURIComponent(f) + '.mp3' + (VO_VERSION ? '?v=' + encodeURIComponent(VO_VERSION) : ''));
     curAudio = a;
     a.onended = function(){ if(playing && curAudio===a) tryGo(); };
     a.onerror = function(){ if(curAudio===a){ curAudio = null; speak(txt); } };   // missing/failed → browser voice
@@ -445,11 +476,46 @@
 
   // ── On-screen captions (subtitles): show the spoken line, for sound-off viewers. Default ON. ──
   var ccOn = true, ccBar = document.getElementById('ccbar'), ccBtn = document.getElementById('cc');
+  // Captions reveal ONE SENTENCE AT A TIME, timed to the voice-over, so long narration no longer dumps
+  // as a wall of text. We drive off the actual audio clock (curAudio.currentTime/duration) to stay in
+  // unison with the speech; with no audio (browser-speech or muted) we fall back to a word-count
+  // estimate. Each sentence gets a share of the timeline proportional to its length.
+  var capTimer = null, capParts = [], capFracs = [], capCur = -1, capStart = 0, capEstMs = 0;
+  function splitSentences(t){
+    var m = String(t).trim().match(/[^.!?…]+[.!?…]+(?:["'”’)\]]+)?|[^.!?…]+$/g);
+    return m ? m.map(function(s){ return s.trim(); }).filter(Boolean) : [];
+  }
+  function capProgress(){
+    if(curAudio && isFinite(curAudio.duration) && curAudio.duration > 0 && !curAudio.paused){
+      return curAudio.currentTime / curAudio.duration;         // real speech clock — best sync
+    }
+    if(!playing) return null;                                   // paused, no audio → freeze on the current line
+    return capEstMs ? Math.min(1, (Date.now() - capStart) / capEstMs) : 1;
+  }
+  function tickCaption(){
+    if(!ccOn || capParts.length <= 1) return;
+    var p = capProgress();
+    if(p === null) return;
+    var i = capFracs.findIndex(function(f){ return p < f - 1e-6; });
+    if(i < 0) i = capParts.length - 1;
+    if(i !== capCur){ capCur = i; ccBar.textContent = capParts[i]; }
+  }
   function renderCaption(){
+    if(capTimer){ clearInterval(capTimer); capTimer = null; }
+    capCur = -1;
     if(!ccBar) return;
     var t = ccOn ? (SAY[frames[idx]] || '').trim() : '';   // raw narration reads better than the TTS-normalized form
-    ccBar.textContent = t;
-    ccBar.style.opacity = (ccOn && t) ? '1' : '0';
+    if(!t){ ccBar.textContent = ''; ccBar.style.opacity = '0'; return; }
+    capParts = splitSentences(t);
+    ccBar.style.opacity = '1';
+    if(capParts.length <= 1){ ccBar.textContent = t; return; }  // single sentence → just show it
+    var weights = capParts.map(function(s){ return (s.match(/\S+/g) || []).length || 1; });
+    var tot = weights.reduce(function(a, b){ return a + b; }, 0) || 1;
+    var c = 0; capFracs = weights.map(function(w){ c += w; return c / tot; });   // end-fraction of each sentence
+    capEstMs = estSpeechMs(t);                                  // fallback timeline when there's no audio clock
+    capStart = Date.now();
+    capCur = 0; ccBar.textContent = capParts[0];                // first sentence immediately
+    capTimer = setInterval(tickCaption, 140);
   }
   if(ccBtn){
     ccBtn.classList.add('primary');                        // default ON
@@ -466,6 +532,7 @@
     idx = Math.max(0, Math.min(frames.length-1, n));
     var clip = videoFileFor(frames[idx]);
     if(vid){ try{ vid.pause(); }catch(e){} vid.onended = null; }          // stop any clip from the previous slide
+    clearOverlay(true);                                                   // glide any previous slide-in overlay off
     if(clip){                                                             // ── video slide ──
       // A <video> paints BLACK until its first frame decodes, which flashes when arriving from a PNG.
       // (Hiding the video to wait it out backfires — a display:none video won't decode at all.) So keep
@@ -492,6 +559,7 @@
         pre.src = url;
       }
     }
+    if(!clip && OVERLAY[frames[idx]]){ showOverlay(OVERLAY[frames[idx]]); }   // iPad (etc.) slides in over the still
     counter.textContent = (idx+1) + ' / ' + frames.length;
     fill.style.width = (frames.length<2?100:(idx/(frames.length-1))*100) + '%';
     renderCurrentHint(false); scheduleKeyHint();   // caption now; key presses in near the slide's end
@@ -631,7 +699,7 @@
     tSayPlay.onclick = function(){ speak(tSay.value.trim()); };
     tSclear.onclick = function(){ delete SAY[frames[idx]]; updateTune(); stopSpeech(); };
     document.getElementById('tCopy').onclick = function(){
-      var cfg = { default: Math.round((curDuration()/1000)*10)/10, order: frames.slice(), frames: {}, keys: {}, text: {}, say: {}, video: {} };
+      var cfg = { default: Math.round((curDuration()/1000)*10)/10, order: frames.slice(), frames: {}, keys: {}, text: {}, say: {}, video: {}, overlay: {} };
       // Frame ids are strings now (e.g. "st6.1.2") — sort by PLAY ORDER, not Number() (which is NaN).
       var byOrder = function(a,b){ return frames.indexOf(a) - frames.indexOf(b); };
       Object.keys(OV).sort(byOrder).forEach(function(k){ cfg.frames[k] = OV[k]; });
@@ -645,10 +713,12 @@
         var s=String(SAY[k]||'').trim(); if(s){ cfg.say[k]=s; }
       });
       Object.keys(VIDEO).sort(byOrder).forEach(function(k){ if(VIDEO[k]){ cfg.video[k]=VIDEO[k]; } });
+      Object.keys(OVERLAY).sort(byOrder).forEach(function(k){ if(OVERLAY[k]){ cfg.overlay[k]=OVERLAY[k]; } });
       if(!Object.keys(cfg.keys).length) delete cfg.keys;
       if(!Object.keys(cfg.text).length) delete cfg.text;
       if(!Object.keys(cfg.say).length) delete cfg.say;
       if(!Object.keys(cfg.video).length) delete cfg.video;
+      if(!Object.keys(cfg.overlay).length) delete cfg.overlay;
       var txt = JSON.stringify(cfg, null, 2);
       var done = function(){ tCopied.style.display=''; setTimeout(function(){ tCopied.style.display='none'; }, 5000); };
       if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done).catch(function(){ prompt('Copy into v2/manifest.json:', txt); }); }
@@ -677,6 +747,10 @@
       if(cfg && cfg.video && typeof cfg.video === 'object'){
         Object.keys(cfg.video).forEach(function(k){ if(cfg.video[k]) VIDEO[k]=cfg.video[k]; });
       }
+      if(cfg && cfg.overlay && typeof cfg.overlay === 'object'){
+        Object.keys(cfg.overlay).forEach(function(k){ if(cfg.overlay[k]) OVERLAY[k]=cfg.overlay[k]; });
+      }
+      if(cfg && cfg.voVersion) VO_VERSION = String(cfg.voVersion);
       if(cfg && typeof cfg.tryUrl === 'string' && cfg.tryUrl){
         TRY_URL = cfg.tryUrl; var b=document.getElementById('ctaBtn'); if(b) b.href = TRY_URL;
       }

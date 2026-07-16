@@ -33,7 +33,9 @@
   "st6.0",
   "st6.1",
   "st6.1.1",
-  "st6.1.6",
+  "st6.1.2",
+  "st6.1.3",
+  "st6.1.4",
   "st6.2",
   "st6.2.1",
   "st6.2.2",
@@ -63,6 +65,7 @@
   "st9.0",
   "sk9.1",
   "sk10.0",
+  "sk10.1",
   "sk11.0",
   "sk11.1",
   "sk11.2",
@@ -192,12 +195,17 @@
   "sk40.3"
  ],
  "video": {
-  "intro": "intro.mp4",
-  "st6.1.1": "st6.1.1.mp4",
-  "sk23.4": "sk23.4.mp4",
-  "sk23.6": "sk23.6.mp4"
+  "intro": "intro_crowd_with_musicians.mp4",
+  "st6.1.1": "st6.1.1_norm.mp4",
+  "st6.1.3": "st6.1.3_norm.mp4",
+  "sk23.4": "sk23.4_norm.mp4",
+  "sk23.6": "sk23.6_norm.mp4"
+ },
+ "overlay": {
+  "sk10.1": "sk10.1.1.webp"
  },
  "frames": {
+  "intro": 3.0,
   "st1.0": 4.0,
   "st2.0": 2.0,
   "st2.1": 10.0,
@@ -231,8 +239,6 @@
   "st6.1.2": 0.3,
   "st6.1.3": 0.3,
   "st6.1.4": 0.3,
-  "st6.1.5": 0.3,
-  "st6.1.6": 0.3,
   "st6.2": 3.0,
   "st6.2.1": 0.3,
   "st6.2.2": 0.3,
@@ -262,6 +268,7 @@
   "st9.0": 2.0,
   "sk9.1": 2.0,
   "sk10.0": 2.0,
+  "sk10.1": 4.0,
   "sk11.0": 1.0,
   "sk11.1": 3.0,
   "sk11.2": 1.0,
@@ -481,6 +488,15 @@
    "y": 87,
    "img": "button_icons/up_button.png"
   },
+  "st6.1.1": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
+  },
   "st6.1.2": {
    "keys": [
     "↑"
@@ -507,24 +523,6 @@
    "x": 84,
    "y": 87,
    "img": "button_icons/up_button.png"
-  },
-  "st6.1.5": {
-   "keys": [
-    "↑"
-   ],
-   "type": "nav",
-   "x": 84,
-   "y": 87,
-   "img": "button_icons/up_button.png"
-  },
-  "st6.1.6": {
-   "keys": [
-    "→"
-   ],
-   "type": "nav",
-   "x": 84,
-   "y": 87,
-   "img": "button_icons/right_button.png"
   },
   "st6.2": {
    "keys": [
@@ -786,6 +784,15 @@
    "x": 84,
    "y": 87,
    "img": "button_icons/right_button.png"
+  },
+  "sk10.1": {
+   "keys": [
+    "↑"
+   ],
+   "type": "nav",
+   "x": 84,
+   "y": 87,
+   "img": "button_icons/up_button.png"
   },
   "sk11.0": {
    "keys": [
@@ -1268,6 +1275,7 @@
  "_text_comment": "Optional captions: id -> {text,size(s|m|l),x,y percent}.",
  "text": {},
  "say": {
+  "intro": "Every great night starts the same way — the lights, the crowd, the count-in. It's Showtime. Everything your band needs, driven from a single screen. Designed and built by musicians, for musicians — to run your whole show, on stage and behind the scenes. One master screen leads the band: every follower jumps to the same song, transposed automatically for each player's instrument. From that one screen, fire your visuals — slideshows, video, live camera feeds, backing tracks, even DMX lighting, all timed to the song. On stage, drive the entire menu with four foot-pedals — up, down, left, right. That's all it takes. Behind the scenes, It's Showtime runs the business too — book your gigs, overlay every member's calendar to find the night you're all free, email the whole band in one tap, and raise a tailored PDF invoice with a single press. It runs live at the gig and syncs to the cloud — so your players can log in from home, add their own annotations, and have them flow straight back into your show. Plus song-story notes at showtime, a visual metronome, and a library you build from OnSong, Ultimate Guitar, iReal Pro, Word, RTF and plain text. It's Showtime — for Mac, Windows and Linux. Built for the way you actually gig.",
   "st1.0": "This is the start-up screen. You can wait for the master device to pick a song, or press Up to jump straight to the song search box.",
   "st2.0": "This is the start-up screen, with the Home button in focus.",
   "st2.1": "This is the performance toolbar. It holds every function you'll use while you play. The basics are simple: move left or right to choose a function, press Up or Down to run it, and touch or mouse work everywhere too.",
@@ -1295,11 +1303,10 @@
   "st5.5": "With the song in focus, press Right to open and display it.",
   "st6.0": "Moonlight Sonata, a MusicXML score, is now on screen. The main menu tucks away and a small MusicXML toolbar takes its place. The app picks a zoom level to suit your display. Press Left at any time to go back. Next, the scroll toggle.",
   "st6.1": "Like several other buttons, this one starts and stops auto-scroll. Press Up or Down, or use your foot pedal, to start or stop scrolling.",
-  "st6.1.2": "Up",
-  "st6.1.3": "Up",
-  "st6.1.4": "Up",
-  "st6.1.5": "Up",
-  "st6.1.6": "This button sets the zoom level. The app picks a sensible level to start with, and Up or Down zooms in and out.",
+  "st6.1.1": "Up starts the scrolling",
+  "st6.1.2": "Up stops the scrolling",
+  "st6.1.3": "Up continues the scrolling",
+  "st6.1.4": "Up to stop scrolling",
   "st6.2": "Here's a quick zoom demonstration. Press Up to zoom in, or Down to zoom out.",
   "st6.2.1": "Zoom in",
   "st6.2.2": "and again",
@@ -1329,6 +1336,7 @@
   "st9.0": "Press Up or Down to decrease the font. It returns to the size the app calculated for you.",
   "sk9.1": "The font is back to its original size. Press Right to explore the next button.",
   "sk10.0": "Toggle between landscape two-page view and portrait single-page view. Press Up or Down to switch.",
+  "sk10.1": "Portrait mode is ideal for tablets and other smaller screens.",
   "sk11.0": "This is the maximise button. It hides the window frame and the operating-system status bar for the biggest display. Press it again to bring them back.",
   "sk11.1": "Maximised display.",
   "sk11.2": "Back to the normal display.",
@@ -1457,5 +1465,6 @@
   "sk40.2": "Right-click at the playlist level for a menu that streamlines your prep. You can add markers to lay out the sets, set the band the setlist belongs to, and export the setlist in many formats. With one button you can email every band member the setlist as HTML, Word, and PDF, plus all the charts and lyrics as HTML.",
   "sk40.3": "The song-list right-click menu: add a setlist marker, or add songs."
  },
- "tryUrl": "https://showtime-saas.fly.dev"
+ "tryUrl": "https://showtime-saas.fly.dev",
+ "voVersion": "1784205819"
 }
