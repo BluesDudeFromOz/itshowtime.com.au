@@ -152,6 +152,29 @@ markings, use **Annotations**.
 
 ---
 
+## Connecting Google Drive (so your media syncs to the whole band)
+Keywords: google drive, connect drive, connect google drive, drive setup, link drive, media not syncing, media won't sync, media on other device, share media, media backup, images not showing, videos not showing, backing track not on other device, cloud media, media sync, authorise drive, authorize drive, allow drive, drive permission, set up drive
+
+Connecting Google Drive is the one setup step that makes all your media — song slideshows, videos, and backing tracks — **upload to your own Google Drive and appear on every device in the band**. Without it, anything you add stays only on the device you added it from. It's a **one-time** step, done by the **band owner**.
+
+**To connect (band owner):**
+1. Open the **Setup (cog) menu → Google Drive** (in Settings).
+2. Click **Connect Google Drive**.
+3. Sign in with your Google account and click **Allow** on Google's screen.
+4. You return to It's Showtime showing **● connected**. That's it.
+
+From then on, any image, video, or backing track you add is copied to your Drive automatically, and It's Showtime stores just a **link** to it — so your database stays small and the media streams to the whole band.
+
+**Your privacy:** It's Showtime uses Google's *per-file* access — it can only ever see the files **it creates** in your Drive. It cannot read anything else in your Drive.
+
+**Good to know / troubleshooting:**
+- **"This app isn't verified" notice** (during the beta): It's Showtime is the app asking for access — click **Advanced → continue to It's Showtime** to proceed. This goes away once verification is complete.
+- **A file you added isn't on your other device?** Check that Drive was **connected before** you added it — files added while disconnected stay on that one device. Connect Drive, re-add the file, then sync.
+- **Added on the cloud but not on your laptop yet (or the reverse)?** Run a **cloud sync** so the new links travel across.
+- **Want to use a file already in your Drive?** In the Media Manager you can also **add by Google Drive link** — paste the file's share link instead of uploading.
+
+---
+
 ## Adding images or videos to a song
 Keywords: add video, add image, add a video, song video, per-song video, slideshow, media, picture, manage images and videos, attach video, video playback
 
@@ -387,15 +410,19 @@ Join a band** after signing in.
 ---
 
 ## Where song & show media (slideshows, videos) are stored
-Keywords: media storage, where are my videos, slideshow files, media folder, cloud storage, local drive, where is media saved, storage location, back up media
+Keywords: media storage, where are my videos, slideshow files, media folder, cloud storage, local drive, where is media saved, storage location, back up media, google drive storage, media in drive
 
-Your media (song, slideshow, and pre-/post-show videos & images) lives on **your own device**, stored
-**beside your database file** by default — so copying that folder backs everything up, and it works fully
-offline. You can point media at a specific **local folder** in configuration.
+When **Google Drive is connected** (see *Connecting Google Drive*), your media (song, slideshow, and
+pre-/post-show videos & images, plus backing tracks) lives in **your own Google Drive**. It's Showtime
+keeps only a **link** to each file in your database — so your database stays small, the media backs
+itself up in Drive, and it streams to the whole band on any device.
 
-For the **actual show, a local drive is the most reliable** — gig venues have flaky networks — while the
-cloud is best for the **configuring** phase (building songs and slideshows from any device). It's Showtime
-doesn't host your media; you keep it, so you control who can see it.
+If Drive is **not** connected, media is kept **on the device you added it from** (beside your database
+file) and won't travel to other devices — connecting Drive is what makes it shareable and synced.
+
+It's Showtime doesn't host your media on its own servers; it lives in **your** Drive, so you control who
+can see it. For a **gig with no internet**, keeping a local copy is most reliable — venues have flaky
+networks (offline media caching is on the roadmap).
 
 ---
 
