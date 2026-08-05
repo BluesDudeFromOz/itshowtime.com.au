@@ -153,25 +153,39 @@ markings, use **Annotations**.
 ---
 
 ## Connecting Google Drive (so your media syncs to the whole band)
-Keywords: google drive, connect drive, connect google drive, drive setup, link drive, media not syncing, media won't sync, media on other device, share media, media backup, images not showing, videos not showing, backing track not on other device, cloud media, media sync, authorise drive, authorize drive, allow drive, drive permission, set up drive
+Keywords: google drive, connect drive, connect google drive, drive setup, link drive, media not syncing, media won't sync, media on other device, share media, media backup, images not showing, videos not showing, backing track not on other device, cloud media, media sync, authorise drive, authorize drive, allow drive, drive permission, set up drive, oauth, client id, client secret, redirect uri, redirect_uri_mismatch, drive not connecting, drive advanced, drive credentials, G drive, google drive for desktop, not set up, badge, where is drive panel
 
 Connecting Google Drive is the one setup step that makes all your media — song slideshows, videos, and backing tracks — **upload to your own Google Drive and appear on every device in the band**. Without it, anything you add stays only on the device you added it from. It's a **one-time** step, done by the **band owner**.
 
-**To connect (band owner):**
-1. Open the **Setup (cog) menu → Google Drive** (in Settings).
-2. Click **Connect Google Drive**.
-3. Sign in with your Google account and click **Allow** on Google's screen.
-4. You return to It's Showtime showing **● connected**. That's it.
+### Where to find it
+The Google Drive panel is in **Setup (⚙) → scroll down to the "☁ Google Drive" panel**. It is **not** in the Media Manager (the Media Manager only has "add by Drive **link**", which is a different thing).
 
-From then on, any image, video, or backing track you add is copied to your Drive automatically, and It's Showtime stores just a **link** to it — so your database stays small and the media streams to the whole band.
+### ⚠ Most common mix-up: "G:" in File Explorer is NOT connecting Drive to the app
+Logging into **Google Drive for Desktop** (the **G:** drive in File Explorer / Finder) does **not** connect Drive to It's Showtime. The app connects through Google's **API** with its own "Allow" — a separate step. If your media isn't reaching the cloud, it's almost always because the app itself isn't connected (check the badge in Setup), even if the G: drive is working fine.
 
-**Your privacy:** It's Showtime uses Google's *per-file* access — it can only ever see the files **it creates** in your Drive. It cannot read anything else in your Drive.
+### Connecting
+1. Open **Setup (⚙)** and scroll to the **☁ Google Drive** panel.
+2. If a green **Connect Google Drive** button is shown, click it → sign in → **Allow** on Google's screen. You return showing **● connected** — done.
+3. If the badge shows **"○ not set up"** and there's **no** Connect button, you need to add your Google credentials first — see **Advanced setup** below.
 
-**Good to know / troubleshooting:**
-- **"This app isn't verified" notice** (during the beta): It's Showtime is the app asking for access — click **Advanced → continue to It's Showtime** to proceed. This goes away once verification is complete.
-- **A file you added isn't on your other device?** Check that Drive was **connected before** you added it — files added while disconnected stay on that one device. Connect Drive, re-add the file, then sync.
-- **Added on the cloud but not on your laptop yet (or the reverse)?** Run a **cloud sync** so the new links travel across.
-- **Want to use a file already in your Drive?** In the Media Manager you can also **add by Google Drive link** — paste the file's share link instead of uploading.
+From then on, any image, video, or backing track you add is copied to your Drive automatically, and It's Showtime stores just a **link** to it — so your database stays small and the media streams to the whole band. Bulky files are shrunk automatically on the way up (**WAV → MP3**, unusual video → **MP4**), which keeps you inside your Drive quota.
+
+### Advanced setup (beta — enter your own Google credentials)
+Until It's Showtime's built-in Google verification is finished, the band owner supplies their own Google OAuth credentials once:
+1. In the ☁ Google Drive panel, click **⚙ Advanced — enter your Google OAuth Client ID / Secret**.
+2. Paste your **Client ID** and **Client Secret** (from Google Cloud Console → *APIs & Services → Credentials → an OAuth 2.0 Client*) and click **Save credentials**.
+3. A **redirect URI** is shown (e.g. `http://localhost:5000/api/drive/oauth/callback`). **Add that exact URI** to your OAuth client's **Authorized redirect URIs** in Google Cloud Console — otherwise connecting fails with **"redirect_uri_mismatch"**.
+4. Click **Connect Google Drive → Allow**. The badge goes **● connected**.
+
+### Good to know / troubleshooting
+- **"redirect_uri_mismatch" when connecting:** the redirect URI shown in the panel isn't listed on your Google OAuth client. Add it under *Authorized redirect URIs* and try again.
+- **Badge says connected but media still isn't uploading:** the saved login may be stale. Click **Disconnect**, then **Connect Google Drive → Allow** again for a fresh login. (The badge can read "connected" from an old token even when it no longer works.)
+- **A file you added isn't on your other device / on the cloud app?** It was probably added while Drive was disconnected, so it stayed on that one device. Re-connect Drive, then use **Setup → ⬆ Push local media to Drive** (or **Upload to cloud**) to sweep the local-only files up.
+- **Getting your changes to the cloud:** adding media copies the *files* to Drive automatically, but the *slideshow layout* travels only when you **⬆ Upload to cloud** (the Sync button). After editing, hit **Sync** and it recommends the right direction.
+- **Don't delete the "It's Showtime" folder in your Google Drive** — that's where your live media lives; deleting it breaks every slide. Other folders are safe to tidy up.
+- **"This app isn't verified" notice** (during the beta): It's Showtime is the app asking for access — click **Advanced → continue to It's Showtime**.
+- **Want to use a file already in your Drive?** In the Media Manager you can also **add by Google Drive link** — paste the file's share link instead of uploading. (Files added by link aren't auto-shrunk; uploading is preferred.)
+- **Your privacy:** It's Showtime uses Google's *per-file* access — it can only ever see the files **it creates** in your Drive; it cannot read anything else.
 
 ---
 
